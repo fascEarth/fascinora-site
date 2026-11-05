@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Fascinora builds business apps, WhatsApp chatbots and SEO-ready websites with an AI team, checked by senior engineers.">
+<style>[hidden]{display:none!important}img{max-width:100%}body{margin:0}</style>
+<title>Fascinora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: topographic "earth" hero with a live AI-office board, then services, process, work, contact on a single 1120px column */
+:root{
+  --bg:#F2F4EF; --surface:#FFFFFF; --sunk:#E6EAE2; --ink:#14211C; --muted:#56635D; --line:#CBD3C9;
+  --accent:#1E6B52; --accent-ink:#FFFFFF; --gold:#C98A12; --contour:#9FB3A6;
+  --ok:#2E8B57; --busy:#C98A12; --wait:#7A8A82;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1714; --surface:#16211D; --sunk:#1C2924; --ink:#E7EEE9; --muted:#9AA9A1; --line:#2A3A33;
+  --accent:#4FBF94; --accent-ink:#0B1411; --gold:#E3AE45; --contour:#2E463C;
+  --ok:#5CC48B; --busy:#E3AE45; --wait:#7D8D85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1714; --surface:#16211D; --sunk:#1C2924; --ink:#E7EEE9; --muted:#9AA9A1; --line:#2A3A33;
+  --accent:#4FBF94; --accent-ink:#0B1411; --gold:#E3AE45; --contour:#2E463C;
+  --ok:#5CC48B; --busy:#E3AE45; --wait:#7D8D85; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);line-height:1.08;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.label{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* header */
+header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand b{font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:-.02em}
+nav.links{display:flex;gap:22px;flex-wrap:wrap}
+nav.links a{text-decoration:none;color:var(--muted);font-weight:500;font-size:15px}
+nav.links a:hover{color:var(--ink)}
+
+/* hero */
+.hero{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding-block:48px 72px}
+#topo{position:absolute;inset:-20px -40px 0 -40px;width:calc(100% + 80px);height:calc(100% + 20px);z-index:0;pointer-events:none}
+.hero>*:not(canvas){position:relative;z-index:1;min-width:0}
+.hero h1{font-size:clamp(40px,6.2vw,76px);font-weight:800;letter-spacing:-.035em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lede{font-size:19px;color:var(--muted);max-width:34em;margin-top:22px}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:var(--f-body)}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{border-color:var(--line);background:var(--surface)}
+.btn:hover{filter:brightness(1.06)}
+.meta-row{display:flex;gap:18px;flex-wrap:wrap;margin-top:28px;font-size:14px;color:var(--muted)}
+.meta-row span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-right:8px;vertical-align:middle}
+
+/* AI office board */
+.board{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 18px 40px -24px rgba(20,33,28,.35)}
+.board-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:12px}
+.board-head strong{font-family:var(--f-display);font-size:17px}
+.ticket{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.agents{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.agent{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:10px 4px;border-top:1px solid var(--line)}
+.agent:first-child{border-top:0}
+.agent .role{font-weight:600;font-size:15px}
+.agent .task{grid-column:1/2;font-size:13px;color:var(--muted)}
+.pill{grid-row:1/3;grid-column:2;align-self:center;font-family:var(--f-mono);font-size:11px;padding:4px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.pill.done{color:var(--ok)} .pill.busy{color:var(--busy)} .pill.wait{color:var(--wait)}
+.pill.busy::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-right:6px;vertical-align:1px;animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.25}}
+.board-foot{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:13px;color:var(--muted)}
+.board-foot b{color:var(--ink)}
+
+/* sections */
+section.block{padding-block:72px;border-top:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:1fr 1.2fr;gap:24px 48px;align-items:end;margin-bottom:40px}
+.sec-head h2{font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-.025em}
+.sec-head p{color:var(--muted);max-width:36em}
+
+.services{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.svc{background:var(--surface);padding:28px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.svc h3{font-size:24px;font-weight:700;letter-spacing:-.015em}
+.svc p{color:var(--muted)}
+.svc ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.svc li{font-size:13px;background:var(--sunk);padding:4px 10px;border-radius:6px}
+.svc .eta{margin-top:auto;padding-top:8px;font-family:var(--f-mono);font-size:13px;color:var(--accent)}
+
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:20px;counter-reset:s}
+.steps li{counter-increment:s;display:flex;flex-direction:column;gap:8px;min-width:0}
+.steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--f-mono);font-size:13px;color:var(--gold);padding-bottom:10px;border-bottom:2px solid var(--gold)}
+.steps h3{font-size:19px;font-weight:700}
+.steps p{font-size:14.5px;color:var(--muted)}
+.steps .who{font-family:var(--f-mono);font-size:12px;color:var(--accent)}
+
+.work{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.case{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.case .shot{aspect-ratio:16/8;max-width:100%;background:var(--sunk);position:relative;overflow:hidden}
+.case .shot svg{width:100%;height:100%;display:block}
+.case .body{padding:22px;display:flex;flex-direction:column;gap:8px}
+.case .row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.case h3{font-size:22px;font-weight:700}
+.tag{font-family:var(--f-mono);font-size:11px;padding:3px 8px;border-radius:999px;background:var(--sunk);color:var(--muted)}
+.case p{color:var(--muted);font-size:15px}
+.stack{font-family:var(--f-mono);font-size:12px;color:var(--accent)}
+
+.promise{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.promise div{display:flex;flex-direction:column;gap:8px}
+.promise h3{font-size:20px;font-weight:700}
+.promise p{color:var(--muted);font-size:15px}
+
+/* contact */
+.contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
+.contact h2{font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-.025em}
+.contact .side p{color:var(--muted);margin-top:16px;max-width:30em}
+.facts{margin-top:28px;display:grid;gap:14px}
+.facts div{display:grid;gap:2px}
+.facts .v{font-weight:600}
+form{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;display:grid;gap:16px;min-width:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:14px;font-weight:600}
+input,select,textarea{font:inherit;font-size:15px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%}
+textarea{min-height:110px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;background:var(--bg)}
+.chips input{width:auto;accent-color:var(--accent)}
+.out{border:1px dashed var(--accent);border-radius:12px;padding:16px;display:grid;gap:10px}
+.out pre{margin:0;white-space:pre-wrap;font-family:var(--f-mono);font-size:13px;color:var(--ink)}
+.out p{font-size:14px;color:var(--muted)}
+
+footer{padding-block:36px 48px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;padding-block:28px 56px}
+  .sec-head,.contact{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .promise{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .services,.work{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
+  nav.links{gap:14px}
+  section.block{padding-block:56px}
+}
+@media (prefers-reduced-motion:reduce){.pill.busy::before{animation:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top" aria-label="Fascinora home">
+      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13.5" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M4 17c4-3 7 3 11 0s7-3 11 0" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><path d="M6 11c3-2 6 2 9 0s6-2 9 0" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <b>Fascinora</b>
+    </a>
+    <nav class="links" aria-label="Main">
+      <a href="#services">Services</a><a href="#process">How we work</a><a href="#work">Work</a><a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="hero" id="top">
+    <canvas id="topo" aria-hidden="true"></canvas>
+    <div>
+      <p class="label">AI software studio · Palakkad, Kerala</p>
+      <h1 style="margin-top:14px">Apps built by an AI team. <em>Checked by senior engineers.</em></h1>
+      <p class="lede">Fascinora builds business apps, WhatsApp chatbots and SEO-ready websites. AI agents do the first draft fast. An experienced full-stack engineer reviews every line before it reaches you.</p>
+      <div class="ctas">
+        <a class="btn primary" href="#contact">Start a project</a>
+        <a class="btn ghost" href="#work">See our work</a>
+      </div>
+      <div class="meta-row"><span>Requirements reply within 24 hours</span><span>English · தமிழ் · മലയാളം</span></div>
+    </div>
+
+    <aside class="board" aria-label="Example of the Fascinora AI office working on a project">
+      <div class="board-head"><strong>Inside the AI office</strong><span class="ticket">Example project</span></div>
+      <ul class="agents">
+        <li class="agent"><span class="role">Receptionist</span><span class="task">Collected requirements on WhatsApp</span><span class="pill done">done</span></li>
+        <li class="agent"><span class="role">Developer</span><span class="task">Building stock-transfer screen</span><span class="pill busy">working</span></li>
+        <li class="agent"><span class="role">Reviewer</span><span class="task">Checks the pull request for bugs</span><span class="pill wait">next</span></li>
+        <li class="agent"><span class="role">QA tester</span><span class="task">Runs test cases on staging</span><span class="pill wait">next</span></li>
+        <li class="agent"><span class="role">SEO &amp; marketing</span><span class="task">Writes launch page and listings</span><span class="pill wait">next</span></li>
+      </ul>
+      <p class="board-foot"><b>Senior engineer</b> approves every release before it goes live.</p>
+    </aside>
+  </div>
+</div>
+
+<section class="block" id="services"><div class="wrap">
+  <div class="sec-head">
+    <h2>What we build</h2>
+    <p>Four services, one team. Pick one, or combine them. You get a working staging link early, so you see real progress instead of status reports.</p>
+  </div>
+  <div class="services">
+    <article class="svc">
+      <p class="label">Business software</p>
+      <h3>Web apps for how you actually work</h3>
+      <p>Inventory, warehouse, billing, CRM and HR tools, built around your process instead of forcing you into a template.</p>
+      <ul><li>Inventory &amp; WMS</li><li>Billing &amp; GST</li><li>CRM</li><li>Admin dashboards</li></ul>
+      <p class="eta">Typical delivery: 3–6 weeks</p>
+    </article>
+    <article class="svc">
+      <p class="label">AI &amp; automation</p>
+      <h3>Chatbots that answer customers for you</h3>
+      <p>WhatsApp and website assistants that reply instantly, capture leads, book appointments and hand real questions to your staff.</p>
+      <ul><li>WhatsApp bots</li><li>Lead capture</li><li>Workflow automation</li></ul>
+      <p class="eta">Typical delivery: 1–2 weeks</p>
+    </article>
+    <article class="svc">
+      <p class="label">Websites &amp; SEO</p>
+      <h3>Sites that people find on Google</h3>
+      <p>Fast company websites with local SEO, Google Business setup and monthly content, so customers in your area find you first.</p>
+      <ul><li>Company websites</li><li>Local SEO</li><li>Blog content</li></ul>
+      <p class="eta">Typical delivery: 1–3 weeks</p>
+    </article>
+    <article class="svc">
+      <p class="label">Digital marketing</p>
+      <h3>Posts, ads and campaigns every week</h3>
+      <p>Social media calendars, ad copy and email campaigns in English, Tamil and Malayalam, planned with you and published on schedule.</p>
+      <ul><li>Social media</li><li>Ad campaigns</li><li>Email marketing</li></ul>
+      <p class="eta">Monthly plans</p>
+    </article>
+  </div>
+</div></section>
+
+<section class="block" id="process"><div class="wrap">
+  <div class="sec-head">
+    <h2>How a project runs</h2>
+    <p>AI agents handle the repetitive work. A human makes every decision that matters: scope, price, architecture and release.</p>
+  </div>
+  <ol class="steps">
+    <li><span class="who">You</span><h3>Tell us the problem</h3><p>Message us on WhatsApp, email or the form below. Voice notes are fine.</p></li>
+    <li><span class="who">AI receptionist</span><h3>Get a clear brief</h3><p>Within 24 hours you get a written scope with screens, features and open questions.</p></li>
+    <li><span class="who">Engineer</span><h3>Fixed quote</h3><p>A senior engineer prices the scope. No work starts until you approve it.</p></li>
+    <li><span class="who">AI dev team</span><h3>Build and test</h3><p>Developer, reviewer and QA agents build in small steps. You get a staging link each week.</p></li>
+    <li><span class="who">Engineer</span><h3>Launch and support</h3><p>Final review, deployment, handover and 30 days of free fixes.</p></li>
+  </ol>
+</div></section>
+
+<section class="block" id="work"><div class="wrap">
+  <div class="sec-head">
+    <h2>Showcase projects</h2>
+    <p>Working demos you can open and try. Each one shows a type of product we build for clients.</p>
+  </div>
+  <div class="work">
+    <article class="case">
+      <div class="shot"><svg viewBox="0 0 320 160" role="img" aria-label="Sketch of an inventory dashboard"><rect x="16" y="16" width="70" height="128" rx="6" fill="var(--surface)"/><rect x="98" y="16" width="206" height="36" rx="6" fill="var(--surface)"/><rect x="98" y="62" width="100" height="82" rx="6" fill="var(--surface)"/><rect x="206" y="62" width="98" height="82" rx="6" fill="var(--surface)"/><g fill="var(--accent)"><rect x="216" y="112" width="12" height="24"/><rect x="234" y="96" width="12" height="40"/><rect x="252" y="104" width="12" height="32"/><rect x="270" y="84" width="12" height="52"/></g><g fill="var(--line)"><rect x="26" y="30" width="48" height="6" rx="3"/><rect x="26" y="46" width="40" height="6" rx="3"/><rect x="26" y="62" width="44" height="6" rx="3"/><rect x="108" y="74" width="80" height="6" rx="3"/><rect x="108" y="90" width="64" height="6" rx="3"/><rect x="108" y="106" width="72" height="6" rx="3"/><rect x="108" y="30" width="90" height="8" rx="4"/></g></svg></div>
+      <div class="body"><div class="row"><h3>StockFlow</h3><a class="tag" style="color:var(--accent);text-decoration:none" href="/stockflow/">Open live demo ↗</a></div>
+      <p>Warehouse and inventory app with stock in/out, transfers between godowns, barcode lookup and low-stock alerts.</p>
+      <p class="stack">Angular · Node.js · PostgreSQL</p></div>
+    </article>
+    <article class="case">
+      <div class="shot"><svg viewBox="0 0 320 160" role="img" aria-label="Sketch of a WhatsApp chat with a bot"><rect x="110" y="10" width="100" height="140" rx="12" fill="var(--surface)"/><rect x="120" y="28" width="62" height="18" rx="8" fill="var(--line)"/><rect x="138" y="54" width="62" height="26" rx="8" fill="var(--accent)" opacity=".85"/><rect x="120" y="88" width="56" height="18" rx="8" fill="var(--line)"/><rect x="144" y="114" width="56" height="18" rx="8" fill="var(--accent)" opacity=".85"/><circle cx="60" cy="80" r="26" fill="none" stroke="var(--gold)" stroke-width="2" stroke-dasharray="4 5"/><circle cx="260" cy="80" r="26" fill="none" stroke="var(--gold)" stroke-width="2" stroke-dasharray="4 5"/></svg></div>
+      <div class="body"><div class="row"><h3>LeadBot</h3><span class="tag">Demo · in progress</span></div>
+      <p>WhatsApp assistant for a local business. Answers common questions, collects enquiry details and sends hot leads to the owner.</p>
+      <p class="stack">WhatsApp Business API · Claude · n8n</p></div>
+    </article>
+    <article class="case">
+      <div class="shot"><svg viewBox="0 0 320 160" role="img" aria-label="Sketch of a food ordering menu"><rect x="16" y="16" width="288" height="128" rx="8" fill="var(--surface)"/><rect x="30" y="30" width="120" height="10" rx="5" fill="var(--line)"/><g fill="var(--sunk)"><rect x="30" y="54" width="80" height="76" rx="6"/><rect x="120" y="54" width="80" height="76" rx="6"/><rect x="210" y="54" width="80" height="76" rx="6"/></g><g fill="var(--gold)"><circle cx="70" cy="82" r="16"/><circle cx="160" cy="82" r="16"/><circle cx="250" cy="82" r="16"/></g><g fill="var(--accent)"><rect x="46" y="110" width="48" height="10" rx="5"/><rect x="136" y="110" width="48" height="10" rx="5"/><rect x="226" y="110" width="48" height="10" rx="5"/></g></svg></div>
+      <div class="body"><div class="row"><h3>Chai Corner</h3><span class="tag">Demo · coming soon</span></div>
+      <p>Online menu and ordering site for a tea and snacks shop, with local SEO pages and a WhatsApp order button.</p>
+      <p class="stack">Next.js · Local SEO · Google Business</p></div>
+    </article>
+    <article class="case">
+      <div class="shot"><svg viewBox="0 0 320 160" role="img" aria-label="Sketch of a smart home control panel"><path d="M110 80 L160 40 L210 80 V140 H110 Z" fill="var(--surface)"/><rect x="146" y="104" width="28" height="36" fill="var(--sunk)"/><g fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><path d="M226 60a20 20 0 0 1 0 28"/><path d="M236 52a32 32 0 0 1 0 44"/><path d="M94 60a20 20 0 0 0 0 28"/><path d="M84 52a32 32 0 0 0 0 44"/></g><circle cx="160" cy="76" r="6" fill="var(--gold)"/></svg></div>
+      <div class="body"><div class="row"><h3>HomeIQ</h3><span class="tag">Demo · coming soon</span></div>
+      <p>Website and enquiry system for a home automation company, with a room-by-room quote builder and site-visit booking.</p>
+      <p class="stack">Website · Quote builder · CRM</p></div>
+    </article>
+  </div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <div class="promise">
+    <div><p class="label">Quality</p><h3>A real engineer on every project</h3><p>AI writes fast, but it also makes confident mistakes. Every release is reviewed and approved by a senior full-stack engineer.</p></div>
+    <div><p class="label">Pricing</p><h3>Fixed quotes, no surprises</h3><p>You approve a written scope and price before work starts. Changes are quoted separately, never added silently.</p></div>
+    <div><p class="label">Ownership</p><h3>Your code is yours</h3><p>You get the full source code in your own GitHub account, plus documentation so any developer can continue the work.</p></div>
+  </div>
+</div></section>
+
+<section class="block" id="contact"><div class="wrap contact">
+  <div class="side">
+    <p class="label">Start a project</p>
+    <h2 style="margin-top:12px">Tell us what you need</h2>
+    <p>Describe your business and the problem in a few lines. We reply with a clear scope and next steps within one working day.</p>
+    <div class="facts">
+      <div><span class="label">Email</span><span class="v">hello@fascinora.com</span></div>
+      <div><span class="label">Based in</span><span class="v">Palakkad, Kerala · working with clients anywhere</span></div>
+      <div><span class="label">Languages</span><span class="v">English, Tamil, Malayalam</span></div>
+    </div>
+  </div>
+  <form id="enquiry" novalidate>
+    <div class="two">
+      <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required></div>
+      <div class="field"><label for="f-biz">Business name</label><input id="f-biz" name="biz" autocomplete="organization"></div>
+    </div>
+    <div class="field"><label for="f-phone">WhatsApp number</label><input id="f-phone" name="phone" inputmode="tel" autocomplete="tel" placeholder="+91"></div>
+    <fieldset class="field" style="border:0;padding:0;margin:0">
+      <legend style="font-size:14px;font-weight:600;margin-bottom:6px">What do you need?</legend>
+      <div class="chips">
+        <label><input type="checkbox" id="c-app" value="Business app"> Business app</label>
+        <label><input type="checkbox" id="c-bot" value="Chatbot / automation"> Chatbot</label>
+        <label><input type="checkbox" id="c-web" value="Website & SEO"> Website &amp; SEO</label>
+        <label><input type="checkbox" id="c-mkt" value="Marketing"> Marketing</label>
+      </div>
+    </fieldset>
+    <div class="field"><label for="f-msg">Tell us about the project</label><textarea id="f-msg" name="msg" placeholder="Example: We run 2 warehouses and track stock in Excel. We want an app for stock in/out and monthly reports."></textarea></div>
+    <div class="field"><label for="f-budget">Rough budget</label>
+      <select id="f-budget" name="budget"><option>Not sure yet</option><option>Under ₹25,000</option><option>₹25,000 – ₹1,00,000</option><option>₹1,00,000 – ₹3,00,000</option><option>Above ₹3,00,000</option></select></div>
+    <button class="btn primary" type="submit" style="justify-self:start">Prepare my enquiry</button>
+    <div class="out" id="out" hidden>
+      <p>Copy this message and send it to <b>hello@fascinora.com</b> or on WhatsApp.</p>
+      <pre id="out-text"></pre>
+      <button class="btn ghost" type="button" id="copy" style="justify-self:start">Copy message</button>
+    </div>
+  </form>
+</div></section>
+
+<div class="wrap">
+  <footer><span>© 2026 Fascinora · Apps, automation and SEO</span><span>Palakkad, Kerala, India</span></footer>
+</div>
+
+<script>
+(function(){
+  // Topographic contours behind the hero
+  const c=document.getElementById('topo'); if(!c) return;
+  const ctx=c.getContext('2d');
+  function draw(){
+    const r=c.getBoundingClientRect(), d=window.devicePixelRatio||1;
+    c.width=r.width*d; c.height=r.height*d; ctx.setTransform(d,0,0,d,0,0);
+    ctx.clearRect(0,0,r.width,r.height);
+    const col=getComputedStyle(document.documentElement).getPropertyValue('--contour').trim()||'#9FB3A6';
+    ctx.strokeStyle=col; ctx.lineWidth=1;
+    const centers=[[r.width*.88,r.height*.18,1.3],[r.width*.12,r.height*.92,.9],[r.width*.55,r.height*1.05,.7]];
+    centers.forEach(([cx,cy,s],k)=>{
+      for(let i=1;i<=14;i++){
+        const base=i*26*s; ctx.globalAlpha=Math.max(.15,.75-i*.04);
+        ctx.beginPath();
+        for(let a=0;a<=Math.PI*2+.01;a+=.06){
+          const w=Math.sin(a*3+i*.5+k)*9+Math.sin(a*5-i*.3)*6+Math.cos(a*2+k*1.7)*12;
+          const rr=base+w*(i/6);
+          const x=cx+Math.cos(a)*rr*1.25, y=cy+Math.sin(a)*rr*.8;
+          a===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+        }
+        ctx.stroke();
+      }
+    });
+    ctx.globalAlpha=1;
+  }
+  draw();
+  let t; window.addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(draw,150)});
+  if(window.matchMedia){const m=matchMedia('(prefers-color-scheme: dark)'); m.addEventListener&&m.addEventListener('change',draw);}
+  new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+})();
+
+(function(){
+  const f=document.getElementById('enquiry'), out=document.getElementById('out'), txt=document.getElementById('out-text');
+  f.addEventListener('submit',e=>{
+    e.preventDefault();
+    const name=f.name.value.trim();
+    if(!name){f.name.focus();f.name.setCustomValidity('Please enter your name');f.name.reportValidity();return;}
+    f.name.setCustomValidity('');
+    const needs=[...f.querySelectorAll('.chips input:checked')].map(i=>i.value);
+    txt.textContent=
+`Hi Fascinora,
+
+Name: ${name}
+Business: ${f.biz.value.trim()||'-'}
+WhatsApp: ${f.phone.value.trim()||'-'}
+Need: ${needs.join(', ')||'Not sure yet'}
+Budget: ${f.budget.value}
+
+${f.msg.value.trim()||'(No details yet)'}`;
+    out.hidden=false; out.scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+  f.name.addEventListener('input',()=>f.name.setCustomValidity(''));
+  document.getElementById('copy').addEventListener('click',async e=>{
+    const b=e.currentTarget;
+    try{await navigator.clipboard.writeText(txt.textContent);b.textContent='Copied';}
+    catch(_){const r=document.createRange();r.selectNodeContents(txt);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected, press Ctrl+C';}
+    setTimeout(()=>b.textContent='Copy message',2200);
+  });
+})();
+</script>
+
+</body>
+</html>
