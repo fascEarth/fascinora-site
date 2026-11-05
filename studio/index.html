@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Fascinora AI Studio: describe an app in plain English and get a working low-code app.">
+<meta property="og:title" content="Fascinora AI Studio">
+<meta property="og:description" content="Fascinora AI Studio: describe an app in plain English and get a working low-code app.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fascinora.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Ccircle cx='15' cy='15' r='13.5' fill='%230B2A33' stroke='%23E8962E' stroke-width='2'/%3E%3Cpath d='M5 17c4-3 7 3 10 0s6-3 10 0' fill='none' stroke='%23E8962E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>[hidden]{display:none!important}img{max-width:100%}body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>Fascinora AI Studio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600&family=Martian+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: builder workspace; left column = prompt + build log, right column = tabbed canvas (App preview / Data model / Metadata) */
+:root{
+  --bg:#F3F5F3; --surface:#FFFFFF; --sunk:#EAEEEC; --ink:#0D1B1E; --muted:#53656A; --line:#D5DCDA;
+  --deep:#0B2A33; --on-deep:#E9F2F3; --on-deep-muted:#A9C2C6; --deep-line:#1F4955;
+  --accent:#E8962E; --accent-ink:#1B1205; --accent-text:#9A5A08; --teal:#167880; --teal-soft:#DDEFF0;
+  --ok:#23885A; --bad:#BE3B33;
+  --f-display:"Schibsted Grotesk","Segoe UI",system-ui,sans-serif;
+  --f-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --f-mono:"Martian Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#091215; --surface:#101C20; --sunk:#16252A; --ink:#E6EEEF; --muted:#94A7AC; --line:#22353B;
+  --deep:#0C2730; --on-deep:#E9F2F3; --on-deep-muted:#A3BBC0; --deep-line:#23505C;
+  --accent:#F2A93B; --accent-ink:#1B1205; --accent-text:#F2B65A; --teal:#5BC3C9; --teal-soft:#123338;
+  --ok:#4CC28A; --bad:#F07068; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#091215; --surface:#101C20; --sunk:#16252A; --ink:#E6EEEF; --muted:#94A7AC; --line:#22353B;
+  --deep:#0C2730; --on-deep:#E9F2F3; --on-deep-muted:#A3BBC0; --deep-line:#23505C;
+  --accent:#F2A93B; --accent-ink:#1B1205; --accent-text:#F2B65A; --teal:#5BC3C9; --teal-soft:#123338;
+  --ok:#4CC28A; --bad:#F07068; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15.5px;line-height:1.5;margin:0}
+.band{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1320px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);margin:0;letter-spacing:-.02em;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+button{font:inherit;cursor:pointer}
+.top{background:var(--deep);color:var(--on-deep)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.brand b{font-family:var(--f-display);font-weight:800;font-size:18px}
+.brand span{font:500 11px var(--f-mono);color:var(--accent);border:1px solid var(--deep-line);border-radius:6px;padding:3px 7px}
+.top a.back{color:var(--on-deep-muted);font-size:14px;text-decoration:none}
+.top a.back:hover{color:var(--on-deep)}
+.notice{font-size:13px;color:var(--muted);padding-block:10px}
+.grid{display:grid;grid-template-columns:380px 1fr;gap:20px;align-items:start;padding-bottom:40px}
+.grid>*{min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.left{padding:18px;display:grid;gap:14px;position:sticky;top:12px}
+.left h1{font-size:22px;font-weight:800}
+.left label{font-size:13px;font-weight:600;color:var(--muted)}
+textarea,input,select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:9px 11px;width:100%}
+textarea{min-height:120px;resize:vertical;font-size:15px}
+.examples{display:flex;flex-wrap:wrap;gap:6px}
+.examples button{font-size:12.5px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:5px 10px}
+.examples button:hover{border-color:var(--teal);color:var(--teal)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 16px;border-radius:9px;font:600 14.5px/1 var(--f-display);border:1px solid transparent}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:var(--surface);border-color:var(--line);color:var(--ink)}
+.btn.sm{padding:7px 11px;font-size:13px}
+.btn:disabled{opacity:.6;cursor:wait}
+.log{list-style:none;margin:0;padding:12px;background:var(--sunk);border-radius:10px;display:grid;gap:7px;font:12px/1.5 var(--f-mono);min-height:150px}
+.log li{display:grid;grid-template-columns:16px 1fr;gap:8px;color:var(--muted)}
+.log li.done{color:var(--ink)}
+.log li .m{color:var(--ok)}
+.log li.run .m{color:var(--accent-text)}
+.log .empty{grid-template-columns:1fr}
+.right{overflow:hidden}
+.tabs{display:flex;gap:2px;padding:6px;border-bottom:1px solid var(--line);background:var(--sunk);flex-wrap:wrap}
+.tabs button{border:0;background:none;color:var(--muted);font:600 14px var(--f-display);padding:9px 14px;border-radius:8px}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.tabs .meta{margin-left:auto;align-self:center;font:500 11px var(--f-mono);color:var(--muted);padding-right:8px}
+.view{padding:20px}
+/* generated app shell */
+.app{display:grid;grid-template-columns:190px 1fr;border:1px solid var(--line);border-radius:12px;overflow:hidden;min-height:440px}
+.app>*{min-width:0}
+.side{background:var(--deep);color:var(--on-deep);padding:16px 12px;display:grid;gap:4px;align-content:start}
+.side .an{font:700 15px var(--f-display);padding:0 6px 12px;border-bottom:1px solid var(--deep-line);margin-bottom:8px}
+.side a{display:block;color:var(--on-deep-muted);text-decoration:none;font-size:14px;padding:7px 8px;border-radius:7px}
+.side a.on{background:var(--deep-line);color:var(--on-deep)}
+.main{padding:18px;display:grid;gap:18px;align-content:start;background:var(--bg)}
+.main-head{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.main-head h2{font-size:20px;font-weight:700}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px;display:grid;gap:2px}
+.kpi span{font-size:12.5px;color:var(--muted)}
+.kpi b{font:600 20px var(--f-mono);font-variant-numeric:tabular-nums}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+.card h3{font-size:15px;font-weight:700;margin-bottom:12px}
+.form{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.f{display:grid;gap:5px;min-width:0}
+.f.wide{grid-column:1/-1}
+.f label{font-size:12.5px;font-weight:600;color:var(--muted)}
+.f label i{color:var(--bad);font-style:normal}
+.f .err{font-size:12px;color:var(--bad);min-height:0}
+.f.chk{grid-template-columns:auto 1fr;align-items:center}
+.f.chk input{width:auto;accent-color:var(--accent)}
+.formfoot{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}
+.toast{font-size:13px;color:var(--ok)}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font:500 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right}
+.tag{display:inline-block;font:500 11px var(--f-mono);padding:2px 8px;border-radius:999px;background:var(--teal-soft);color:var(--teal)}
+.searchrow{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.searchrow h3{margin:0}
+.searchrow input{max-width:240px}
+/* data model */
+.model-head{display:flex;justify-content:space-between;gap:10px;align-items:end;margin-bottom:14px;flex-wrap:wrap}
+.model-head .f{max-width:280px}
+.fields th:last-child,.fields td:last-child{text-align:right}
+.fields td{white-space:normal;vertical-align:middle}
+.fields input[type=text],.fields select{padding:6px 8px;font-size:13.5px}
+.fields .key{font:12px var(--f-mono);color:var(--muted)}
+.del{border:0;background:none;color:var(--bad);font-size:13px;padding:4px 6px}
+pre.json{margin:0;background:var(--sunk);border-radius:10px;padding:16px;font:12.5px/1.6 var(--f-mono);overflow:auto;max-height:560px}
+.hint{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+@media (max-width:980px){.grid{grid-template-columns:1fr}.left{position:static}}
+@media (max-width:640px){.app{grid-template-columns:1fr}.side{display:none}.form{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.view{padding:12px}}
+</style>
+</head>
+<body>
+
+<div class="top band"><div class="wrap">
+  <a class="brand" href="/" aria-label="Fascinora home"><svg width="24" height="24" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13.5" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M4 17c4-3 7 3 11 0s7-3 11 0" fill="none" stroke="var(--on-deep)" stroke-width="1.8" stroke-linecap="round"/></svg><b>Fascinora</b><span>AI Studio</span></a>
+  <a class="back" href="/">← Back to fascinora.com</a>
+</div></div>
+
+<div class="band"><div class="wrap">
+  <p class="notice">Demo: in this preview, app generation runs on built-in templates in your browser and sample data is invented. Client deployments use an LLM and a real database.</p>
+  <div class="grid">
+    <aside class="panel left">
+      <h1>Describe your app</h1>
+      <div style="display:grid;gap:6px">
+        <label for="prompt">What should the app do? Mention the details you want to track.</label>
+        <textarea id="prompt"></textarea>
+      </div>
+      <div style="display:grid;gap:6px">
+        <label>Try an example</label>
+        <div class="examples" id="examples"></div>
+      </div>
+      <button class="btn primary" id="gen" type="button">Generate app</button>
+      <div style="display:grid;gap:6px">
+        <label>Build log</label>
+        <ol class="log" id="log" aria-live="polite"></ol>
+      </div>
+    </aside>
+
+    <section class="panel right">
+      <div class="tabs" role="tablist" aria-label="Studio views">
+        <button role="tab" id="t-app" aria-selected="true" data-v="app">App preview</button>
+        <button role="tab" id="t-model" aria-selected="false" data-v="model">Data model</button>
+        <button role="tab" id="t-json" aria-selected="false" data-v="json">Metadata</button>
+        <span class="meta" id="meta"></span>
+      </div>
+      <div class="view" id="v-app"></div>
+      <div class="view" id="v-model" hidden></div>
+      <div class="view" id="v-json" hidden>
+        <p class="hint">This schema is the single source of truth. The form, table, validation and API are all generated from it.</p>
+        <div style="display:flex;justify-content:flex-end;margin-bottom:10px"><button class="btn ghost sm" id="copyjson" type="button">Copy JSON</button></div>
+        <pre class="json" id="json"></pre>
+      </div>
+    </section>
+  </div>
+</div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_|_$/g,"")||"field";
+const title=s=>s.replace(/\b\w/g,c=>c.toUpperCase());
+const TYPES=["text","textarea","number","currency","date","time","phone","email","select","boolean"];
+
+const EXAMPLES=[
+  ["Dental clinic","A booking app for my dental clinic with patient name, phone, treatment, appointment date, time slot, fee and status."],
+  ["Gym members","Manage gym members with name, mobile, plan, joining date, expiry date, amount paid and active."],
+  ["Tuition centre","Track students in my tuition centre with student name, parent phone, class, subject, monthly fee and fee paid."],
+  ["Bike service","Vehicle service centre app with customer name, phone, vehicle number, service type, delivery date, estimate amount and status."],
+  ["Property leads","Real estate leads with buyer name, phone, email, budget, location, site visit date and stage."],
+];
+
+const TEMPLATES=[
+  {k:/dental|clinic|hospital|patient|doctor|appointment/,app:"Clinic Desk",entity:"Appointment",fields:["patient name","phone","treatment","appointment date","time slot","fee","status"]},
+  {k:/gym|fitness|member/,app:"Gym Manager",entity:"Member",fields:["name","mobile","plan","joining date","expiry date","amount paid","active"]},
+  {k:/tuition|school|student|coaching|class/,app:"Tuition Tracker",entity:"Student",fields:["student name","parent phone","class","subject","monthly fee","fee paid"]},
+  {k:/vehicle|bike|car|garage|service cent/,app:"Service Centre",entity:"Job Card",fields:["customer name","phone","vehicle number","service type","delivery date","estimate amount","status"]},
+  {k:/real estate|property|plot|flat|buyer/,app:"Property CRM",entity:"Lead",fields:["buyer name","phone","email","budget","location","site visit date","stage"]},
+  {k:/inventory|stock|warehouse|product|godown/,app:"Stock Register",entity:"Product",fields:["product name","sku","category","quantity","unit price","reorder level"]},
+  {k:/restaurant|food|menu|cafe|tea|order/,app:"Order Book",entity:"Order",fields:["customer name","phone","items","order type","amount","order time","status"]},
+  {k:/leave|employee|staff|hr\b|attendance/,app:"HR Desk",entity:"Leave Request",fields:["employee name","department","leave type","from date","to date","reason","status"]},
+];
+
+const OPTS={
+  treatment:["Check-up","Cleaning","Filling","Root canal","Braces consult"],
+  plan:["Monthly","Quarterly","Half-yearly","Yearly"],
+  class:["Class 8","Class 9","Class 10","Class 11","Class 12"],
+  subject:["Maths","Science","English","Physics","Chemistry"],
+  "service type":["General service","Oil change","Brake work","Engine repair","Washing"],
+  stage:["New","Contacted","Site visit","Negotiation","Closed"],
+  status:["New","In progress","Done","Cancelled"],
+  "order type":["Dine-in","Takeaway","Delivery"],
+  "leave type":["Casual","Sick","Earned"],
+  department:["Sales","Operations","Accounts","Warehouse"],
+  category:["Grains","Oils","Snacks","Beverages","Home care"],
+  location:["Coimbatore","Madurai","Dindigul","Chennai","Trichy"],
+  "time slot":["10:00","11:30","14:00","16:30","18:00"],
+  gender:["Female","Male","Other"],
+};
+function inferType(n){
+  if(/\b(date|dob|day|expiry|deadline)\b/.test(n))return"date";
+  if(/\btime\b/.test(n)&&!/slot/.test(n))return"time";
+  if(/phone|mobile|whatsapp|contact no/.test(n))return"phone";
+  if(/e-?mail/.test(n))return"email";
+  if(/amount|price|fee\b|fees|cost|salary|budget|total|estimate|rate/.test(n)&&!/paid$/.test(n.trim())||/amount paid/.test(n))return"currency";
+  if(/qty|quantity|count|\bage\b|level|number of|weight|\bkg\b|\bstock\b/.test(n))return"number";
+  if(/\b(active|paid|verified|completed|approved)\b$/.test(n.trim()))return"boolean";
+  if(/notes|address|description|remarks|reason|items/.test(n))return"textarea";
+  if(Object.keys(OPTS).some(o=>n.includes(o))||/\b(type|status|stage|category|plan)\b/.test(n))return"select";
+  return"text";
+}
+function optionsFor(n){const k=Object.keys(OPTS).find(o=>n.includes(o));return k?OPTS[k].slice():["Option A","Option B","Option C"]}
+function makeField(raw,i){
+  const n=raw.toLowerCase().trim().replace(/^(the|a|an)\s+/,"");
+  const type=inferType(n);
+  const f={key:slug(n),label:title(n),type,required:i===0||type==="phone"||(type==="date"&&i<5)};
+  if(type==="select")f.options=optionsFor(n);
+  return f;
+}
+function parseFields(p){
+  const m=p.match(/\bwith\b(.+)$/i)||p.match(/\b(?:fields?:?|including|capture|store|track(?:ing)?)\b(.+)$/i);
+  if(!m)return[];
+  return m[1].replace(/\.$/,"").split(/,|\band\b|;/).map(s=>s.trim()).filter(s=>s&&s.split(" ").length<=4&&!/^(more|etc)$/i.test(s));
+}
+function generate(prompt){
+  const p=prompt.toLowerCase();
+  const tpl=TEMPLATES.find(t=>t.k.test(p));
+  let names=parseFields(prompt);
+  if(names.length<2)names=tpl?tpl.fields:["name","phone","email","date","status","notes"];
+  const seen=new Set();
+  const fields=names.map(makeField).filter(f=>!seen.has(f.key)&&seen.add(f.key)).slice(0,12);
+  let entity=tpl?tpl.entity:"Record", app=tpl?tpl.app:"My App";
+  if(!tpl){const mm=prompt.match(/\b(?:manage|track|for my|for our|for)\s+([a-z ]{3,30}?)(?:\s+with|\s+app|,|\.|$)/i);if(mm){app=title(mm[1].trim())+" App";entity=title(mm[1].trim().split(" ").pop().replace(/s$/,""))}}
+  return {app,entity,version:1,fields,views:{form:fields.map(f=>f.key),list:fields.slice(0,6).map(f=>f.key)},permissions:{admin:["create","read","update","delete"],staff:["create","read","update"]}};
+}
+
+// sample data
+const NAMES=["Priya Raman","Arjun Kumar","Meena Sundaram","Karthik Raj","Divya Natarajan","Suresh Babu","Lakshmi Iyer","Vignesh M","Anitha Selvam","Rahul Menon"];
+const rnd=(a,b)=>Math.floor(Math.random()*(b-a+1))+a, pick=a=>a[rnd(0,a.length-1)];
+function sampleValue(f,i){
+  const d=new Date();d.setDate(d.getDate()+rnd(-10,20));
+  switch(f.type){
+    case"date":return d.toISOString().slice(0,10);
+    case"time":return pick(["09:30","11:00","13:15","15:45","17:30"]);
+    case"phone":return"+91 9"+rnd(1000,9999)+" "+rnd(10000,99999);
+    case"email":return NAMES[i%NAMES.length].split(" ")[0].toLowerCase()+"@example.com";
+    case"currency":return rnd(5,250)*100;
+    case"number":return rnd(1,120);
+    case"boolean":return Math.random()>.35;
+    case"select":return pick(f.options||["-"]);
+    case"textarea":return pick(["Call before visiting","Prefers evening","Regular customer","Follow up next week"]);
+    default:
+      if(/name/.test(f.key))return NAMES[i%NAMES.length];
+      if(/vehicle/.test(f.key))return"TN 57 "+pick(["AB","CK","DM"])+" "+rnd(1000,9999);
+      if(/sku/.test(f.key))return"SKU-"+rnd(100,999);
+      return title(pick(["standard","premium","basic","special"]));
+  }
+}
+let S={schema:null,rows:[],q:""};
+function seedRows(){S.rows=Array.from({length:6},(_,i)=>Object.fromEntries(S.schema.fields.map(f=>[f.key,sampleValue(f,i)])))}
+
+const fmt=(f,v)=>{
+  if(v===undefined||v===null||v==="")return"<span style='color:var(--muted)'>–</span>";
+  if(f.type==="currency")return"₹"+Number(v).toLocaleString("en-IN");
+  if(f.type==="boolean")return v?"<span class='tag'>Yes</span>":"No";
+  if(f.type==="date")return new Date(v+"T00:00").toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});
+  if(f.type==="select")return`<span class="tag">${esc(v)}</span>`;
+  return esc(v);
+};
+function inputFor(f){
+  const id="in-"+f.key, req=f.required?" required":"";
+  const t={text:"text",phone:"tel",email:"email",number:"number",currency:"number",date:"date",time:"time"}[f.type];
+  if(f.type==="textarea")return`<textarea id="${id}" rows="2"${req}></textarea>`;
+  if(f.type==="select")return`<select id="${id}"${req}><option value="">Choose…</option>${f.options.map(o=>`<option>${esc(o)}</option>`).join("")}</select>`;
+  if(f.type==="boolean")return`<input type="checkbox" id="${id}">`;
+  return`<input type="${t}" id="${id}"${f.type==="currency"?' min="0" step="1"':""}${req}>`;
+}
+function renderApp(){
+  const s=S.schema, list=s.fields.filter(f=>s.views.list.includes(f.key));
+  const money=s.fields.find(f=>f.type==="currency"), sel=s.fields.find(f=>f.type==="select");
+  const total=money?S.rows.reduce((a,r)=>a+(+r[money.key]||0),0):null;
+  const top=sel?Object.entries(S.rows.reduce((a,r)=>(a[r[sel.key]]=(a[r[sel.key]]||0)+1,a),{})).sort((a,b)=>b[1]-a[1])[0]:null;
+  const q=S.q.toLowerCase();
+  const rows=S.rows.filter(r=>!q||Object.values(r).some(v=>String(v).toLowerCase().includes(q)));
+  $("v-app").innerHTML=`<div class="app">
+    <nav class="side" aria-label="Generated app navigation"><div class="an">${esc(s.app)}</div><a href="#" class="on">${esc(s.entity)}s</a><a href="#">Reports</a><a href="#">Settings</a></nav>
+    <div class="main">
+      <div class="main-head"><h2>${esc(s.entity)}s</h2><span class="tag">Generated from schema v${s.version}</span></div>
+      <div class="kpis">
+        <div class="kpi"><span>Total ${esc(s.entity.toLowerCase())}s</span><b>${S.rows.length}</b></div>
+        <div class="kpi"><span>${money?esc(money.label)+" (sum)":"Fields"}</span><b>${money?"₹"+total.toLocaleString("en-IN"):s.fields.length}</b></div>
+        <div class="kpi"><span>${sel?"Most common "+esc(sel.label.toLowerCase()):"Required fields"}</span><b style="font-size:15px">${top?esc(top[0]):s.fields.filter(f=>f.required).length}</b></div>
+      </div>
+      <div class="card"><h3>New ${esc(s.entity.toLowerCase())}</h3>
+        <form id="appform" novalidate><div class="form">${s.fields.filter(f=>s.views.form.includes(f.key)).map(f=>`<div class="f ${f.type==="textarea"?"wide":""} ${f.type==="boolean"?"chk":""}">${f.type==="boolean"?inputFor(f)+`<label for="in-${f.key}">${esc(f.label)}</label>`:`<label for="in-${f.key}">${esc(f.label)}${f.required?" <i>*</i>":""}</label>${inputFor(f)}<span class="err" id="er-${f.key}"></span>`}</div>`).join("")}</div>
+        <div class="formfoot"><button class="btn primary" type="submit">Save ${esc(s.entity.toLowerCase())}</button><span class="toast" id="toast" role="status"></span></div></form>
+      </div>
+      <div class="card"><div class="searchrow"><h3>All ${esc(s.entity.toLowerCase())}s</h3><input id="q" type="search" placeholder="Search…" aria-label="Search records" value="${esc(S.q)}"></div>
+        <div class="scroll"><table><thead><tr>${list.map(f=>`<th${f.type==="currency"||f.type==="number"?' style="text-align:right"':""}>${esc(f.label)}</th>`).join("")}</tr></thead>
+        <tbody>${rows.length?rows.map(r=>`<tr>${list.map(f=>`<td class="${f.type==="currency"||f.type==="number"?"num":""}">${fmt(f,r[f.key])}</td>`).join("")}</tr>`).join(""):`<tr><td colspan="${list.length}" style="color:var(--muted)">No records match your search.</td></tr>`}</tbody></table></div>
+      </div>
+    </div></div>`;
+  $("q").addEventListener("input",e=>{S.q=e.target.value;const pos=e.target.selectionStart;renderApp();const n=$("q");n.focus();n.setSelectionRange(pos,pos)});
+  $("appform").addEventListener("submit",e=>{
+    e.preventDefault(); let ok=true; const rec={};
+    s.fields.forEach(f=>{
+      const el=$("in-"+f.key), er=$("er-"+f.key); if(!el)return;
+      let v=f.type==="boolean"?el.checked:el.value.trim(); let msg="";
+      if(f.required&&f.type!=="boolean"&&!v)msg=`${f.label} is required.`;
+      else if(v&&f.type==="email"&&!/^\S+@\S+\.\S+$/.test(v))msg="Enter a valid email, like name@company.com.";
+      else if(v&&f.type==="phone"&&String(v).replace(/\D/g,"").length<10)msg="Enter at least 10 digits.";
+      if(er)er.textContent=msg; if(msg)ok=false;
+      rec[f.key]=(f.type==="currency"||f.type==="number")&&v!==""?Number(v):v;
+    });
+    if(!ok){$("toast").textContent="";return}
+    S.rows.unshift(rec); renderApp(); $("toast").textContent=`Saved. ${S.rows.length} ${s.entity.toLowerCase()}s in total.`;
+  });
+}
+function renderModel(){
+  const s=S.schema;
+  $("v-model").innerHTML=`<div class="model-head"><div class="f"><label for="m-app">App name</label><input id="m-app" value="${esc(s.app)}"></div><div class="f"><label for="m-ent">Entity</label><input id="m-ent" value="${esc(s.entity)}"></div><button class="btn ghost sm" id="addf" type="button">+ Add field</button></div>
+  <p class="hint">Edit any field and the app preview and metadata update instantly. This is the low-code part: no developer needed.</p>
+  <div class="scroll"><table class="fields"><thead><tr><th>Label</th><th>Key</th><th>Type</th><th>Options</th><th>Required</th><th>In table</th><th></th></tr></thead><tbody>
+  ${s.fields.map((f,i)=>`<tr>
+    <td><input type="text" data-i="${i}" data-p="label" value="${esc(f.label)}" aria-label="Label for field ${i+1}"></td>
+    <td class="key">${esc(f.key)}</td>
+    <td><select data-i="${i}" data-p="type" aria-label="Type for ${esc(f.label)}">${TYPES.map(t=>`<option${t===f.type?" selected":""}>${t}</option>`).join("")}</select></td>
+    <td>${f.type==="select"?`<input type="text" data-i="${i}" data-p="options" value="${esc((f.options||[]).join(", "))}" aria-label="Options for ${esc(f.label)}">`:"<span style='color:var(--muted)'>–</span>"}</td>
+    <td><input type="checkbox" data-i="${i}" data-p="required"${f.required?" checked":""} aria-label="${esc(f.label)} required" style="width:auto;accent-color:var(--accent)"></td>
+    <td><input type="checkbox" data-i="${i}" data-p="list"${s.views.list.includes(f.key)?" checked":""} aria-label="Show ${esc(f.label)} in table" style="width:auto;accent-color:var(--accent)"></td>
+    <td><button class="del" type="button" data-del="${i}" aria-label="Delete ${esc(f.label)}">Delete</button></td></tr>`).join("")}
+  </tbody></table></div>`;
+  $("m-app").addEventListener("change",e=>{s.app=e.target.value||s.app;bump()});
+  $("m-ent").addEventListener("change",e=>{s.entity=e.target.value||s.entity;bump()});
+  $("addf").addEventListener("click",()=>{let n=1;while(s.fields.some(f=>f.key==="new_field_"+n))n++;const f={key:"new_field_"+n,label:"New field "+n,type:"text",required:false};s.fields.push(f);s.views.form.push(f.key);bump(true)});
+  $("v-model").querySelectorAll("[data-p]").forEach(el=>el.addEventListener("change",()=>{
+    const f=s.fields[+el.dataset.i], p=el.dataset.p;
+    if(p==="label")f.label=el.value||f.label;
+    if(p==="type"){f.type=el.value;if(f.type==="select"&&!f.options)f.options=optionsFor(f.label.toLowerCase());S.rows.forEach((r,i)=>r[f.key]=sampleValue(f,i))}
+    if(p==="options")f.options=el.value.split(",").map(x=>x.trim()).filter(Boolean);
+    if(p==="required")f.required=el.checked;
+    if(p==="list"){s.views.list=el.checked?[...new Set([...s.views.list,f.key])]:s.views.list.filter(k=>k!==f.key)}
+    bump(p==="type");
+  }));
+  $("v-model").querySelectorAll("[data-del]").forEach(b=>b.addEventListener("click",()=>{
+    if(s.fields.length<=1)return; const f=s.fields.splice(+b.dataset.del,1)[0];
+    s.views.form=s.views.form.filter(k=>k!==f.key); s.views.list=s.views.list.filter(k=>k!==f.key); bump(true);
+  }));
+}
+function bump(rerenderModel){S.schema.version++;renderApp();renderJson();if(rerenderModel)renderModel();$("meta").textContent=`${S.schema.fields.length} fields · v${S.schema.version}`}
+function renderJson(){$("json").textContent=JSON.stringify(S.schema,null,2)}
+function renderAll(){renderApp();renderModel();renderJson();$("meta").textContent=`${S.schema.fields.length} fields · v${S.schema.version}`}
+
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+async function build(){
+  const prompt=$("prompt").value.trim(), btn=$("gen"), log=$("log");
+  if(prompt.length<10){log.innerHTML=`<li class="empty" style="color:var(--bad)">Describe the app in at least one sentence, for example: “Track gym members with name, mobile and plan.”</li>`;return}
+  btn.disabled=true; btn.textContent="Generating…"; log.innerHTML="";
+  const schema=generate(prompt);
+  const steps=[
+    `Read request (${prompt.split(/\s+/).length} words)`,
+    `Identified app type: ${schema.app}`,
+    `Designed entity “${schema.entity}” with ${schema.fields.length} fields`,
+    `Inferred types: ${[...new Set(schema.fields.map(f=>f.type))].join(", ")}`,
+    `Added validation for ${schema.fields.filter(f=>f.required).length} required fields`,
+    `Generated form, list view and dashboard`,
+    `Set roles: admin, staff`,
+  ];
+  for(const s of steps){
+    const li=document.createElement("li"); li.className="run"; li.innerHTML=`<span class="m">›</span><span>${esc(s)}</span>`; log.appendChild(li);
+    if(!reduce)await new Promise(r=>setTimeout(r,260));
+    li.className="done"; li.querySelector(".m").textContent="✓";
+  }
+  S.schema=schema; S.q=""; seedRows(); renderAll();
+  const li=document.createElement("li"); li.className="done"; li.innerHTML=`<span class="m">✓</span><span><b>App ready.</b> Open “Data model” to change any field.</span>`; log.appendChild(li);
+  btn.disabled=false; btn.textContent="Generate app";
+  showTab("app");
+}
+function showTab(v){document.querySelectorAll(".tabs [role=tab]").forEach(b=>b.setAttribute("aria-selected",b.dataset.v===v));["app","model","json"].forEach(x=>$("v-"+x).hidden=x!==v)}
+document.querySelectorAll(".tabs [role=tab]").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.v)));
+$("examples").innerHTML=EXAMPLES.map((e,i)=>`<button type="button" data-ex="${i}">${esc(e[0])}</button>`).join("");
+$("examples").addEventListener("click",e=>{const b=e.target.closest("[data-ex]");if(!b)return;$("prompt").value=EXAMPLES[+b.dataset.ex][1];build()});
+$("gen").addEventListener("click",build);
+$("copyjson").addEventListener("click",async e=>{const b=e.currentTarget;try{await navigator.clipboard.writeText($("json").textContent);b.textContent="Copied"}catch(_){const r=document.createRange();r.selectNodeContents($("json"));getSelection().removeAllRanges();getSelection().addRange(r);b.textContent="Selected, press Ctrl+C"}setTimeout(()=>b.textContent="Copy JSON",2000)});
+
+// open in a working state
+$("prompt").value=EXAMPLES[0][1];
+S.schema=generate(EXAMPLES[0][1]); seedRows(); renderAll();
+$("log").innerHTML=steps0();
+function steps0(){return`<li class="done"><span class="m">✓</span><span>Loaded example: dental clinic booking app</span></li><li class="done"><span class="m">✓</span><span>${S.schema.fields.length} fields, form, list and dashboard generated</span></li><li class="done"><span class="m">✓</span><span>Edit the description and press Generate app</span></li>`}
+</script>
+
+</body>
+</html>
