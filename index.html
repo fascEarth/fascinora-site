@@ -66,6 +66,11 @@ nav.links{display:flex;gap:4px 22px;flex-wrap:wrap;align-items:center}
 nav.links a{text-decoration:none;color:var(--on-deep-muted);font-weight:500;font-size:15px}
 nav.links a:hover{color:var(--on-deep)}
 nav.links a.btn{color:var(--accent-ink);padding:10px 16px}
+.menu-btn{display:none;width:44px;height:44px;border-radius:10px;border:1px solid var(--deep-line);background:transparent;color:var(--on-deep);align-items:center;justify-content:center;cursor:pointer}
+.menu-btn path{stroke:currentColor;stroke-width:2;stroke-linecap:round;transition:transform .2s,opacity .2s;transform-origin:11px 11px}
+.menu-btn[aria-expanded="true"] .l1{transform:translateY(5px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] .l2{opacity:0}
+.menu-btn[aria-expanded="true"] .l3{transform:translateY(-5px) rotate(-45deg)}
 .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding-block:56px 88px}
 .hero>*{min-width:0}
 .hero h1{font-size:clamp(40px,6vw,74px);font-weight:800;letter-spacing:-.04em}
@@ -73,7 +78,7 @@ nav.links a.btn{color:var(--accent-ink);padding:10px 16px}
 .hero .lede{font-size:20px;color:var(--on-deep-muted);max-width:33em;margin-top:22px}
 .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
 .assure{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:10px 28px;margin-top:36px;padding-top:24px;border-top:1px solid var(--deep-line)}
-.assure div{display:grid;gap:2px}
+.assure>div{display:grid;gap:2px}
 .assure b{font-family:var(--f-display);font-size:16px}
 .assure span{font-size:14px;color:var(--on-deep-muted)}
 
@@ -195,7 +200,8 @@ section.block+section.block{border-top:1px solid var(--line)}
 .grp{display:grid;gap:10px;margin-bottom:20px}
 .grp h4{font-size:13px;font-family:var(--f-mono);font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .trust{display:grid;gap:18px}
-.trust div{display:grid;grid-template-columns:28px 1fr;gap:12px}
+.trust>div{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start}
+.trust>div>div{min-width:0}
 .trust h3{font-size:18px;font-weight:700;margin-bottom:2px}
 .trust p{font-size:15.5px;color:var(--muted)}
 
@@ -206,7 +212,7 @@ section.block+section.block{border-top:1px solid var(--line)}
 .about .txt{display:grid;gap:16px;color:var(--muted);font-size:18px}
 .about .txt b{color:var(--ink)}
 .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
-.facts div{border-top:2px solid var(--ink);padding-top:10px;display:grid;gap:2px}
+.facts>div{border-top:2px solid var(--ink);padding-top:10px;display:grid;gap:2px}
 .facts b{font-family:var(--f-display);font-size:17px;color:var(--ink)}
 .facts span{font-size:14px}
 
@@ -225,7 +231,7 @@ section.block+section.block{border-top:1px solid var(--line)}
 .contact h2{font-size:clamp(32px,4.2vw,50px);font-weight:800}
 .contact .side p{color:var(--muted);margin-top:16px;max-width:30em}
 .cfacts{margin-top:28px;display:grid;gap:16px}
-.cfacts div{display:grid;gap:2px}
+.cfacts>div{display:grid;gap:2px}
 .cfacts .l{font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .cfacts .v{font-weight:600}
 form{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px;display:grid;gap:16px}
@@ -260,7 +266,14 @@ footer.site .legal{grid-column:1/-1;border-top:1px solid var(--deep-line);paddin
   .mock-prompt{border-right:0;border-bottom:1px solid var(--deep-line)}
   .assure{grid-template-columns:1fr}
   section.block{padding-block:64px}
-  nav.links a:not(.btn){display:none}
+  .menu-btn{display:inline-flex}
+  nav.links{display:none;width:100%;flex-direction:column;align-items:stretch;gap:0;padding:6px 0 18px;border-top:1px solid var(--deep-line)}
+  nav.links.open{display:flex}
+  nav.links a:not(.btn){font-size:18px;padding:13px 2px;border-bottom:1px solid var(--deep-line);color:var(--on-deep)}
+  nav.links a.btn{justify-content:center;margin-top:16px;padding:14px 16px}
+  .hero h1{font-size:clamp(34px,10vw,44px)}
+  .hero .lede{font-size:18px}
+  .ctas .btn{flex:1 1 100%;justify-content:center}
   footer.site .wrap{grid-template-columns:1fr}
 }
 </style>
@@ -275,7 +288,8 @@ footer.site .legal{grid-column:1/-1;border-top:1px solid var(--deep-line);paddin
         <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13.5" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M4 17c4-3 7 3 11 0s7-3 11 0" fill="none" stroke="var(--on-deep)" stroke-width="1.8" stroke-linecap="round"/><path d="M6 11c3-2 6 2 9 0s6-2 9 0" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round"/></svg>
         <b>Fascinora</b>
       </a>
-      <nav class="links" aria-label="Main">
+      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path class="l1" d="M3 6h16"/><path class="l2" d="M3 11h16"/><path class="l3" d="M3 16h16"/></svg></button>
+      <nav class="links" id="main-nav" aria-label="Main">
         <a href="#services">Services</a><a href="#studio">AI Studio</a><a href="#work">Work</a><a href="#process">Process</a><a href="#pricing">Pricing</a><a href="#about">About</a>
         <a class="btn primary" href="#contact">Start a project</a>
       </nav>
@@ -596,6 +610,15 @@ footer.site .legal{grid-column:1/-1;border-top:1px solid var(--deep-line);paddin
 </div></footer>
 
 <script>
+(function(){
+  const b=document.getElementById('menu-btn'), n=document.getElementById('main-nav');
+  if(!b||!n) return;
+  const set=o=>{n.classList.toggle('open',o);b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Close menu':'Open menu')};
+  b.addEventListener('click',()=>set(!n.classList.contains('open')));
+  n.addEventListener('click',e=>{if(e.target.closest('a'))set(false)});
+  addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});
+  matchMedia('(min-width:641px)').addEventListener('change',e=>{if(e.matches)set(false)});
+})();
 (function(){
   const c=document.getElementById('topo'); if(!c) return;
   const ctx=c.getContext('2d');
