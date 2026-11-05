@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="StockFlow: a warehouse inventory demo app built by Fascinora.">
+<style>[hidden]{display:none!important}img{max-width:100%}body{margin:0}</style>
+<title>StockFlow</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: warehouse-ledger app; top bar + tabbed views (Dashboard, Inventory, Movements), tables in scroll containers */
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --sunk:#E9EDF2; --ink:#16202C; --muted:#5B6878; --line:#D3DAE3;
+  --accent:#2F5BEA; --accent-soft:#E3EAFD; --accent-ink:#FFFFFF;
+  --good:#1F8A5B; --warn:#B7791F; --bad:#C2413A;
+  --f-ui:"Archivo","Segoe UI",system-ui,sans-serif; --f-num:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E141B; --surface:#151D27; --sunk:#1C2633; --ink:#E6ECF3; --muted:#93A1B2; --line:#283545;
+  --accent:#7C9BFF; --accent-soft:#1F2B4A; --accent-ink:#0E141B; --good:#4CC28A; --warn:#E0A84A; --bad:#F07068; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E141B; --surface:#151D27; --sunk:#1C2633; --ink:#E6ECF3; --muted:#93A1B2; --line:#283545;
+  --accent:#7C9BFF; --accent-soft:#1F2B4A; --accent-ink:#0E141B; --good:#4CC28A; --warn:#E0A84A; --bad:#F07068; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 40px}
+.wrap{max-width:1180px;margin:0 auto}
+h1,h2,h3{margin:0;text-wrap:balance}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.demo{background:var(--accent-soft);color:var(--ink);font-size:13px;padding:8px 12px;border-radius:8px;margin-top:14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.demo button{font:inherit;font-size:13px;background:none;border:0;color:var(--accent);font-weight:600;cursor:pointer;text-decoration:underline}
+header.bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding-block:16px 6px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo b{font-size:20px;font-weight:800;letter-spacing:-.02em}
+.logo small{color:var(--muted);font-size:13px}
+.tabs{display:flex;gap:4px;background:var(--sunk);padding:4px;border-radius:10px;flex-wrap:wrap}
+.tabs button{font:inherit;font-weight:600;font-size:14px;border:0;background:none;color:var(--muted);padding:8px 14px;border-radius:7px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.btn{font:inherit;font-weight:600;font-size:14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:9px 14px;border-radius:8px;cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+main{margin-top:18px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:4px;min-width:0}
+.kpi span{font-size:13px;color:var(--muted)}
+.kpi strong{font-size:26px;font-weight:600}
+.kpi.alert strong{color:var(--bad)}
+.grid2{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;margin-top:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.panel h2{font-size:16px;font-weight:700;margin-bottom:12px;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.panel h2 small{font-weight:500;color:var(--muted);font-size:13px}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right}
+.sku{font-family:var(--f-num);font-size:12px;color:var(--muted)}
+.pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.pill.ok{color:var(--good)} .pill.low{color:var(--warn)} .pill.out{color:var(--bad)}
+.type{font-family:var(--f-num);font-size:12px;font-weight:500;padding:2px 7px;border-radius:5px;background:var(--sunk)}
+.type.IN{color:var(--good)} .type.OUT{color:var(--bad)} .type.TRANSFER{color:var(--accent)}
+.bars{display:grid;gap:14px}
+.bar-row{display:grid;gap:6px}
+.bar-row .lbl{display:flex;justify-content:space-between;font-size:14px}
+.track{height:10px;background:var(--sunk);border-radius:5px;overflow:hidden}
+.fill{height:100%;background:var(--accent);border-radius:5px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+input,select{font:inherit;font-size:14px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
+.toolbar input{flex:1 1 220px;min-width:0}
+.form{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:end}
+.field{display:grid;gap:5px;min-width:0}
+.field label{font-size:13px;font-weight:600;color:var(--muted)}
+.field input,.field select{width:100%}
+.msg{font-size:14px;margin-top:10px;min-height:1.5em}
+.msg.err{color:var(--bad)} .msg.ok{color:var(--good)}
+.empty{color:var(--muted);font-size:14px;padding:10px 0}
+footer{margin-top:28px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media (max-width:860px){.kpis{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.form{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.form{grid-template-columns:1fr}.kpi strong{font-size:22px}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="demo"><span>Demo app by <a href="/" style="color:inherit"><b>Fascinora</b></a>. All items and figures are sample data. Changes are saved only in your browser.</span><button type="button" id="reset">Reset demo data</button></div>
+  <header class="bar">
+    <div class="logo">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="10" width="24" height="16" rx="2" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M2 11 14 3l12 8" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/><rect x="8" y="16" width="5" height="5" fill="var(--accent)"/><rect x="15" y="16" width="5" height="5" fill="var(--warn)"/></svg>
+      <div><b>StockFlow</b><br><small>Sri Annapoorna Traders · FMCG distributor</small></div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Views">
+      <button role="tab" id="t-dash" aria-selected="true" data-view="dash">Dashboard</button>
+      <button role="tab" id="t-inv" aria-selected="false" data-view="inv">Inventory</button>
+      <button role="tab" id="t-mov" aria-selected="false" data-view="mov">Stock movement</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="v-dash">
+      <div class="kpis">
+        <div class="kpi"><span>Active items</span><strong class="num" id="k-items">0</strong></div>
+        <div class="kpi"><span>Stock value</span><strong class="num" id="k-value">₹0</strong></div>
+        <div class="kpi alert"><span>Below reorder level</span><strong class="num" id="k-low">0</strong></div>
+        <div class="kpi"><span>Movements today</span><strong class="num" id="k-today">0</strong></div>
+      </div>
+      <div class="grid2">
+        <div class="panel"><h2>Reorder now <small>below reorder level, all godowns</small></h2><div class="scroll"><table><thead><tr><th>Item</th><th class="r">In stock</th><th class="r">Reorder at</th><th>Status</th></tr></thead><tbody id="low-body"></tbody></table></div></div>
+        <div class="panel"><h2>Stock value by godown</h2><div class="bars" id="gd-bars"></div></div>
+      </div>
+      <div class="panel" style="margin-top:16px"><h2>Recent movements</h2><div class="scroll"><table><thead><tr><th>Time</th><th>Type</th><th>Item</th><th class="r">Qty</th><th>Godown</th><th>Reference</th></tr></thead><tbody id="recent-body"></tbody></table></div></div>
+    </section>
+
+    <section id="v-inv" hidden>
+      <div class="panel">
+        <div class="toolbar">
+          <input id="q" type="search" placeholder="Search by item name or SKU" aria-label="Search items">
+          <select id="f-gd" aria-label="Filter by godown"></select>
+          <select id="f-st" aria-label="Filter by status"><option value="">All statuses</option><option value="ok">In stock</option><option value="low">Low stock</option><option value="out">Out of stock</option></select>
+        </div>
+        <div class="scroll"><table><thead><tr><th>Item</th><th>Category</th><th class="r" id="h-cbe">Coimbatore</th><th class="r">Palakkad</th><th class="r">Total</th><th class="r">Rate</th><th>Status</th></tr></thead><tbody id="inv-body"></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="v-mov" hidden>
+      <div class="panel">
+        <h2>Record a movement</h2>
+        <form id="mv" class="form" novalidate>
+          <div class="field"><label for="m-type">Type</label><select id="m-type"><option value="IN">Stock in (purchase)</option><option value="OUT">Stock out (sale / dispatch)</option><option value="TRANSFER">Transfer between godowns</option></select></div>
+          <div class="field"><label for="m-item">Item</label><select id="m-item"></select></div>
+          <div class="field"><label for="m-qty">Quantity</label><input id="m-qty" type="number" min="1" step="1" inputmode="numeric" value="10"></div>
+          <div class="field"><label for="m-from" id="l-from">Godown</label><select id="m-from"></select></div>
+          <div class="field" id="to-wrap" hidden><label for="m-to">To godown</label><select id="m-to"></select></div>
+          <div class="field"><label for="m-ref">Reference</label><input id="m-ref" placeholder="Invoice / DC no."></div>
+          <div><button class="btn primary" type="submit">Save movement</button></div>
+        </form>
+        <p class="msg" id="m-msg" role="status"></p>
+      </div>
+      <div class="panel" style="margin-top:16px"><h2>Movement log <small id="log-count"></small></h2><div class="scroll"><table><thead><tr><th>Time</th><th>Type</th><th>Item</th><th class="r">Qty</th><th>Godown</th><th>Reference</th></tr></thead><tbody id="log-body"></tbody></table></div></div>
+    </section>
+  </main>
+  <footer><span>StockFlow demo · built by Fascinora</span><span>Angular · Node.js · PostgreSQL in the full version</span></footer>
+</div>
+
+<script>
+const GD={CBE:"Coimbatore",PKD:"Palakkad"};
+const KEY="stockflow-demo-v1";
+function seed(){
+  const items=[
+    ["RIC-25","Ponni Rice 25 kg bag","Grains","bag",1450,40,{CBE:120,PKD:65}],
+    ["ATT-10","Wheat Atta 10 kg","Grains","bag",520,30,{CBE:22,PKD:14}],
+    ["OIL-1L","Sunflower Oil 1 L pouch","Oils","pouch",145,200,{CBE:640,PKD:310}],
+    ["COC-1L","Coconut Oil 1 L bottle","Oils","bottle",240,80,{CBE:55,PKD:18}],
+    ["SUG-50","Sugar 50 kg sack","Essentials","sack",2150,15,{CBE:30,PKD:12}],
+    ["TEA-500","CTC Tea Dust 500 g","Beverages","pack",210,60,{CBE:90,PKD:48}],
+    ["DAL-1K","Toor Dal 1 kg","Pulses","pack",165,100,{CBE:70,PKD:0}],
+    ["SAL-1K","Iodised Salt 1 kg","Essentials","pack",24,150,{CBE:400,PKD:260}],
+    ["DET-1K","Detergent Powder 1 kg","Home care","pack",110,80,{CBE:0,PKD:0}],
+    ["BIS-24","Glucose Biscuits (24 pack)","Snacks","carton",480,25,{CBE:44,PKD:31}],
+  ].map(([sku,name,cat,unit,rate,reorder,stock])=>({sku,name,cat,unit,rate,reorder,stock}));
+  const now=Date.now(), h=3600e3;
+  const moves=[
+    {t:now-1*h,type:"OUT",sku:"OIL-1L",qty:120,from:"CBE",ref:"INV-2041"},
+    {t:now-2*h,type:"IN",sku:"RIC-25",qty:60,from:"CBE",ref:"PO-1188"},
+    {t:now-4*h,type:"TRANSFER",sku:"SAL-1K",qty:100,from:"CBE",to:"PKD",ref:"STN-0312"},
+    {t:now-26*h,type:"OUT",sku:"DAL-1K",qty:45,from:"PKD",ref:"INV-2033"},
+    {t:now-30*h,type:"OUT",sku:"DET-1K",qty:35,from:"CBE",ref:"INV-2029"},
+  ];
+  return {items,moves};
+}
+let S;
+try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!S||!S.items)S=seed();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+const $=id=>document.getElementById(id);
+const inr=n=>"₹"+Math.round(n).toLocaleString("en-IN");
+const total=i=>i.stock.CBE+i.stock.PKD;
+const status=i=>{const t=total(i);return t===0?"out":t<i.reorder?"low":"ok"};
+const SL={ok:"In stock",low:"Low stock",out:"Out of stock"};
+const item=sku=>S.items.find(i=>i.sku===sku);
+const tfmt=t=>{const d=new Date(t),today=new Date().toDateString()===d.toDateString();
+  return (today?"Today ":d.toLocaleDateString("en-IN",{day:"numeric",month:"short"})+" ")+d.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"})};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function moveRows(list){
+  if(!list.length)return `<tr><td colspan="6" class="empty">No movements yet. Record one in the Stock movement tab.</td></tr>`;
+  return list.map(m=>{const it=item(m.sku);return `<tr><td class="num" style="white-space:nowrap">${tfmt(m.t)}</td><td><span class="type ${m.type}">${m.type}</span></td><td>${esc(it?it.name:m.sku)}</td><td class="r num">${m.qty}</td><td>${m.type==="TRANSFER"?GD[m.from]+" → "+GD[m.to]:GD[m.from]}</td><td class="sku">${esc(m.ref||"-")}</td></tr>`}).join("");
+}
+function renderDash(){
+  $("k-items").textContent=S.items.length;
+  $("k-value").textContent=inr(S.items.reduce((a,i)=>a+total(i)*i.rate,0));
+  const low=S.items.filter(i=>status(i)!=="ok").sort((a,b)=>total(a)/a.reorder-total(b)/b.reorder);
+  $("k-low").textContent=low.length;
+  const d0=new Date();d0.setHours(0,0,0,0);
+  $("k-today").textContent=S.moves.filter(m=>m.t>=d0.getTime()).length;
+  $("low-body").innerHTML=low.length?low.map(i=>`<tr><td>${esc(i.name)}<br><span class="sku">${i.sku}</span></td><td class="r num">${total(i)} ${i.unit}</td><td class="r num">${i.reorder}</td><td><span class="pill ${status(i)}">${SL[status(i)]}</span></td></tr>`).join(""):`<tr><td colspan="4" class="empty">All items are above their reorder level.</td></tr>`;
+  const vals=Object.keys(GD).map(g=>[g,S.items.reduce((a,i)=>a+i.stock[g]*i.rate,0)]);
+  const max=Math.max(...vals.map(v=>v[1]),1);
+  $("gd-bars").innerHTML=vals.map(([g,v])=>`<div class="bar-row"><div class="lbl"><span>${GD[g]}</span><span class="num">${inr(v)}</span></div><div class="track"><div class="fill" style="width:${(v/max*100).toFixed(1)}%"></div></div></div>`).join("")+
+    `<p style="font-size:13px;color:var(--muted);margin:4px 0 0">Value at selling rate. ${S.items.filter(i=>i.stock.PKD===0&&i.stock.CBE>0).length} items are available only in Coimbatore.</p>`;
+  $("recent-body").innerHTML=moveRows([...S.moves].sort((a,b)=>b.t-a.t).slice(0,6));
+}
+function renderInv(){
+  const q=$("q").value.trim().toLowerCase(),g=$("f-gd").value,st=$("f-st").value;
+  const rows=S.items.filter(i=>(!q||i.name.toLowerCase().includes(q)||i.sku.toLowerCase().includes(q))&&(!st||status(i)===st)&&(!g||i.stock[g]>0));
+  $("inv-body").innerHTML=rows.length?rows.map(i=>`<tr><td>${esc(i.name)}<br><span class="sku">${i.sku}</span></td><td>${esc(i.cat)}</td><td class="r num">${i.stock.CBE}</td><td class="r num">${i.stock.PKD}</td><td class="r num"><b>${total(i)}</b> <span class="sku">${i.unit}</span></td><td class="r num">${inr(i.rate)}</td><td><span class="pill ${status(i)}">${SL[status(i)]}</span></td></tr>`).join(""):`<tr><td colspan="7" class="empty">No items match these filters.</td></tr>`;
+}
+function renderLog(){
+  $("log-body").innerHTML=moveRows([...S.moves].sort((a,b)=>b.t-a.t));
+  $("log-count").textContent=S.moves.length+" entries";
+}
+function renderAll(){renderDash();renderInv();renderLog()}
+
+// selects
+const gdOpts=Object.entries(GD).map(([k,v])=>`<option value="${k}">${v}</option>`).join("");
+$("f-gd").innerHTML=`<option value="">All godowns</option>`+gdOpts.replace(/>(\w+)</g,">Has stock in $1<");
+$("m-from").innerHTML=gdOpts; $("m-to").innerHTML=gdOpts; $("m-to").value="PKD";
+$("m-item").innerHTML=S.items.map(i=>`<option value="${i.sku}">${esc(i.name)}</option>`).join("");
+["q","f-gd","f-st"].forEach(id=>$(id).addEventListener("input",renderInv));
+$("m-type").addEventListener("change",()=>{const t=$("m-type").value==="TRANSFER";$("to-wrap").hidden=!t;$("l-from").textContent=t?"From godown":"Godown"});
+
+// tabs
+document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".tabs button").forEach(x=>x.setAttribute("aria-selected",x===b));
+  ["dash","inv","mov"].forEach(v=>$("v-"+v).hidden=v!==b.dataset.view);
+}));
+
+$("mv").addEventListener("submit",e=>{
+  e.preventDefault();
+  const type=$("m-type").value,sku=$("m-item").value,qty=parseInt($("m-qty").value,10),from=$("m-from").value,to=$("m-to").value,ref=$("m-ref").value.trim();
+  const it=item(sku),msg=$("m-msg");msg.className="msg err";
+  if(!qty||qty<1){msg.textContent="Enter a quantity of at least 1.";return}
+  if(type==="TRANSFER"&&from===to){msg.textContent="Choose two different godowns for a transfer.";return}
+  if(type!=="IN"&&it.stock[from]<qty){msg.textContent=`Only ${it.stock[from]} ${it.unit} of ${it.name} in ${GD[from]}. Reduce the quantity or pick another godown.`;return}
+  if(type==="IN")it.stock[from]+=qty;
+  else{it.stock[from]-=qty;if(type==="TRANSFER")it.stock[to]+=qty}
+  S.moves.push({t:Date.now(),type,sku,qty,from,to:type==="TRANSFER"?to:undefined,ref});
+  save();renderAll();
+  msg.className="msg ok";
+  msg.textContent=`Saved. ${it.name} now has ${total(it)} ${it.unit} in stock${status(it)!=="ok"?" (below reorder level)":""}.`;
+  $("m-ref").value="";
+});
+$("reset").addEventListener("click",()=>{S=seed();save();renderAll();$("m-msg").textContent="";});
+renderAll();
+</script>
+
+</body>
+</html>
