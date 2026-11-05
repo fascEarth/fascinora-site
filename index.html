@@ -11,559 +11,545 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://fascinora.com/">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Ccircle cx='15' cy='15' r='13.5' fill='%230B2A33' stroke='%23E8962E' stroke-width='2'/%3E%3Cpath d='M5 17c4-3 7 3 10 0s6-3 10 0' fill='none' stroke='%23E8962E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cg transform='rotate(-18 20 22)'%3E%3Cellipse cx='20' cy='22' rx='18.5' ry='5.6' fill='none' stroke='%231F2933' stroke-width='3.4'/%3E%3C/g%3E%3Ccircle cx='20' cy='21' r='12' fill='%23D6336C'/%3E%3Cg transform='rotate(-18 20 22)'%3E%3Cpath d='M1.5 22a18.5 5.6 0 0 0 37 0' fill='none' stroke='%231F2933' stroke-width='3.4' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E">
 <style>[hidden]{display:none!important}img{max-width:100%}body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 <title>Fascinora</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600&family=Martian+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: full-bleed deep-teal hero band with contour canvas; light editorial sections on a 1200px column; Studio showcase as a second dark band */
+/* Layout: light, product-launch style. Centered statements over wide white space, alternating white and #F5F5F7 bands, one accent (planet magenta) used sparingly. Deliberately light-only. */
 :root{
-  --bg:#F5F6F3; --surface:#FFFFFF; --sunk:#ECEFEC; --ink:#0D1B1E; --muted:#53656A; --line:#D7DDDB;
-  --deep:#0B2A33; --deep-2:#0F3540; --on-deep:#E9F2F3; --on-deep-muted:#A9C2C6; --deep-line:#1F4955;
-  --accent:#E8962E; --accent-ink:#1B1205; --accent-text:#9A5A08; --teal:#167880; --contour:#2A5C68;
-  --ok:#23885A; --busy:#C9871A; --wait:#7C8C90;
-  --f-display:"Schibsted Grotesk","Segoe UI",system-ui,sans-serif;
-  --f-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
-  --f-mono:"Martian Mono",ui-monospace,Menlo,Consolas,monospace;
+  --white:#FFFFFF; --mist:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --body:#3A3A3C; --muted:#6E6E73; --line:#D2D2D7; --hair:#E8E8ED;
+  --planet:#D6336C; --planet-ink:#FFFFFF; --link:#B0234F; --charcoal:#1F2933; --ok:#1E8E5A;
+  --f:"DM Sans","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#091215; --surface:#101C20; --sunk:#16252A; --ink:#E6EEEF; --muted:#94A7AC; --line:#22353B;
-  --deep:#0C2730; --deep-2:#103240; --on-deep:#E9F2F3; --on-deep-muted:#A3BBC0; --deep-line:#23505C;
-  --accent:#F2A93B; --accent-ink:#1B1205; --accent-text:#F2B65A; --teal:#5BC3C9; --contour:#2A5C68;
-  --ok:#4CC28A; --busy:#E3AE45; --wait:#7F9095; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#091215; --surface:#101C20; --sunk:#16252A; --ink:#E6EEEF; --muted:#94A7AC; --line:#22353B;
-  --deep:#0C2730; --deep-2:#103240; --on-deep:#E9F2F3; --on-deep-muted:#A3BBC0; --deep-line:#23505C;
-  --accent:#F2A93B; --accent-ink:#1B1205; --accent-text:#F2B65A; --teal:#5BC3C9; --contour:#2A5C68;
-  --ok:#4CC28A; --busy:#E3AE45; --wait:#7F9095; color-scheme:dark}
-
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;margin:0}
-.band{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.wrap{max-width:1200px;margin:0 auto}
-h1,h2,h3,h4{font-family:var(--f-display);line-height:1.08;text-wrap:balance;margin:0;letter-spacing:-.02em}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--f);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.band{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.03em;text-wrap:balance;color:var(--ink)}
 p{margin:0}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-.eyebrow{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-text)}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:10px;font:600 15px/1 var(--f-display);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .15s, filter .15s}
-.btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
-.btn.primary{background:var(--accent);color:var(--accent-ink)}
-.btn.ghost{border-color:var(--line);color:var(--ink);background:var(--surface)}
-.btn.ghost-dark{border-color:var(--deep-line);color:var(--on-deep);background:transparent}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--planet);outline-offset:3px;border-radius:6px}
+.mist{background:var(--mist)}
+.center{text-align:center}
+.eyebrow{font-size:15px;font-weight:600;color:var(--planet);letter-spacing:0}
+.lead{font-size:21px;line-height:1.45;color:var(--muted);max-width:40ch}
+.center .lead,.hero .lead,.sh .lead{margin-inline:auto}
 
-/* ---------- hero band ---------- */
-.hero-band{background:var(--deep);color:var(--on-deep);position:relative;overflow:hidden}
-#topo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.hero-band .wrap{position:relative;z-index:1}
-header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:20px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--on-deep)}
-.brand b{font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:-.03em}
-nav.links{display:flex;gap:4px 22px;flex-wrap:wrap;align-items:center}
-nav.links a{text-decoration:none;color:var(--on-deep-muted);font-weight:500;font-size:15px}
-nav.links a:hover{color:var(--on-deep)}
-nav.links a.btn{color:var(--accent-ink);padding:10px 16px}
-.menu-btn{display:none;width:44px;height:44px;border-radius:10px;border:1px solid var(--deep-line);background:transparent;color:var(--on-deep);align-items:center;justify-content:center;cursor:pointer}
-.menu-btn path{stroke:currentColor;stroke-width:2;stroke-linecap:round;transition:transform .2s,opacity .2s;transform-origin:11px 11px}
-.menu-btn[aria-expanded="true"] .l1{transform:translateY(5px) rotate(45deg)}
-.menu-btn[aria-expanded="true"] .l2{opacity:0}
-.menu-btn[aria-expanded="true"] .l3{transform:translateY(-5px) rotate(-45deg)}
-.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding-block:56px 88px}
-.hero>*{min-width:0}
-.hero h1{font-size:clamp(40px,6vw,74px);font-weight:800;letter-spacing:-.04em}
-.hero h1 span{color:var(--accent)}
-.hero .lede{font-size:20px;color:var(--on-deep-muted);max-width:33em;margin-top:22px}
-.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
-.assure{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:10px 28px;margin-top:36px;padding-top:24px;border-top:1px solid var(--deep-line)}
-.assure>div{display:grid;gap:2px}
-.assure b{font-family:var(--f-display);font-size:16px}
-.assure span{font-size:14px;color:var(--on-deep-muted)}
+/* logo */
+.logo{display:inline-flex;align-items:center;font-weight:700;letter-spacing:-.045em;line-height:1;color:var(--charcoal);text-decoration:none}
+.logo:hover{text-decoration:none}
+.logo svg{width:1.02em;height:1.02em;margin:0 .01em;transform:translateY(.04em);flex:none}
 
-.board{background:var(--deep-2);border:1px solid var(--deep-line);border-radius:16px;padding:18px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
-.board-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px}
-.board-head strong{font-family:var(--f-display);font-size:16px}
-.board-head span{font-family:var(--f-mono);font-size:11px;color:var(--on-deep-muted)}
-.agents{list-style:none;margin:0;padding:0}
-.agent{display:grid;grid-template-columns:34px 1fr auto;gap:2px 12px;align-items:center;padding:11px 2px;border-top:1px solid var(--deep-line)}
-.agent:first-child{border-top:0}
-.av{grid-row:1/3;width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font:600 11px var(--f-mono);background:var(--deep);border:1px solid var(--deep-line);color:var(--accent)}
-.agent .role{font-weight:600;font-size:15px;font-family:var(--f-display)}
-.agent .task{grid-column:2;font-size:13.5px;color:var(--on-deep-muted)}
-.pill{grid-row:1/3;grid-column:3;font:500 10.5px var(--f-mono);padding:4px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
-.pill.done{color:var(--ok)} .pill.busy{color:var(--busy)} .pill.wait{color:var(--wait)}
-.pill.busy::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-right:6px;vertical-align:1px;animation:blink 1.4s infinite}
-@keyframes blink{50%{opacity:.25}}
-@media (prefers-reduced-motion:reduce){.pill.busy::before{animation:none}}
-.board-foot{margin-top:10px;padding-top:12px;border-top:1px dashed var(--deep-line);font-size:13.5px;color:var(--on-deep-muted)}
-.board-foot b{color:var(--on-deep)}
+/* nav */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:rgba(255,255,255,.86);z-index:60}
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(255,255,255,.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--hair)}
+header.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px;flex-wrap:wrap}
+header.nav .logo{font-size:22px}
+nav.links{display:flex;align-items:center;gap:28px}
+nav.links a{color:var(--body);font-size:14px}
+nav.links a:hover{color:var(--ink);text-decoration:none}
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:999px;font-weight:500;font-family:var(--f);cursor:pointer;border:1px solid transparent;text-decoration:none;transition:background .2s,color .2s,transform .2s}
+.pill:hover{text-decoration:none}
+.pill.sm{padding:7px 15px;font-size:14px}
+.pill.lg{padding:13px 24px;font-size:17px}
+.pill.solid{background:var(--planet);color:var(--planet-ink)}
+.pill.solid:hover{background:#BE2A5E}
+.pill.dark{background:var(--ink);color:#fff}
+.pill.dark:hover{background:#000}
+.pill.ghost{border-color:var(--ink);color:var(--ink);background:transparent}
+.pill.ghost:hover{background:var(--ink);color:#fff}
+nav.links a.pill{color:#fff}
+.more{font-size:17px;color:var(--link)}
+.more::after{content:" ›"}
+.menu-btn{display:none;width:44px;height:44px;border:0;background:transparent;color:var(--ink);align-items:center;justify-content:center;cursor:pointer;border-radius:10px}
+.menu-btn path{stroke:currentColor;stroke-width:1.8;stroke-linecap:round;transition:transform .2s,opacity .2s;transform-origin:11px 11px}
+.menu-btn[aria-expanded="true"] .l1{transform:translateY(4px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] .l2{transform:translateY(-4px) rotate(-45deg)}
 
-/* ---------- sections ---------- */
-section.block{padding-block:88px}
-section.block+section.block{border-top:1px solid var(--line)}
-.sec-head{display:grid;grid-template-columns:1fr 1.1fr;gap:20px 56px;align-items:end;margin-bottom:44px}
-.sec-head h2{font-size:clamp(32px,4.2vw,50px);font-weight:800}
-.sec-head p{color:var(--muted);max-width:38em}
-.sec-head .eyebrow{display:block;margin-bottom:14px}
+/* hero */
+.hero{padding-block:88px 0;text-align:center}
+.hero .eyebrow{margin-bottom:16px}
+.hero h1{font-size:clamp(44px,7.2vw,88px);line-height:1.03;letter-spacing:-.045em;max-width:14ch;margin-inline:auto}
+.hero .lead{margin-top:22px;font-size:clamp(19px,2.2vw,24px)}
+.hero .ctas{display:flex;gap:14px 28px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:34px}
+.stage{margin-top:64px;padding-bottom:0}
+.device{max-width:1000px;margin:0 auto;border-radius:20px 20px 0 0;border:1px solid var(--line);border-bottom:0;background:var(--white);box-shadow:0 40px 80px -40px rgba(29,29,31,.25);overflow:hidden;text-align:left}
+.chrome{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid var(--hair);background:#FAFAFC}
+.chrome i{width:11px;height:11px;border-radius:50%;background:#DADADF;display:block}
+.chrome span{margin-left:10px;font:400 12px var(--mono);color:var(--muted);background:var(--mist);padding:4px 12px;border-radius:7px}
+.screen{display:grid;grid-template-columns:300px 1fr;min-height:400px}
+.screen>*{min-width:0}
+.s-left{border-right:1px solid var(--hair);padding:22px;display:flex;flex-direction:column;gap:14px;background:#FCFCFD}
+.s-left h4{font-size:15px;letter-spacing:-.01em}
+.prompt{border:1px solid var(--line);border-radius:12px;padding:14px;font-size:14px;line-height:1.5;color:var(--body);background:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12px;padding:5px 10px;border-radius:999px;background:var(--mist);color:var(--body)}
+.steps-log{list-style:none;margin:0;padding:0;display:grid;gap:7px;font:400 12px/1.4 var(--mono);color:var(--body)}
+.steps-log li::before{content:"✓  ";color:var(--ok)}
+.s-right{padding:22px 24px;display:flex;flex-direction:column;gap:16px}
+.s-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.s-head h4{font-size:19px}
+.tag{font:500 11px var(--mono);padding:4px 9px;border-radius:999px;background:#FBE7EE;color:var(--link)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.kpi{background:var(--mist);border-radius:12px;padding:12px 14px}
+.kpi span{display:block;font-size:12px;color:var(--muted)}
+.kpi b{font-size:22px;letter-spacing:-.02em}
+.tbl{border:1px solid var(--hair);border-radius:12px;overflow-x:auto}
+.tbl table{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{text-align:left;font-weight:500;color:var(--muted);padding:9px 12px;background:#FAFAFC;border-bottom:1px solid var(--hair);white-space:nowrap}
+.tbl td{padding:9px 12px;border-bottom:1px solid var(--hair);white-space:nowrap}
+.tbl tr:last-child td{border-bottom:0}
+.st{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:#E6F4EC;color:var(--ok)}
+.st.n{background:var(--mist);color:var(--body)}
 
-.industries{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.ind{background:var(--surface);padding:24px;display:grid;gap:8px;align-content:start;min-width:0}
-.ind h3{font-size:19px;font-weight:700}
-.ind p{font-size:15.5px;color:var(--muted)}
-.ind .eg{font-family:var(--f-mono);font-size:11.5px;color:var(--teal)}
+/* promise row */
+.promise{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-block:72px;text-align:center}
+.promise h3{font-size:28px;letter-spacing:-.03em}
+.promise p{color:var(--muted);margin-top:6px;font-size:16px}
 
-.services{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.svc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px;display:flex;flex-direction:column;gap:12px;min-width:0}
-.svc .ico{width:40px;height:40px;border-radius:10px;background:var(--sunk);display:grid;place-items:center}
-.svc h3{font-size:21px;font-weight:700}
-.svc p{color:var(--muted);font-size:15.5px}
-.svc ul{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:15px}
-.svc li{display:flex;gap:8px}
-.svc li::before{content:"";flex:none;width:6px;height:6px;margin-top:9px;border-radius:2px;background:var(--accent)}
-.svc .from{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
-.svc .from b{font-family:var(--f-display);color:var(--ink)}
+/* section heads */
+section.block{padding-block:112px}
+.sh{text-align:center;margin-bottom:56px}
+.sh h2{font-size:clamp(36px,5vw,60px);line-height:1.06;letter-spacing:-.04em;max-width:18ch;margin:10px auto 0}
+.sh .lead{margin-top:18px}
 
-/* studio band */
-.studio-band{background:var(--deep);color:var(--on-deep)}
-.studio{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center;padding-block:88px}
-.studio>*{min-width:0}
-.studio h2{font-size:clamp(32px,4.2vw,50px);font-weight:800}
-.studio .eyebrow{color:var(--accent)}
-.studio p.lead{color:var(--on-deep-muted);margin-top:18px;font-size:18px}
-.studio ul{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:12px}
-.studio li{display:grid;grid-template-columns:22px 1fr;gap:10px;color:var(--on-deep-muted)}
-.studio li b{color:var(--on-deep);font-weight:600}
-.studio li svg{margin-top:4px}
-.mock{background:var(--deep-2);border:1px solid var(--deep-line);border-radius:16px;overflow:hidden;font-size:14px}
-.mock-bar{display:flex;gap:6px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--deep-line);font-family:var(--f-mono);font-size:11px;color:var(--on-deep-muted)}
-.mock-bar i{width:9px;height:9px;border-radius:50%;background:var(--deep-line);display:inline-block}
-.mock-bar span{margin-left:8px}
-.mock-body{display:grid;grid-template-columns:1fr 1fr;min-height:280px}
-.mock-prompt{padding:16px;border-right:1px solid var(--deep-line);display:grid;gap:12px;align-content:start}
-.mock-prompt .q{background:var(--deep);border:1px solid var(--deep-line);border-radius:10px;padding:12px;color:var(--on-deep)}
-.mock-prompt pre{margin:0;font:11.5px/1.6 var(--f-mono);color:var(--on-deep-muted);white-space:pre-wrap}
-.mock-prompt pre b{color:var(--accent);font-weight:500}
-.mock-app{padding:16px;display:grid;gap:10px;align-content:start}
-.mock-app .f{display:grid;gap:4px}
-.mock-app label{font-size:12px;color:var(--on-deep-muted)}
-.mock-app .in{height:30px;border-radius:7px;border:1px solid var(--deep-line);background:var(--deep);padding:6px 9px;font-size:12.5px;color:var(--on-deep)}
-.mock-app .go{justify-self:start;background:var(--accent);color:var(--accent-ink);font:600 12px var(--f-display);padding:8px 12px;border-radius:7px}
+/* bento services */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.tile{background:var(--card);border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:12px;min-width:0;min-height:300px}
+.mist .tile{background:var(--white)}
+.tile.w3{grid-column:span 3}.tile.w2{grid-column:span 2}.tile.w4{grid-column:span 4}
+.tile .k{font-size:14px;font-weight:600;color:var(--muted)}
+.tile h3{font-size:30px;line-height:1.1;letter-spacing:-.035em}
+.tile p{color:var(--muted);font-size:17px}
+.tile ul{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.tile li{font-size:13px;padding:6px 11px;border-radius:999px;background:var(--mist);color:var(--body)}
+.mist .tile li{background:var(--mist)}
+.tile .from{margin-top:auto;padding-top:14px;font-size:15px;color:var(--muted)}
+.tile .from b{color:var(--ink);font-weight:600}
+.tile .ico{width:44px;height:44px}
+.tile.mist{background:var(--mist)}
+.tile.mist li{background:var(--white)}
+
+/* studio */
+.feat3{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:64px}
+.feat3 h3{font-size:22px;letter-spacing:-.02em}
+.feat3 p{color:var(--muted);margin-top:8px}
+.studio-cta{display:flex;justify-content:center;gap:14px 28px;flex-wrap:wrap;margin-top:28px;align-items:center}
+.schema{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;max-width:920px;margin:0 auto}
+.schema>*{min-width:0}
+.panel{background:var(--white);border-radius:20px;padding:24px;border:1px solid var(--hair)}
+.panel .cap{font-size:13px;color:var(--muted);margin-bottom:12px;font-weight:500}
+.panel pre{margin:0;font:400 13px/1.7 var(--mono);color:var(--body);white-space:pre-wrap}
+.panel pre b{color:var(--link);font-weight:500}
+.arrow{width:48px;height:48px;border-radius:50%;background:var(--planet);display:grid;place-items:center}
+.f{display:grid;gap:5px;margin-bottom:12px}
+.f label{font-size:12px;color:var(--muted);font-weight:500}
+.f .in{height:36px;border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:14px;color:var(--ink)}
+.save{display:inline-block;background:var(--ink);color:#fff;font-size:13px;font-weight:500;border-radius:999px;padding:8px 16px}
 
 /* work */
 .work{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.case{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
-.case .shot{aspect-ratio:16/8;max-width:100%;background:var(--sunk)}
+.case{background:var(--mist);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.case .body{padding:36px 36px 0;display:flex;flex-direction:column;gap:10px}
+.case .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.case h3{font-size:30px;letter-spacing:-.035em}
+.badge{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:#E6F4EC;color:var(--ok)}
+.badge.soon{background:var(--white);color:var(--muted)}
+.case p{color:var(--muted)}
+.case .links{display:flex;gap:24px;margin-top:6px}
+.case .shot{margin:28px 36px 0;aspect-ratio:16/9;max-width:calc(100% - 72px);border-radius:16px 16px 0 0;background:var(--white);border:1px solid var(--hair);border-bottom:0;overflow:hidden}
 .case .shot svg{width:100%;height:100%;display:block}
-.case .body{padding:22px;display:flex;flex-direction:column;gap:10px;flex:1}
-.case .row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-.case h3{font-size:22px;font-weight:700}
-.status{font:500 10.5px var(--f-mono);padding:4px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
-.status.live{color:var(--ok);border-color:currentColor}
-.case p{color:var(--muted);font-size:15.5px}
-.case .stack{font:400 11.5px/1.6 var(--f-mono);color:var(--teal)}
-.case .open{margin-top:auto;font:600 15px var(--f-display);color:var(--teal);text-decoration:none}
-.case .open:hover{text-decoration:underline}
 
 /* process */
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:24px;counter-reset:s}
-.steps li{counter-increment:s;display:flex;flex-direction:column;gap:8px;min-width:0}
-.steps li::before{content:counter(s,decimal-leading-zero);font:500 12px var(--f-mono);color:var(--accent-text);padding-bottom:12px;border-bottom:2px solid var(--accent)}
-.steps h3{font-size:19px;font-weight:700}
-.steps p{font-size:15.5px;color:var(--muted)}
-.steps .who{font:500 11px var(--f-mono);color:var(--teal)}
-.loop{margin-top:40px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;padding:20px 22px;border-radius:14px;background:var(--sunk)}
-.loop p{color:var(--muted)} .loop b{color:var(--ink)}
+.proc{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:28px;counter-reset:s}
+.proc li{counter-increment:s;display:flex;flex-direction:column;gap:8px;min-width:0}
+.proc li::before{content:counter(s);width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:600;font-size:15px;margin-bottom:8px}
+.proc h3{font-size:20px;letter-spacing:-.02em}
+.proc p{color:var(--muted);font-size:16px}
+.proc .who{font-size:13px;font-weight:600;color:var(--link)}
+.human{margin:56px auto 0;max-width:760px;text-align:center;font-size:21px;line-height:1.5;color:var(--muted)}
+.human b{color:var(--ink);font-weight:600}
+
+/* industries */
+.ind{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+.ind div{padding:26px 24px 26px 0;border-bottom:1px solid var(--line);min-width:0}
+.ind h3{font-size:19px;letter-spacing:-.02em}
+.ind p{color:var(--muted);font-size:15.5px;margin-top:4px}
 
 /* pricing */
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
-.plan{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:14px;min-width:0}
-.plan.feature{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
-.plan h3{font-size:22px;font-weight:700}
-.plan .price{font-family:var(--f-display);font-size:34px;font-weight:800;letter-spacing:-.03em}
-.plan .price small{font:500 14px var(--f-body);color:var(--muted);letter-spacing:0}
-.plan .usd{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-top:-8px}
-.plan p{color:var(--muted);font-size:15.5px}
-.plan ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:15px}
-.plan li{display:flex;gap:8px}
-.plan li::before{content:"✓";color:var(--ok);font-weight:700}
-.plan .btn{margin-top:auto;justify-content:center}
-.note{margin-top:18px;font-size:14px;color:var(--muted)}
+.plan{background:var(--white);border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.plan.pop{box-shadow:0 0 0 2px var(--planet)}
+.plan .ptag{align-self:flex-start;font-size:12px;font-weight:600;color:var(--planet)}
+.plan h3{font-size:26px}
+.plan .price{font-size:48px;font-weight:700;letter-spacing:-.04em;line-height:1}
+.plan .price small{font-size:16px;font-weight:500;color:var(--muted);letter-spacing:0}
+.plan p{color:var(--muted);font-size:16px}
+.plan ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:15.5px;border-top:1px solid var(--hair);padding-top:18px}
+.plan li{display:flex;gap:10px}
+.plan li::before{content:"";flex:none;width:16px;height:16px;margin-top:3px;border-radius:50%;background:var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4.5 8.2 2.2 2.2 4.8-4.8' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.plan .pill{margin-top:auto}
+.fine{text-align:center;color:var(--muted);font-size:14px;margin-top:28px}
 
-/* stack + trust */
-.split{display:grid;grid-template-columns:1fr 1fr;gap:56px}
-.split>*{min-width:0}
-.split h2{font-size:clamp(28px,3.4vw,40px);font-weight:800;margin-bottom:20px}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{font:500 12px var(--f-mono);padding:7px 11px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
-.grp{display:grid;gap:10px;margin-bottom:20px}
-.grp h4{font-size:13px;font-family:var(--f-mono);font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.trust{display:grid;gap:18px}
-.trust>div{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start}
-.trust>div>div{min-width:0}
-.trust h3{font-size:18px;font-weight:700;margin-bottom:2px}
-.trust p{font-size:15.5px;color:var(--muted)}
+/* trust */
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.trust>div{display:flex;flex-direction:column;gap:10px;min-width:0}
+.trust h3{font-size:20px;letter-spacing:-.02em}
+.trust p{color:var(--muted);font-size:16px}
+.stack{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:64px}
+.stack span{font-size:14px;padding:9px 16px;border-radius:999px;border:1px solid var(--line);color:var(--body)}
 
 /* about */
-.about{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;align-items:start}
-.about>*{min-width:0}
-.about h2{font-size:clamp(32px,4.2vw,50px);font-weight:800}
-.about .txt{display:grid;gap:16px;color:var(--muted);font-size:18px}
-.about .txt b{color:var(--ink)}
-.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
-.facts>div{border-top:2px solid var(--ink);padding-top:10px;display:grid;gap:2px}
-.facts b{font-family:var(--f-display);font-size:17px;color:var(--ink)}
-.facts span{font-size:14px}
+.about{max-width:820px;margin:0 auto;text-align:center}
+.about p{font-size:clamp(22px,2.6vw,30px);line-height:1.4;letter-spacing:-.02em;color:var(--muted);margin-top:20px}
+.about p b{color:var(--ink);font-weight:600}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+.facts div{display:flex;flex-direction:column;gap:4px}
+.facts b{font-size:32px;letter-spacing:-.03em}
+.facts span{color:var(--muted);font-size:15px}
 
 /* faq */
-.faq{display:grid;gap:0;border-top:1px solid var(--line)}
-.faq details{border-bottom:1px solid var(--line);padding:18px 0}
-.faq summary{cursor:pointer;font:700 19px/1.3 var(--f-display);list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq{max-width:820px;margin:0 auto;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px;padding:24px 0;font-size:21px;font-weight:600;letter-spacing:-.02em}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";font-weight:500;color:var(--accent-text);flex:none}
-.faq details[open] summary::after{content:"–"}
-.faq p{margin-top:10px;color:var(--muted);max-width:62ch}
+.faq summary::after{content:"+";font-weight:400;font-size:26px;line-height:1;color:var(--muted);flex:none;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--muted);padding:0 0 24px;max-width:64ch}
 
 /* contact */
 .contact{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
 .contact>*{min-width:0}
-.contact h2{font-size:clamp(32px,4.2vw,50px);font-weight:800}
-.contact .side p{color:var(--muted);margin-top:16px;max-width:30em}
-.cfacts{margin-top:28px;display:grid;gap:16px}
-.cfacts>div{display:grid;gap:2px}
-.cfacts .l{font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.cfacts .v{font-weight:600}
-form{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px;display:grid;gap:16px}
+.contact h2{font-size:clamp(36px,5vw,56px);line-height:1.05;letter-spacing:-.04em}
+.contact .lead{margin-top:16px}
+.cfacts{margin-top:32px;display:grid;gap:18px}
+.cfacts>div{display:flex;flex-direction:column;gap:2px}
+.cfacts .l{font-size:13px;color:var(--muted)}
+.cfacts .v{font-size:17px;font-weight:500}
+form{background:var(--white);border-radius:24px;padding:32px;display:grid;gap:18px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.field{display:grid;gap:6px;min-width:0}
-.field label,.legend{font-size:14px;font-weight:600}
-input,select,textarea{font:inherit;font-size:15.5px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%}
-textarea{min-height:110px;resize:vertical}
+.field{display:grid;gap:7px;min-width:0}
+.field label,.legend{font-size:14px;font-weight:500;color:var(--body)}
+input,select,textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--mist);border:1px solid transparent;border-radius:12px;padding:13px 14px;width:100%;transition:border-color .2s,background .2s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--planet);background:#fff}
+textarea{min-height:120px;resize:vertical}
 .opts{display:flex;flex-wrap:wrap;gap:8px}
-.opts label{font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;background:var(--bg)}
-.opts input{width:auto;accent-color:var(--accent)}
-.out{border:1px dashed var(--teal);border-radius:12px;padding:16px;display:grid;gap:10px}
-.out pre{margin:0;white-space:pre-wrap;font:12.5px/1.6 var(--f-mono)}
+.opts label{font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;background:#fff}
+.opts input{width:auto;accent-color:var(--planet);padding:0}
+.out{border-radius:16px;background:var(--mist);padding:18px;display:grid;gap:12px}
+.out pre{margin:0;white-space:pre-wrap;font:400 13px/1.6 var(--mono);color:var(--body)}
 .out p{font-size:14px;color:var(--muted)}
 
-footer.site{background:var(--deep);color:var(--on-deep-muted)}
-footer.site .wrap{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:32px;padding-block:56px 32px}
-footer.site h4{font:500 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--on-deep);margin-bottom:12px}
-footer.site ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px}
-footer.site a{text-decoration:none} footer.site a:hover{color:var(--on-deep)}
-footer.site .legal{grid-column:1/-1;border-top:1px solid var(--deep-line);padding-top:20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13.5px}
+/* footer */
+footer.site{background:var(--mist);font-size:12.5px;color:var(--muted)}
+footer.site .wrap{padding-block:48px 28px}
+.f-top{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.f-top .logo{font-size:26px}
+.f-top p{max-width:34ch;margin-top:10px;font-size:14px}
+.f-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding-block:24px;border-bottom:1px solid var(--line)}
+.f-cols h4{font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:10px;letter-spacing:0}
+.f-cols ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.f-cols a{color:var(--muted)}
+.f-cols a:hover{color:var(--ink)}
+.f-legal{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:18px}
 
-@media (max-width:980px){
-  .hero,.studio,.sec-head,.split,.about,.contact{grid-template-columns:1fr}
-  .services,.industries,.plans{grid-template-columns:1fr 1fr}
-  .steps{grid-template-columns:1fr 1fr}
-  footer.site .wrap{grid-template-columns:1fr 1fr}
+@media (max-width:1000px){
+  .screen{grid-template-columns:1fr}
+  .s-left{border-right:0;border-bottom:1px solid var(--hair)}
+  .tile.w2{grid-column:span 3}.tile.w4{grid-column:span 6}
+  .proc{grid-template-columns:repeat(2,1fr)}
+  .trust{grid-template-columns:repeat(2,1fr)}
+  .contact{grid-template-columns:1fr}
+  .plans{grid-template-columns:1fr;max-width:520px;margin:0 auto}
 }
-@media (max-width:640px){
-  .services,.industries,.plans,.work,.steps,.two,.facts{grid-template-columns:1fr}
-  .mock-body{grid-template-columns:1fr}
-  .mock-prompt{border-right:0;border-bottom:1px solid var(--deep-line)}
-  .assure{grid-template-columns:1fr}
-  section.block{padding-block:64px}
+@media (max-width:760px){
   .menu-btn{display:inline-flex}
-  nav.links{display:none;width:100%;flex-direction:column;align-items:stretch;gap:0;padding:6px 0 18px;border-top:1px solid var(--deep-line)}
+  nav.links{display:none;width:100%;flex-direction:column;align-items:stretch;gap:0;padding:4px 0 18px}
   nav.links.open{display:flex}
-  nav.links a:not(.btn){font-size:18px;padding:13px 2px;border-bottom:1px solid var(--deep-line);color:var(--on-deep)}
-  nav.links a.btn{justify-content:center;margin-top:16px;padding:14px 16px}
-  .hero h1{font-size:clamp(34px,10vw,44px)}
-  .hero .lede{font-size:18px}
-  .ctas .btn{flex:1 1 100%;justify-content:center}
-  footer.site .wrap{grid-template-columns:1fr}
+  nav.links a:not(.pill){font-size:20px;font-weight:600;color:var(--ink);padding:14px 0;border-bottom:1px solid var(--hair)}
+  nav.links a.pill{margin-top:18px;padding:13px 16px;font-size:16px}
+  .hero{padding-top:56px}
+  .promise,.feat3,.ind,.facts{grid-template-columns:1fr}
+  .promise{gap:28px;padding-block:56px}
+  .bento{grid-template-columns:1fr}
+  .tile.w2,.tile.w3,.tile.w4{grid-column:auto}
+  .tile{min-height:0;padding:28px}
+  .work{grid-template-columns:1fr}
+  .case .body{padding:28px 28px 0}
+  .case .shot{margin:24px 28px 0;max-width:calc(100% - 56px)}
+  .schema{grid-template-columns:1fr}
+  .arrow{margin:0 auto;transform:rotate(90deg)}
+  .proc,.trust{grid-template-columns:1fr}
+  .kpis{grid-template-columns:1fr 1fr}
+  .kpis .kpi:last-child{grid-column:1/-1}
+  section.block{padding-block:80px}
+  .two{grid-template-columns:1fr}
+  form{padding:22px}
+  .f-cols{grid-template-columns:1fr 1fr}
+  .hero .ctas .pill{flex:1 1 100%}
 }
 </style>
 </head>
 <body>
 
-<div class="hero-band band">
-  <canvas id="topo" aria-hidden="true"></canvas>
+<header class="nav band">
   <div class="wrap">
-    <header class="top">
-      <a class="brand" href="#top" aria-label="Fascinora home">
-        <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13.5" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M4 17c4-3 7 3 11 0s7-3 11 0" fill="none" stroke="var(--on-deep)" stroke-width="1.8" stroke-linecap="round"/><path d="M6 11c3-2 6 2 9 0s6-2 9 0" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <b>Fascinora</b>
-      </a>
-      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path class="l1" d="M3 6h16"/><path class="l2" d="M3 11h16"/><path class="l3" d="M3 16h16"/></svg></button>
-      <nav class="links" id="main-nav" aria-label="Main">
-        <a href="#services">Services</a><a href="#studio">AI Studio</a><a href="#work">Work</a><a href="#process">Process</a><a href="#pricing">Pricing</a><a href="#about">About</a>
-        <a class="btn primary" href="#contact">Start a project</a>
-      </nav>
-    </header>
+    <a class="logo" href="#top" aria-label="Fascinora home">fascin<svg viewBox="0 0 40 40" aria-hidden="true"><g transform="rotate(-18 20 22)"><ellipse cx="20" cy="22" rx="19" ry="5.6" fill="none" stroke="#1F2933" stroke-width="3"/></g><circle cx="20" cy="21" r="11.5" fill="#D6336C"/><g transform="rotate(-18 20 22)"><path d="M1 22a19 5.6 0 0 0 38 0" fill="none" stroke="#1F2933" stroke-width="3" stroke-linecap="round"/></g></svg>ra</a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path class="l1" d="M4 7h14"/><path class="l2" d="M4 15h14"/></svg></button>
+    <nav class="links" id="main-nav" aria-label="Main">
+      <a href="#services">Services</a><a href="#studio">AI Studio</a><a href="#work">Work</a><a href="#process">Process</a><a href="#pricing">Pricing</a><a href="#about">Company</a>
+      <a class="pill sm solid" href="#contact">Start a project</a>
+    </nav>
+  </div>
+</header>
 
-    <div class="hero" id="top">
-      <div>
-        <p class="eyebrow" style="color:var(--accent)">AI-native software studio · Worldwide</p>
-        <h1 style="margin-top:16px">Business software, built at AI speed. <span>Reviewed by senior engineers.</span></h1>
-        <p class="lede">Fascinora designs and builds custom web apps, low-code platforms, AI agents and growth websites for companies worldwide. Our AI team drafts the work in days. An experienced engineer reviews every release.</p>
-        <div class="ctas">
-          <a class="btn primary" href="/studio/">Try AI Studio demo</a>
-          <a class="btn ghost-dark" href="#contact">Book a free consultation</a>
-        </div>
-        <div class="assure">
-          <div><b>Fixed-price quotes</b><span>Approved before work starts</span></div>
-          <div><b>Weekly staging links</b><span>See real progress</span></div>
-          <div><b>You own the code</b><span>Delivered to your GitHub</span></div>
-        </div>
-      </div>
-
-      <aside class="board" aria-label="Example of the Fascinora AI team working on a project">
-        <div class="board-head"><strong>Project room · Clinic booking app</strong><span>Example</span></div>
-        <ul class="agents">
-          <li class="agent"><span class="av">BA</span><span class="role">Requirements agent</span><span class="task">Turned a client voice note into 14 user stories</span><span class="pill done">done</span></li>
-          <li class="agent"><span class="av">UX</span><span class="role">Design agent</span><span class="task">Drafted 6 screens from the approved stories</span><span class="pill done">done</span></li>
-          <li class="agent"><span class="av">DEV</span><span class="role">Developer agent</span><span class="task">Building appointment slots and reminders</span><span class="pill busy">working</span></li>
-          <li class="agent"><span class="av">QA</span><span class="role">Test agent</span><span class="task">Writes test cases for every story</span><span class="pill wait">queued</span></li>
-          <li class="agent"><span class="av">SEO</span><span class="role">Growth agent</span><span class="task">Prepares launch page and Google listing</span><span class="pill wait">queued</span></li>
-        </ul>
-        <p class="board-foot"><b>Lead engineer</b> reviews the pull request and approves the release.</p>
-      </aside>
+<main id="top">
+<section class="hero band">
+  <div class="wrap">
+    <p class="eyebrow">AI-native software studio</p>
+    <h1>Software that works the way you do.</h1>
+    <p class="lead">Custom business apps, low-code platforms and AI agents. Drafted by our AI team in days. Reviewed by a senior engineer before every release.</p>
+    <div class="ctas">
+      <a class="pill lg solid" href="/studio/">Try AI Studio</a>
+      <a class="more" href="#contact">Book a free consultation</a>
     </div>
   </div>
-</div>
-
-<section class="block band" id="industries"><div class="wrap">
-  <div class="sec-head">
-    <div><span class="eyebrow">Who we work with</span><h2>Built for businesses that run on process</h2></div>
-    <p>We work best with owners and operations teams who still run on spreadsheets, WhatsApp groups and paper registers, and want one system that fits how they already work.</p>
-  </div>
-  <div class="industries">
-    <div class="ind"><h3>Logistics &amp; warehousing</h3><p>Stock across warehouses, dispatch, transfers and fleet tracking.</p><span class="eg">WMS · inventory · shipping docs</span></div>
-    <div class="ind"><h3>Distribution &amp; retail</h3><p>Dealer orders, invoicing with local tax rules, receivables and reports.</p><span class="eg">Billing · CRM · dealer apps</span></div>
-    <div class="ind"><h3>Clinics &amp; services</h3><p>Appointments, patient or customer records, reminders and follow-ups.</p><span class="eg">Booking · records · WhatsApp reminders</span></div>
-    <div class="ind"><h3>Restaurants &amp; food</h3><p>Online menus, table and takeaway orders, kitchen display and local SEO.</p><span class="eg">Ordering · KOT · Google listing</span></div>
-    <div class="ind"><h3>Real estate &amp; home services</h3><p>Lead capture, site-visit booking, quotes and installation tracking.</p><span class="eg">Lead CRM · quote builder</span></div>
-    <div class="ind"><h3>Startups &amp; SaaS founders</h3><p>MVPs, admin panels and internal tools, built fast without cutting corners.</p><span class="eg">MVP · admin · integrations</span></div>
-  </div>
-</div></section>
-
-<section class="block band" id="services"><div class="wrap">
-  <div class="sec-head">
-    <div><span class="eyebrow">Services</span><h2>Six things we do well</h2></div>
-    <p>Pick one service or combine them. Every project includes a written scope, a fixed quote, weekly demos, source code in your account and 30 days of free fixes after launch.</p>
-  </div>
-  <div class="services">
-    <article class="svc">
-      <div class="ico"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><rect x="2" y="3" width="18" height="14" rx="2" fill="none" stroke="var(--teal)" stroke-width="1.8"/><path d="M7 20h8M6 8h10M6 12h6" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-      <h3>Custom business software</h3>
-      <p>Web apps built around your process: inventory, billing, CRM, HR and operations dashboards.</p>
-      <ul><li>Role-based access and audit logs</li><li>Reports, exports and tax-ready invoices</li><li>Mobile-friendly for staff on the floor</li></ul>
-      <div class="from"><span>From</span><b>US$ 6,000</b></div>
-    </article>
-    <article class="svc">
-      <div class="ico"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><rect x="2" y="2" width="8" height="8" rx="2" fill="none" stroke="var(--teal)" stroke-width="1.8"/><rect x="12" y="2" width="8" height="8" rx="2" fill="var(--accent)"/><rect x="2" y="12" width="8" height="8" rx="2" fill="var(--accent)"/><rect x="12" y="12" width="8" height="8" rx="2" fill="none" stroke="var(--teal)" stroke-width="1.8"/></svg></div>
-      <h3>Low-code platforms</h3>
-      <p>Metadata-driven app builders so your own team can create forms, workflows and reports without new code.</p>
-      <ul><li>Drag-and-drop forms and tables</li><li>Workflow and approval engine</li><li>AI that turns plain English into screens</li></ul>
-      <div class="from"><span>From</span><b>US$ 15,000</b></div>
-    </article>
-    <article class="svc">
-      <div class="ico"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9l-4 4v-4a2 2 0 0 1-2-2z" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8" cy="9" r="1.3" fill="var(--accent)"/><circle cx="11" cy="9" r="1.3" fill="var(--accent)"/><circle cx="14" cy="9" r="1.3" fill="var(--accent)"/></svg></div>
-      <h3>AI agents &amp; chatbots</h3>
-      <p>WhatsApp and website assistants that answer customers, capture leads and hand real questions to your staff.</p>
-      <ul><li>Trained on your own price list and FAQs</li><li>Multilingual: English, Arabic, Spanish, Hindi and more</li><li>Workflow automation with n8n</li></ul>
-      <div class="from"><span>From</span><b>US$ 2,000</b></div>
-    </article>
-    <article class="svc">
-      <div class="ico"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="9.5" cy="9.5" r="6.5" fill="none" stroke="var(--teal)" stroke-width="1.8"/><path d="m14.5 14.5 5 5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/></svg></div>
-      <h3>Websites &amp; SEO</h3>
-      <p>Fast company websites with technical SEO, local search and Google Business setup.</p>
-      <ul><li>Core Web Vitals and schema markup</li><li>Local landing pages for each city</li><li>Monthly content and ranking reports</li></ul>
-      <div class="from"><span>From</span><b>US$ 1,200</b></div>
-    </article>
-    <article class="svc">
-      <div class="ico"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M3 16 9 10l4 4 6-8" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="19" cy="6" r="2" fill="var(--accent)"/></svg></div>
-      <h3>Digital marketing</h3>
-      <p>Social media calendars, ad campaigns and email marketing, planned with you and published on schedule.</p>
-      <ul><li>Instagram, LinkedIn, Facebook, YouTube</li><li>Meta and Google Ads management</li><li>Monthly performance review call</li></ul>
-      <div class="from"><span>Monthly from</span><b>US$ 1,000</b></div>
-    </article>
-    <article class="svc">
-      <div class="ico"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M11 2 3 5v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V5z" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linejoin="round"/><path d="m7.5 11 2.5 2.5 4.5-5" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <h3>Support &amp; maintenance</h3>
-      <p>Monitoring, backups, security updates and small changes for apps we built or inherited.</p>
-      <ul><li>Uptime monitoring and alerts</li><li>Daily backups, tested restores</li><li>Agreed response times</li></ul>
-      <div class="from"><span>Monthly from</span><b>US$ 400</b></div>
-    </article>
-  </div>
-</div></section>
-
-<div class="studio-band band" id="studio"><div class="wrap studio">
-  <div>
-    <span class="eyebrow">Featured demo · Fascinora AI Studio</span>
-    <h2 style="margin-top:14px">Describe an app. Watch it build itself.</h2>
-    <p class="lead">AI Studio is our low-code app builder. Type what you need in plain English and it designs the data model, generates the screens and gives you a working app you can edit field by field.</p>
-    <ul>
-      <li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="m4 9 3 3 7-7" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Metadata-driven.</b> Every screen comes from a schema, so changes take minutes, not sprints.</span></li>
-      <li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="m4 9 3 3 7-7" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Editable by your team.</b> Add a field, change a type or make it required, without a developer.</span></li>
-      <li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="m4 9 3 3 7-7" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Production path.</b> The same schema runs on Angular, Node.js and PostgreSQL in client deployments.</span></li>
-    </ul>
-    <div class="ctas"><a class="btn primary" href="/studio/">Open AI Studio</a></div>
-  </div>
-  <div class="mock" aria-hidden="true">
-    <div class="mock-bar"><i></i><i></i><i></i><span>studio.fascinora.com</span></div>
-    <div class="mock-body">
-      <div class="mock-prompt">
-        <div class="q">“A booking app for my dental clinic with patient name, phone, treatment, appointment date and status.”</div>
-<pre><b>entity</b> Appointment
-  patient_name  text   required
-  phone         phone  required
-  treatment     select
-  appointment   date   required
-  status        select</pre>
-      </div>
-      <div class="mock-app">
-        <div class="f"><label>Patient name</label><div class="in">Sarah Mitchell</div></div>
-        <div class="f"><label>Phone</label><div class="in">+1 415 555 0142</div></div>
-        <div class="f"><label>Treatment</label><div class="in">Root canal ▾</div></div>
-        <div class="f"><label>Appointment date</label><div class="in">12 Nov 2026</div></div>
-        <span class="go">Save appointment</span>
+  <div class="stage wrap">
+    <div class="device" aria-label="Preview of Fascinora AI Studio generating a clinic booking app" role="img">
+      <div class="chrome"><i></i><i></i><i></i><span>fascinora.com/studio</span></div>
+      <div class="screen">
+        <div class="s-left">
+          <h4>Describe your app</h4>
+          <div class="prompt">A booking app for my dental clinic with patient name, phone, treatment, appointment date and status.</div>
+          <div class="chips"><span class="chip">Dental clinic</span><span class="chip">Gym members</span><span class="chip">Property leads</span></div>
+          <ul class="steps-log"><li>Designed entity “Appointment”</li><li>Inferred 5 field types</li><li>Generated form, list and dashboard</li></ul>
+        </div>
+        <div class="s-right">
+          <div class="s-head"><h4>Appointments</h4><span class="tag">Generated from schema v1</span></div>
+          <div class="kpis"><div class="kpi"><span>Today</span><b>12</b></div><div class="kpi"><span>Confirmed</span><b>9</b></div><div class="kpi"><span>Top treatment</span><b style="font-size:17px">Cleaning</b></div></div>
+          <div class="tbl"><table><thead><tr><th>Patient</th><th>Treatment</th><th>Date</th><th>Status</th></tr></thead><tbody>
+            <tr><td>Sarah Mitchell</td><td>Cleaning</td><td>Nov 12</td><td><span class="st">Confirmed</span></td></tr>
+            <tr><td>James Carter</td><td>Root canal</td><td>Nov 12</td><td><span class="st n">New</span></td></tr>
+            <tr><td>Aisha Khan</td><td>Check-up</td><td>Nov 13</td><td><span class="st">Confirmed</span></td></tr>
+          </tbody></table></div>
+        </div>
       </div>
     </div>
   </div>
+</section>
+
+<div class="band mist"><div class="wrap promise">
+  <div><h3>Fixed price.</h3><p>A written quote you approve before any work starts.</p></div>
+  <div><h3>Weekly demos.</h3><p>A working staging link every week, not status reports.</p></div>
+  <div><h3>Your code.</h3><p>Full source in your own GitHub, documented for any developer.</p></div>
 </div></div>
 
-<section class="block band" id="work"><div class="wrap">
-  <div class="sec-head">
-    <div><span class="eyebrow">Showcase</span><h2>Demos you can open and try</h2></div>
-    <p>Each demo shows a type of product we build for clients. They run on sample data, so you can click around freely.</p>
+<section class="block band" id="services"><div class="wrap">
+  <div class="sh"><p class="eyebrow">Services</p><h2>Everything a growing business needs to run on software.</h2></div>
+  <div class="bento">
+    <article class="tile w4 mist">
+      <span class="k">Custom business software</span>
+      <h3>Apps built around your process, not a template.</h3>
+      <p>Inventory, billing, CRM, HR and operations dashboards with roles, audit logs and reports your team actually uses.</p>
+      <ul><li>Role-based access</li><li>Audit logs</li><li>Tax-ready invoices</li><li>Mobile-friendly</li></ul>
+      <p class="from">From <b>$6,000</b></p>
+    </article>
+    <article class="tile w2 mist">
+      <span class="k">Low-code platforms</span>
+      <h3>Let your team build screens without code.</h3>
+      <p>Metadata-driven builders with forms, workflows and AI that turns plain English into apps.</p>
+      <p class="from">From <b>$15,000</b></p>
+    </article>
+    <article class="tile w2 mist">
+      <span class="k">AI agents &amp; chatbots</span>
+      <h3>Answers customers while you sleep.</h3>
+      <p>WhatsApp and website assistants trained on your FAQs that capture leads and hand off to people.</p>
+      <p class="from">From <b>$2,000</b></p>
+    </article>
+    <article class="tile w2 mist">
+      <span class="k">Websites &amp; SEO</span>
+      <h3>Fast sites that get found.</h3>
+      <p>Technical SEO, Core Web Vitals and local landing pages, measured every month.</p>
+      <p class="from">From <b>$1,200</b></p>
+    </article>
+    <article class="tile w2 mist">
+      <span class="k">Growth marketing</span>
+      <h3>Content and campaigns, on schedule.</h3>
+      <p>Social calendars, ad campaigns and email marketing, planned with you and reviewed monthly.</p>
+      <p class="from">Monthly from <b>$1,000</b></p>
+    </article>
+    <article class="tile w3 mist">
+      <span class="k">Support &amp; maintenance</span>
+      <h3>Kept fast, secure and backed up.</h3>
+      <p>Monitoring, daily backups, security updates and small changes, with agreed response times.</p>
+      <p class="from">Monthly from <b>$400</b></p>
+    </article>
+    <article class="tile w3 mist">
+      <span class="k">Not sure where to start?</span>
+      <h3>Tell us the problem. We’ll scope the solution.</h3>
+      <p>A free 30-minute call and a written scope within one business day.</p>
+      <p class="from"><a class="more" href="#contact">Book a consultation</a></p>
+    </article>
   </div>
+</div></section>
+
+<section class="block band mist" id="studio"><div class="wrap">
+  <div class="sh"><p class="eyebrow">Fascinora AI Studio</p><h2>Describe it. Watch it build itself.</h2><p class="lead">Our low-code builder turns one sentence into a data model, screens and a working app your team can edit field by field.</p></div>
+  <div class="schema" aria-label="A sentence becomes a schema, and the schema becomes a form">
+    <div class="panel"><p class="cap">The schema it writes</p>
+<pre><b>entity</b> Member
+  name        text     required
+  mobile      phone    required
+  plan        select
+  joined      date     required
+  amount_paid currency</pre></div>
+    <div class="arrow" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="panel"><p class="cap">The app it generates</p>
+      <div class="f"><label>Name</label><div class="in">Daniel Kim</div></div>
+      <div class="f"><label>Plan</label><div class="in">Quarterly ▾</div></div>
+      <div class="f"><label>Amount paid</label><div class="in">$180</div></div>
+      <span class="save">Save member</span>
+    </div>
+  </div>
+  <div class="feat3">
+    <div><h3>Metadata-driven.</h3><p>Every screen comes from one schema, so changes take minutes, not sprints.</p></div>
+    <div><h3>Editable by your team.</h3><p>Add a field, change a type or make it required. No developer needed.</p></div>
+    <div><h3>Production-ready path.</h3><p>The same schema runs on Angular, Node.js and PostgreSQL in client deployments.</p></div>
+  </div>
+  <div class="studio-cta"><a class="pill lg dark" href="/studio/">Open AI Studio</a><a class="more" href="#contact">Get it for your business</a></div>
+</div></section>
+
+<section class="block band" id="work"><div class="wrap">
+  <div class="sh"><p class="eyebrow">Showcase</p><h2>Open a demo. Click anything.</h2><p class="lead">Each demo shows a kind of product we build for clients. They run on sample data in your browser.</p></div>
   <div class="work">
     <article class="case">
-      <div class="shot"><svg viewBox="0 0 320 160" role="img" aria-label="Sketch of the AI Studio app builder"><rect x="14" y="14" width="120" height="132" rx="8" fill="var(--surface)"/><rect x="24" y="26" width="100" height="40" rx="6" fill="var(--sunk)"/><g fill="var(--line)"><rect x="24" y="76" width="70" height="6" rx="3"/><rect x="24" y="90" width="86" height="6" rx="3"/><rect x="24" y="104" width="60" height="6" rx="3"/></g><rect x="24" y="122" width="56" height="14" rx="5" fill="var(--accent)"/><rect x="146" y="14" width="160" height="132" rx="8" fill="var(--surface)"/><g fill="var(--sunk)"><rect x="158" y="28" width="136" height="18" rx="5"/><rect x="158" y="54" width="136" height="18" rx="5"/><rect x="158" y="80" width="136" height="18" rx="5"/></g><rect x="158" y="110" width="64" height="18" rx="5" fill="var(--teal)"/></svg></div>
-      <div class="body"><div class="row"><h3>Fascinora AI Studio</h3><span class="status live">Live demo</span></div>
-      <p>Low-code builder that turns a plain-English description into a data model, form and records table you can edit.</p>
-      <p class="stack">Metadata schema · form engine · Angular / Node.js in production</p>
-      <a class="open" href="/studio/">Open AI Studio →</a></div>
+      <div class="body"><div class="row"><h3>AI Studio</h3><span class="badge">Live</span></div>
+      <p>Plain English in, working app out. Form, records table, dashboard and editable schema.</p>
+      <div class="links"><a class="more" href="/studio/">Try it</a></div></div>
+      <div class="shot"><svg viewBox="0 0 400 225" role="img" aria-label="Sketch of the AI Studio builder"><rect width="400" height="225" fill="#FFFFFF"/><rect x="0" y="0" width="128" height="225" fill="#FAFAFC"/><rect x="16" y="20" width="96" height="54" rx="8" fill="#F5F5F7"/><rect x="16" y="86" width="60" height="10" rx="5" fill="#E8E8ED"/><rect x="16" y="104" width="80" height="10" rx="5" fill="#E8E8ED"/><rect x="16" y="190" width="70" height="18" rx="9" fill="#D6336C"/><rect x="148" y="20" width="110" height="12" rx="6" fill="#1D1D1F"/><g fill="#F5F5F7"><rect x="148" y="46" width="72" height="40" rx="8"/><rect x="228" y="46" width="72" height="40" rx="8"/><rect x="308" y="46" width="72" height="40" rx="8"/></g><g fill="#E8E8ED"><rect x="148" y="104" width="232" height="14" rx="4"/><rect x="148" y="128" width="232" height="14" rx="4"/><rect x="148" y="152" width="232" height="14" rx="4"/><rect x="148" y="176" width="232" height="14" rx="4"/></g></svg></div>
     </article>
     <article class="case">
-      <div class="shot"><svg viewBox="0 0 320 160" role="img" aria-label="Sketch of an inventory dashboard"><rect x="16" y="16" width="70" height="128" rx="6" fill="var(--surface)"/><rect x="98" y="16" width="206" height="36" rx="6" fill="var(--surface)"/><rect x="98" y="62" width="100" height="82" rx="6" fill="var(--surface)"/><rect x="206" y="62" width="98" height="82" rx="6" fill="var(--surface)"/><g fill="var(--teal)"><rect x="216" y="112" width="12" height="24"/><rect x="234" y="96" width="12" height="40"/><rect x="252" y="104" width="12" height="32"/><rect x="270" y="84" width="12" height="52"/></g><g fill="var(--line)"><rect x="26" y="30" width="48" height="6" rx="3"/><rect x="26" y="46" width="40" height="6" rx="3"/><rect x="26" y="62" width="44" height="6" rx="3"/><rect x="108" y="74" width="80" height="6" rx="3"/><rect x="108" y="90" width="64" height="6" rx="3"/><rect x="108" y="106" width="72" height="6" rx="3"/><rect x="108" y="30" width="90" height="8" rx="4"/></g></svg></div>
-      <div class="body"><div class="row"><h3>StockFlow WMS</h3><span class="status live">Live demo</span></div>
-      <p>Warehouse app for a distributor: stock across two warehouses, reorder alerts, stock in, stock out and transfers.</p>
-      <p class="stack">Inventory · multi-location · audit log</p>
-      <a class="open" href="/stockflow/">Open StockFlow →</a></div>
+      <div class="body"><div class="row"><h3>StockFlow WMS</h3><span class="badge">Live</span></div>
+      <p>Inventory across two warehouses with reorder alerts, stock in, stock out and transfers.</p>
+      <div class="links"><a class="more" href="/stockflow/">Try it</a></div></div>
+      <div class="shot"><svg viewBox="0 0 400 225" role="img" aria-label="Sketch of an inventory dashboard"><rect width="400" height="225" fill="#FFFFFF"/><g fill="#F5F5F7"><rect x="20" y="20" width="84" height="48" rx="8"/><rect x="114" y="20" width="84" height="48" rx="8"/><rect x="208" y="20" width="84" height="48" rx="8"/><rect x="302" y="20" width="78" height="48" rx="8"/></g><rect x="20" y="84" width="200" height="124" rx="10" fill="#F5F5F7"/><g fill="#E8E8ED"><rect x="34" y="100" width="170" height="12" rx="4"/><rect x="34" y="122" width="150" height="12" rx="4"/><rect x="34" y="144" width="160" height="12" rx="4"/><rect x="34" y="166" width="120" height="12" rx="4"/></g><rect x="232" y="84" width="148" height="124" rx="10" fill="#F5F5F7"/><g fill="#1D1D1F"><rect x="252" y="150" width="18" height="44" rx="3"/><rect x="280" y="124" width="18" height="70" rx="3"/><rect x="308" y="138" width="18" height="56" rx="3"/></g><rect x="336" y="104" width="18" height="90" rx="3" fill="#D6336C"/></svg></div>
     </article>
     <article class="case">
-      <div class="shot"><svg viewBox="0 0 320 160" role="img" aria-label="Sketch of a WhatsApp chat with a bot"><rect x="110" y="10" width="100" height="140" rx="12" fill="var(--surface)"/><rect x="120" y="28" width="62" height="18" rx="8" fill="var(--line)"/><rect x="138" y="54" width="62" height="26" rx="8" fill="var(--teal)"/><rect x="120" y="88" width="56" height="18" rx="8" fill="var(--line)"/><rect x="144" y="114" width="56" height="18" rx="8" fill="var(--teal)"/></svg></div>
-      <div class="body"><div class="row"><h3>LeadBot</h3><span class="status">Coming soon</span></div>
-      <p>WhatsApp assistant for a local business that answers questions, collects enquiries and alerts the owner.</p>
-      <p class="stack">WhatsApp Business API · Claude · n8n</p></div>
+      <div class="body"><div class="row"><h3>LeadBot</h3><span class="badge soon">Coming soon</span></div>
+      <p>A WhatsApp assistant that answers questions, collects enquiries and alerts the owner.</p></div>
+      <div class="shot"><svg viewBox="0 0 400 225" role="img" aria-label="Sketch of a chat assistant"><rect width="400" height="225" fill="#FFFFFF"/><rect x="40" y="26" width="170" height="30" rx="15" fill="#F5F5F7"/><rect x="170" y="70" width="190" height="42" rx="18" fill="#1D1D1F"/><rect x="40" y="126" width="140" height="30" rx="15" fill="#F5F5F7"/><rect x="220" y="170" width="140" height="30" rx="15" fill="#D6336C"/></svg></div>
     </article>
     <article class="case">
-      <div class="shot"><svg viewBox="0 0 320 160" role="img" aria-label="Sketch of a food ordering site"><rect x="16" y="16" width="288" height="128" rx="8" fill="var(--surface)"/><rect x="30" y="30" width="120" height="10" rx="5" fill="var(--line)"/><g fill="var(--sunk)"><rect x="30" y="54" width="80" height="76" rx="6"/><rect x="120" y="54" width="80" height="76" rx="6"/><rect x="210" y="54" width="80" height="76" rx="6"/></g><g fill="var(--accent)"><circle cx="70" cy="82" r="16"/><circle cx="160" cy="82" r="16"/><circle cx="250" cy="82" r="16"/></g></svg></div>
-      <div class="body"><div class="row"><h3>Chai Corner</h3><span class="status">Coming soon</span></div>
-      <p>Ordering site for a tea and snacks shop with local SEO pages and a WhatsApp order button.</p>
-      <p class="stack">Next.js · local SEO · Google Business</p></div>
+      <div class="body"><div class="row"><h3>Café Ordering</h3><span class="badge soon">Coming soon</span></div>
+      <p>An online menu and ordering site for a café, with local SEO pages and order tracking.</p></div>
+      <div class="shot"><svg viewBox="0 0 400 225" role="img" aria-label="Sketch of an ordering site"><rect width="400" height="225" fill="#FFFFFF"/><rect x="20" y="20" width="140" height="14" rx="7" fill="#1D1D1F"/><g fill="#F5F5F7"><rect x="20" y="52" width="112" height="152" rx="12"/><rect x="144" y="52" width="112" height="152" rx="12"/><rect x="268" y="52" width="112" height="152" rx="12"/></g><g fill="#E8E8ED"><circle cx="76" cy="104" r="30"/><circle cx="200" cy="104" r="30"/><circle cx="324" cy="104" r="30"/></g><g fill="#D6336C"><rect x="46" y="170" width="60" height="16" rx="8"/><rect x="170" y="170" width="60" height="16" rx="8"/><rect x="294" y="170" width="60" height="16" rx="8"/></g></svg></div>
     </article>
   </div>
 </div></section>
 
-<section class="block band" id="process"><div class="wrap">
-  <div class="sec-head">
-    <div><span class="eyebrow">How we work</span><h2>From first message to launch</h2></div>
-    <p>AI agents handle the repetitive work. People make every decision that matters: scope, price, architecture and release.</p>
-  </div>
-  <ol class="steps">
-    <li><span class="who">You</span><h3>Share the problem</h3><p>Message us by email, the form below or WhatsApp. A voice note or a photo of your register is fine.</p></li>
-    <li><span class="who">Requirements agent + engineer</span><h3>Written scope</h3><p>Within one working day you get screens, features, assumptions and open questions in a short document.</p></li>
-    <li><span class="who">Engineer</span><h3>Fixed quote</h3><p>A fixed price and timeline. Nothing starts until you approve it. Changes are quoted separately.</p></li>
-    <li><span class="who">AI dev team</span><h3>Build in weekly steps</h3><p>Developer, reviewer and test agents build in small pieces. You get a staging link every week.</p></li>
-    <li><span class="who">Engineer</span><h3>Launch &amp; handover</h3><p>Final review, deployment, training video, documentation and 30 days of free fixes.</p></li>
+<section class="block band mist" id="process"><div class="wrap">
+  <div class="sh"><p class="eyebrow">How we work</p><h2>From first message to launch.</h2></div>
+  <ol class="proc">
+    <li><span class="who">You</span><h3>Share the problem</h3><p>Email us or use the form. A screenshot of your spreadsheet is a great start.</p></li>
+    <li><span class="who">AI + engineer</span><h3>Written scope</h3><p>Screens, features, assumptions and open questions within one business day.</p></li>
+    <li><span class="who">Engineer</span><h3>Fixed quote</h3><p>A price and timeline in writing. Nothing starts until you approve.</p></li>
+    <li><span class="who">AI dev team</span><h3>Weekly builds</h3><p>Developer, reviewer and test agents build in small steps you can try.</p></li>
+    <li><span class="who">Engineer</span><h3>Launch &amp; handover</h3><p>Final review, deployment, documentation and 30 days of free fixes.</p></li>
   </ol>
-  <div class="loop">
-    <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="11" r="5" fill="none" stroke="var(--teal)" stroke-width="2"/><path d="M7 29c1.5-6 5.5-9 10-9s8.5 3 10 9" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round"/><circle cx="27" cy="9" r="3" fill="var(--accent)"/></svg>
-    <p><b>Human in the loop, always.</b> AI can write code fast, and it can also make confident mistakes. No AI-written change reaches your users until a senior engineer has read it, tested it and approved it.</p>
+  <p class="human"><b>Human in the loop, always.</b> AI writes fast, and it can make confident mistakes. No AI-written change reaches your users until a senior engineer has read it, tested it and approved it.</p>
+</div></section>
+
+<section class="block band" id="industries"><div class="wrap">
+  <div class="sh"><p class="eyebrow">Who we work with</p><h2>Built for businesses that run on process.</h2></div>
+  <div class="ind">
+    <div><h3>Logistics &amp; warehousing</h3><p>Multi-warehouse stock, dispatch, transfers and fleet tracking.</p></div>
+    <div><h3>Distribution &amp; retail</h3><p>Dealer orders, invoicing, receivables and sales reports.</p></div>
+    <div><h3>Clinics &amp; services</h3><p>Bookings, client records, reminders and follow-ups.</p></div>
+    <div><h3>Restaurants &amp; cafés</h3><p>Online menus, ordering, kitchen display and local SEO.</p></div>
+    <div><h3>Real estate &amp; home services</h3><p>Lead capture, site visits, quotes and installation tracking.</p></div>
+    <div><h3>Startups &amp; SaaS</h3><p>MVPs, admin panels and internal tools, built fast and right.</p></div>
   </div>
 </div></section>
 
-<section class="block band" id="pricing"><div class="wrap">
-  <div class="sec-head">
-    <div><span class="eyebrow">Engagement models</span><h2>Clear prices, three ways to work</h2></div>
-    <p>Indicative starting prices in US dollars. Your exact quote depends on scope and is fixed in writing before work begins. We can also invoice in EUR, GBP, AED or INR.</p>
-  </div>
+<section class="block band mist" id="pricing"><div class="wrap">
+  <div class="sh"><p class="eyebrow">Pricing</p><h2>Simple prices. Three ways to work.</h2><p class="lead">Starting prices in US dollars. Your exact quote is fixed in writing before work begins.</p></div>
   <div class="plans">
     <article class="plan">
       <h3>Launch</h3>
-      <div><div class="price">$1,200 <small>one-time</small></div><div class="usd">USD · billed on delivery</div></div>
-      <p>For a business that needs to be found online and start getting enquiries.</p>
-      <ul><li>Up to 6-page website</li><li>Local SEO and Google Business</li><li>WhatsApp enquiry button</li><li>Delivered in 2 weeks</li></ul>
-      <a class="btn ghost" href="#contact">Get a quote</a>
+      <div class="price">$1,200 <small>one-time</small></div>
+      <p>For a business that needs to be found online and win enquiries.</p>
+      <ul><li>Up to 6-page website</li><li>Technical and local SEO</li><li>Enquiry and chat button</li><li>Delivered in 2 weeks</li></ul>
+      <a class="pill lg ghost" href="#contact">Get a quote</a>
     </article>
-    <article class="plan feature">
+    <article class="plan pop">
+      <span class="ptag">Most popular</span>
       <h3>Build</h3>
-      <div><div class="price">$6,000 <small>per project</small></div><div class="usd">USD · 40% upfront, rest by milestone</div></div>
+      <div class="price">$6,000 <small>per project</small></div>
       <p>For a custom app or AI agent that replaces spreadsheets and manual work.</p>
       <ul><li>Scope document and fixed quote</li><li>Weekly staging demos</li><li>Source code in your GitHub</li><li>30 days of free fixes</li></ul>
-      <a class="btn primary" href="#contact">Start a project</a>
+      <a class="pill lg solid" href="#contact">Start a project</a>
     </article>
     <article class="plan">
       <h3>Partner</h3>
-      <div><div class="price">$3,000 <small>per month</small></div><div class="usd">USD · billed monthly</div></div>
-      <p>A dedicated AI-plus-engineer team for ongoing product work, marketing or both.</p>
-      <ul><li>Agreed monthly hours</li><li>Priority support</li><li>Monthly roadmap and review call</li><li>Cancel with 30 days’ notice</li></ul>
-      <a class="btn ghost" href="#contact">Talk to us</a>
+      <div class="price">$3,000 <small>per month</small></div>
+      <p>A dedicated AI-plus-engineer team for ongoing product or marketing work.</p>
+      <ul><li>Agreed monthly hours</li><li>Priority support</li><li>Monthly roadmap call</li><li>Cancel with 30 days’ notice</li></ul>
+      <a class="pill lg ghost" href="#contact">Talk to us</a>
     </article>
   </div>
-  <p class="note">Prices exclude local taxes where they apply. Hosting, domain and third-party API costs are billed at actual cost. Payment by bank transfer, Wise or card.</p>
+  <p class="fine">Prices exclude local taxes. Hosting and third-party API costs are billed at cost. We can invoice in USD, EUR, GBP, AED or INR.</p>
 </div></section>
 
-<section class="block band" id="stack"><div class="wrap split">
-  <div>
-    <h2>Technology we use</h2>
-    <div class="grp"><h4>Frontend</h4><div class="chips"><span class="chip">Angular</span><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">Tailwind</span></div></div>
-    <div class="grp"><h4>Backend &amp; data</h4><div class="chips"><span class="chip">Node.js</span><span class="chip">NestJS</span><span class="chip">PostgreSQL</span><span class="chip">Prisma</span><span class="chip">Redis</span></div></div>
-    <div class="grp"><h4>AI &amp; automation</h4><div class="chips"><span class="chip">Claude API</span><span class="chip">Agent SDK</span><span class="chip">n8n</span><span class="chip">WhatsApp Business API</span></div></div>
-    <div class="grp"><h4>Cloud &amp; delivery</h4><div class="chips"><span class="chip">AWS</span><span class="chip">Google Cloud</span><span class="chip">Docker</span><span class="chip">GitHub Actions</span></div></div>
+<section class="block band" id="trust"><div class="wrap">
+  <div class="sh"><p class="eyebrow">Quality &amp; security</p><h2>Built to be trusted.</h2></div>
+  <div class="trust">
+    <div><svg class="ico" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4 7 9v10c0 9 6 15 13 17 7-2 13-8 13-17V9z" fill="none" stroke="#1D1D1F" stroke-width="2.2" stroke-linejoin="round"/><path d="m14 20 4 4 8-8" fill="none" stroke="#D6336C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>NDA on request</h3><p>We sign a non-disclosure agreement before you share business details.</p></div>
+    <div><svg class="ico" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><rect x="8" y="18" width="24" height="17" rx="4" fill="none" stroke="#1D1D1F" stroke-width="2.2"/><path d="M13 18v-5a7 7 0 0 1 14 0v5" fill="none" stroke="#D6336C" stroke-width="2.4"/></svg><h3>Your data stays yours</h3><p>Client data lives in your own cloud account and is never used to train AI models.</p></div>
+    <div><svg class="ico" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="14" fill="none" stroke="#1D1D1F" stroke-width="2.2"/><path d="m13 20 5 5 9-10" fill="none" stroke="#D6336C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Reviewed and tested</h3><p>Every change passes code review and automated tests before it ships.</p></div>
+    <div><svg class="ico" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><rect x="9" y="6" width="22" height="28" rx="3" fill="none" stroke="#1D1D1F" stroke-width="2.2"/><path d="M14 14h12M14 20h12M14 26h7" stroke="#D6336C" stroke-width="2.4" stroke-linecap="round"/></svg><h3>Documented handover</h3><p>Setup guide, architecture notes and a recorded walkthrough for your team.</p></div>
   </div>
-  <div>
-    <h2>Quality &amp; security</h2>
-    <div class="trust">
-      <div><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V5z" fill="none" stroke="var(--teal)" stroke-width="1.8"/></svg><div><h3>NDA on request</h3><p>We sign a non-disclosure agreement before you share business details.</p></div></div>
-      <div><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2" fill="none" stroke="var(--teal)" stroke-width="1.8"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="var(--accent)" stroke-width="1.8"/></svg><div><h3>Your data stays yours</h3><p>Client data lives in your own cloud account. Production data is never used to train AI models.</p></div></div>
-      <div><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div><h3>Reviewed and tested</h3><p>Every change goes through code review and automated tests before it ships.</p></div></div>
-      <div><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round"/></svg><div><h3>Documented handover</h3><p>Setup guide, architecture notes and a recorded walkthrough, so any developer can continue.</p></div></div>
-    </div>
-  </div>
+  <div class="stack" aria-label="Technology we use"><span>Angular</span><span>React</span><span>Next.js</span><span>TypeScript</span><span>Node.js</span><span>NestJS</span><span>PostgreSQL</span><span>Prisma</span><span>Claude API</span><span>n8n</span><span>AWS</span><span>Google Cloud</span><span>Docker</span><span>GitHub Actions</span></div>
 </div></section>
 
-<section class="block band" id="about"><div class="wrap about">
-  <div><span class="eyebrow">About Fascinora</span><h2 style="margin-top:14px">Fascinating digital worlds, built with care</h2></div>
-  <div class="txt">
-    <p>Fascinora means <b>“fascinating earth.”</b> We started it with a simple belief: AI should make good software affordable for every business, not just large companies.</p>
-    <p>Fascinora is led by a <b>senior full-stack engineer</b> with hands-on experience building enterprise low-code platforms, warehouse management systems and client applications on Angular, Node.js and PostgreSQL. Every project gets that experience at the review stage.</p>
-    <p>We are a <b>remote-first team</b> working in English with clients in North America, the UK, Europe, the Middle East and Asia-Pacific. Our working day overlaps with yours for calls, reviews and support.</p>
-    <div class="facts">
-      <div><b>Remote-first</b><span>Clients worldwide, HQ in India</span></div>
-      <div><b>4+ hours</b><span>Daily overlap with US, UK and EU</span></div>
-      <div><b>2026</b><span>Founded</span></div>
-    </div>
+<section class="block band mist" id="about"><div class="wrap about">
+  <p class="eyebrow">Company</p>
+  <h2 style="font-size:clamp(36px,5vw,60px);letter-spacing:-.04em;margin-top:10px">Fascinating digital worlds, built with care.</h2>
+  <p>Fascinora means <b>“fascinating earth.”</b> We believe AI should make great software affordable for every business. We are a <b>remote-first studio led by a senior full-stack engineer</b> with hands-on experience in enterprise low-code platforms and warehouse systems.</p>
+  <div class="facts">
+    <div><b>Worldwide</b><span>Clients in any time zone</span></div>
+    <div><b>4+ hours</b><span>Daily overlap with US, UK and EU</span></div>
+    <div><b>1 day</b><span>Reply time for every enquiry</span></div>
   </div>
 </div></section>
 
 <section class="block band" id="faq"><div class="wrap">
-  <div class="sec-head"><div><span class="eyebrow">FAQ</span><h2>Questions clients ask</h2></div><p>Something else on your mind? Ask in the form below and we will reply within one working day.</p></div>
+  <div class="sh"><p class="eyebrow">FAQ</p><h2>Questions, answered.</h2></div>
   <div class="faq">
     <details><summary>If AI writes the code, is it reliable?</summary><p>AI writes the first draft. A senior engineer reviews every change, runs the tests and approves it before release. You get the speed of AI with the judgement of an experienced developer.</p></details>
-    <details><summary>Who owns the code and the data?</summary><p>You do. The source code is pushed to your own GitHub account and the app runs in your own cloud account. We keep nothing back.</p></details>
+    <details><summary>Who owns the code and the data?</summary><p>You do. The source code goes to your own GitHub account and the app runs in your own cloud account.</p></details>
     <details><summary>How fast can you deliver?</summary><p>Websites usually take 1–2 weeks, chatbots 1–3 weeks and custom apps 3–8 weeks. Your quote states the timeline for your scope.</p></details>
-    <details><summary>Where are your clients, and how do we work together?</summary><p>Anywhere. We work over Zoom or Google Meet, share progress on a weekly call and in a staging link, and keep at least four hours of overlap with your working day. Quotes are in USD by default; EUR, GBP, AED or INR on request.</p></details>
-    <details><summary>What happens after launch?</summary><p>You get 30 days of free bug fixes. After that, you can choose a monthly support plan or ask for changes as separate quotes.</p></details>
-    <details><summary>Can my team edit the app ourselves?</summary><p>If we build it on our low-code AI Studio, yes. Your team can add fields, forms and reports without writing code. Try the demo to see how it works.</p></details>
+    <details><summary>Where are your clients, and how do we work together?</summary><p>Anywhere. We meet over Zoom or Google Meet, share a staging link every week and keep at least four hours of overlap with your working day.</p></details>
+    <details><summary>What happens after launch?</summary><p>You get 30 days of free fixes. After that, choose a monthly support plan or request changes as separate quotes.</p></details>
+    <details><summary>Can my team edit the app ourselves?</summary><p>If we build it on AI Studio, yes. Your team can add fields, forms and reports without writing code.</p></details>
   </div>
 </div></section>
 
-<section class="block band" id="contact"><div class="wrap contact">
-  <div class="side">
-    <span class="eyebrow">Start a project</span>
-    <h2 style="margin-top:14px">Tell us what you need</h2>
-    <p>Describe your business and the problem in a few lines. We reply with a clear scope and next steps within one working day.</p>
+<section class="block band mist" id="contact"><div class="wrap contact">
+  <div>
+    <p class="eyebrow">Start a project</p>
+    <h2 style="margin-top:10px">Tell us what you need.</h2>
+    <p class="lead">Describe your business and the problem in a few lines. We reply with a clear scope and next steps within one business day.</p>
     <div class="cfacts">
       <div><span class="l">Email</span><span class="v">hello@fascinora.com</span></div>
-      <div><span class="l">Hours</span><span class="v">Monday–Friday, with overlap for US, UK, EU and Gulf time zones</span></div>
+      <div><span class="l">Hours</span><span class="v">Monday–Friday, overlapping US, UK, EU and Gulf time zones</span></div>
       <div><span class="l">Response time</span><span class="v">Within one business day</span></div>
     </div>
   </div>
@@ -573,74 +559,55 @@ footer.site .legal{grid-column:1/-1;border-top:1px solid var(--deep-line);paddin
       <div class="field"><label for="f-biz">Company</label><input id="f-biz" name="biz" autocomplete="organization"></div>
     </div>
     <div class="two">
-      <div class="field"><label for="f-phone">Phone / WhatsApp</label><input id="f-phone" name="phone" inputmode="tel" autocomplete="tel" placeholder="+1 555 000 0000"></div>
+      <div class="field"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
       <div class="field"><label for="f-country">Country</label><input id="f-country" name="country" autocomplete="country-name" placeholder="United States"></div>
     </div>
     <fieldset class="field" style="border:0;padding:0;margin:0">
-      <legend class="legend" style="margin-bottom:6px">What do you need?</legend>
+      <legend class="legend" style="margin-bottom:8px">What do you need?</legend>
       <div class="opts">
         <label><input type="checkbox" id="c-app" value="Business software"> Business software</label>
         <label><input type="checkbox" id="c-lcp" value="Low-code platform"> Low-code platform</label>
-        <label><input type="checkbox" id="c-bot" value="AI agent / chatbot"> AI agent</label>
+        <label><input type="checkbox" id="c-bot" value="AI agent"> AI agent</label>
         <label><input type="checkbox" id="c-web" value="Website & SEO"> Website &amp; SEO</label>
         <label><input type="checkbox" id="c-mkt" value="Marketing"> Marketing</label>
       </div>
     </fieldset>
-    <div class="field"><label for="f-msg">About the project</label><textarea id="f-msg" name="msg" placeholder="Example: We run 2 warehouses and track stock in Excel. We want an app for stock in/out and monthly reports."></textarea></div>
+    <div class="field"><label for="f-msg">About the project</label><textarea id="f-msg" name="msg" placeholder="Example: We run two warehouses and track stock in spreadsheets. We want an app for stock movements and monthly reports."></textarea></div>
     <div class="field"><label for="f-budget">Budget</label>
       <select id="f-budget" name="budget"><option>Not sure yet</option><option>Under $2,500</option><option>$2,500 – $10,000</option><option>$10,000 – $25,000</option><option>$25,000 – $50,000</option><option>Above $50,000</option></select></div>
-    <button class="btn primary" type="submit" style="justify-self:start">Prepare my enquiry</button>
+    <button class="pill lg solid" type="submit" style="justify-self:start">Prepare my enquiry</button>
     <div class="out" id="out" hidden>
       <p>Copy this message and send it to <b>hello@fascinora.com</b>.</p>
       <pre id="out-text"></pre>
-      <button class="btn ghost" type="button" id="copy" style="justify-self:start">Copy message</button>
+      <button class="pill sm ghost" type="button" id="copy" style="justify-self:start">Copy message</button>
     </div>
   </form>
 </div></section>
+</main>
 
 <footer class="site band"><div class="wrap">
-  <div>
-    <a class="brand" href="#top" aria-label="Fascinora home"><svg width="26" height="26" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13.5" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M4 17c4-3 7 3 11 0s7-3 11 0" fill="none" stroke="var(--on-deep)" stroke-width="1.8" stroke-linecap="round"/></svg><b style="font-size:19px">Fascinora</b></a>
-    <p style="margin-top:12px;font-size:15px;max-width:28em">AI-native software studio. Custom apps, low-code platforms, AI agents and growth marketing.</p>
+  <div class="f-top">
+    <div><a class="logo" href="#top" aria-label="Fascinora home">fascin<svg viewBox="0 0 40 40" aria-hidden="true"><g transform="rotate(-18 20 22)"><ellipse cx="20" cy="22" rx="19" ry="5.6" fill="none" stroke="#1F2933" stroke-width="3"/></g><circle cx="20" cy="21" r="11.5" fill="#D6336C"/><g transform="rotate(-18 20 22)"><path d="M1 22a19 5.6 0 0 0 38 0" fill="none" stroke="#1F2933" stroke-width="3" stroke-linecap="round"/></g></svg>ra</a>
+    <p>AI-native software studio. Custom apps, low-code platforms, AI agents and growth marketing.</p></div>
+    <a class="pill sm solid" href="#contact" style="align-self:center">Start a project</a>
   </div>
-  <div><h4>Services</h4><ul><li><a href="#services">Business software</a></li><li><a href="#services">Low-code platforms</a></li><li><a href="#services">AI agents</a></li><li><a href="#services">Websites &amp; SEO</a></li></ul></div>
-  <div><h4>Demos</h4><ul><li><a href="/studio/">AI Studio</a></li><li><a href="/stockflow/">StockFlow WMS</a></li></ul></div>
-  <div><h4>Company</h4><ul><li><a href="#about">About</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li><li><a href="/privacy/">Privacy policy</a></li></ul></div>
-  <div class="legal"><span>© 2026 Fascinora. All rights reserved.</span><span>hello@fascinora.com · Serving clients worldwide</span></div>
+  <div class="f-cols">
+    <div><h4>Services</h4><ul><li><a href="#services">Business software</a></li><li><a href="#services">Low-code platforms</a></li><li><a href="#services">AI agents</a></li><li><a href="#services">Websites &amp; SEO</a></li></ul></div>
+    <div><h4>Demos</h4><ul><li><a href="/studio/">AI Studio</a></li><li><a href="/stockflow/">StockFlow WMS</a></li></ul></div>
+    <div><h4>Company</h4><ul><li><a href="#about">About</a></li><li><a href="#process">Process</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li>hello@fascinora.com</li><li><a href="/privacy/">Privacy policy</a></li></ul></div>
+  </div>
+  <div class="f-legal"><span>Copyright © 2026 Fascinora. All rights reserved.</span><span>Serving clients worldwide</span></div>
 </div></footer>
 
 <script>
 (function(){
   const b=document.getElementById('menu-btn'), n=document.getElementById('main-nav');
-  if(!b||!n) return;
   const set=o=>{n.classList.toggle('open',o);b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Close menu':'Open menu')};
   b.addEventListener('click',()=>set(!n.classList.contains('open')));
   n.addEventListener('click',e=>{if(e.target.closest('a'))set(false)});
   addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});
-  matchMedia('(min-width:641px)').addEventListener('change',e=>{if(e.matches)set(false)});
-})();
-(function(){
-  const c=document.getElementById('topo'); if(!c) return;
-  const ctx=c.getContext('2d');
-  function draw(){
-    const r=c.getBoundingClientRect(), d=window.devicePixelRatio||1;
-    c.width=r.width*d; c.height=r.height*d; ctx.setTransform(d,0,0,d,0,0);
-    ctx.clearRect(0,0,r.width,r.height);
-    ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--contour').trim()||'#2A5C68';
-    ctx.lineWidth=1;
-    [[r.width*.92,r.height*.1,1.4],[r.width*.05,r.height*.95,1],[r.width*.6,r.height*1.1,.8]].forEach(([cx,cy,s],k)=>{
-      for(let i=1;i<=16;i++){
-        const base=i*28*s; ctx.globalAlpha=Math.max(.12,.7-i*.035); ctx.beginPath();
-        for(let a=0;a<=Math.PI*2+.01;a+=.05){
-          const w=Math.sin(a*3+i*.5+k)*9+Math.sin(a*5-i*.3)*6+Math.cos(a*2+k*1.7)*12, rr=base+w*(i/6);
-          const x=cx+Math.cos(a)*rr*1.3, y=cy+Math.sin(a)*rr*.8; a===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-        }
-        ctx.stroke();
-      }
-    });
-    ctx.globalAlpha=1;
-  }
-  draw(); let t; addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(draw,150)});
+  matchMedia('(min-width:761px)').addEventListener('change',e=>{if(e.matches)set(false)});
 })();
 (function(){
   const f=document.getElementById('enquiry'), out=document.getElementById('out'), txt=document.getElementById('out-text');
@@ -649,15 +616,15 @@ footer.site .legal{grid-column:1/-1;border-top:1px solid var(--deep-line);paddin
     const name=f.name.value.trim();
     if(!name){f.name.setCustomValidity('Please enter your name');f.name.reportValidity();return}
     const needs=[...f.querySelectorAll('.opts input:checked')].map(i=>i.value);
-    txt.textContent=`Hi Fascinora,\n\nName: ${name}\nCompany: ${f.biz.value.trim()||'-'}\nPhone: ${f.phone.value.trim()||'-'}\nCountry: ${f.country.value.trim()||'-'}\nNeed: ${needs.join(', ')||'Not sure yet'}\nBudget: ${f.budget.value}\n\n${f.msg.value.trim()||'(No details yet)'}`;
+    txt.textContent=`Hi Fascinora,\n\nName: ${name}\nCompany: ${f.biz.value.trim()||'-'}\nEmail: ${f.email.value.trim()||'-'}\nCountry: ${f.country.value.trim()||'-'}\nNeed: ${needs.join(', ')||'Not sure yet'}\nBudget: ${f.budget.value}\n\n${f.msg.value.trim()||'(No details yet)'}`;
     out.hidden=false; out.scrollIntoView({behavior:'smooth',block:'nearest'});
   });
   f.name.addEventListener('input',()=>f.name.setCustomValidity(''));
   document.getElementById('copy').addEventListener('click',async e=>{
-    const b=e.currentTarget;
-    try{await navigator.clipboard.writeText(txt.textContent);b.textContent='Copied'}
-    catch(_){const r=document.createRange();r.selectNodeContents(txt);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected, press Ctrl+C'}
-    setTimeout(()=>b.textContent='Copy message',2200);
+    const btn=e.currentTarget;
+    try{await navigator.clipboard.writeText(txt.textContent);btn.textContent='Copied'}
+    catch(_){const r=document.createRange();r.selectNodeContents(txt);const s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Selected, press Ctrl+C'}
+    setTimeout(()=>btn.textContent='Copy message',2200);
   });
 })();
 </script>
