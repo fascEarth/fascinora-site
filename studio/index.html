@@ -3,11 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Fascinora AI Studio: describe an app in plain English and get a working low-code app.">
+<meta name="description" content="Describe an app in plain English and get a working low-code app: data model, form, records and editable schema.">
+<link rel="canonical" href="https://fascinora.com/studio/">
+<meta property="og:site_name" content="Fascinora">
 <meta property="og:title" content="Fascinora AI Studio">
-<meta property="og:description" content="Fascinora AI Studio: describe an app in plain English and get a working low-code app.">
+<meta property="og:description" content="Describe an app in plain English and get a working low-code app: data model, form, records and editable schema.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://fascinora.com/">
+<meta property="og:url" content="https://fascinora.com/studio/">
+<meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Ccircle cx='15' cy='15' r='13.5' fill='%230B2A33' stroke='%23E8962E' stroke-width='2'/%3E%3Cpath d='M5 17c4-3 7 3 10 0s6-3 10 0' fill='none' stroke='%23E8962E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>[hidden]{display:none!important}img{max-width:100%}body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 <title>Fascinora AI Studio</title>
@@ -211,7 +214,7 @@ const OPTS={
   "leave type":["Casual","Sick","Earned"],
   department:["Sales","Operations","Accounts","Warehouse"],
   category:["Grains","Oils","Snacks","Beverages","Home care"],
-  location:["Coimbatore","Madurai","Dindigul","Chennai","Trichy"],
+  location:["Austin","Dubai","London","Singapore","Toronto"],
   "time slot":["10:00","11:30","14:00","16:30","18:00"],
   gender:["Female","Male","Other"],
 };
@@ -253,23 +256,23 @@ function generate(prompt){
 }
 
 // sample data
-const NAMES=["Priya Raman","Arjun Kumar","Meena Sundaram","Karthik Raj","Divya Natarajan","Suresh Babu","Lakshmi Iyer","Vignesh M","Anitha Selvam","Rahul Menon"];
+const NAMES=["Sarah Mitchell","James Carter","Aisha Khan","Lucas Moreau","Priya Raman","Daniel Kim","Fatima Al-Sayed","Tom Becker","Elena Rossi","Omar Haddad"];
 const rnd=(a,b)=>Math.floor(Math.random()*(b-a+1))+a, pick=a=>a[rnd(0,a.length-1)];
 function sampleValue(f,i){
   const d=new Date();d.setDate(d.getDate()+rnd(-10,20));
   switch(f.type){
     case"date":return d.toISOString().slice(0,10);
     case"time":return pick(["09:30","11:00","13:15","15:45","17:30"]);
-    case"phone":return"+91 9"+rnd(1000,9999)+" "+rnd(10000,99999);
+    case"phone":return"+1 "+rnd(201,989)+" 555 "+String(rnd(100,9999)).padStart(4,"0");
     case"email":return NAMES[i%NAMES.length].split(" ")[0].toLowerCase()+"@example.com";
-    case"currency":return rnd(5,250)*100;
+    case"currency":return rnd(4,300)*5;
     case"number":return rnd(1,120);
     case"boolean":return Math.random()>.35;
     case"select":return pick(f.options||["-"]);
     case"textarea":return pick(["Call before visiting","Prefers evening","Regular customer","Follow up next week"]);
     default:
       if(/name/.test(f.key))return NAMES[i%NAMES.length];
-      if(/vehicle/.test(f.key))return"TN 57 "+pick(["AB","CK","DM"])+" "+rnd(1000,9999);
+      if(/vehicle/.test(f.key))return pick(["7KJD","8MPR","6TXL"])+rnd(100,999);
       if(/sku/.test(f.key))return"SKU-"+rnd(100,999);
       return title(pick(["standard","premium","basic","special"]));
   }
@@ -279,9 +282,9 @@ function seedRows(){S.rows=Array.from({length:6},(_,i)=>Object.fromEntries(S.sch
 
 const fmt=(f,v)=>{
   if(v===undefined||v===null||v==="")return"<span style='color:var(--muted)'>–</span>";
-  if(f.type==="currency")return"₹"+Number(v).toLocaleString("en-IN");
+  if(f.type==="currency")return"$"+Number(v).toLocaleString("en-US");
   if(f.type==="boolean")return v?"<span class='tag'>Yes</span>":"No";
-  if(f.type==="date")return new Date(v+"T00:00").toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});
+  if(f.type==="date")return new Date(v+"T00:00").toLocaleDateString("en-US",{day:"numeric",month:"short",year:"numeric"});
   if(f.type==="select")return`<span class="tag">${esc(v)}</span>`;
   return esc(v);
 };
@@ -306,7 +309,7 @@ function renderApp(){
       <div class="main-head"><h2>${esc(s.entity)}s</h2><span class="tag">Generated from schema v${s.version}</span></div>
       <div class="kpis">
         <div class="kpi"><span>Total ${esc(s.entity.toLowerCase())}s</span><b>${S.rows.length}</b></div>
-        <div class="kpi"><span>${money?esc(money.label)+" (sum)":"Fields"}</span><b>${money?"₹"+total.toLocaleString("en-IN"):s.fields.length}</b></div>
+        <div class="kpi"><span>${money?esc(money.label)+" (sum)":"Fields"}</span><b>${money?"$"+total.toLocaleString("en-US"):s.fields.length}</b></div>
         <div class="kpi"><span>${sel?"Most common "+esc(sel.label.toLowerCase()):"Required fields"}</span><b style="font-size:15px">${top?esc(top[0]):s.fields.filter(f=>f.required).length}</b></div>
       </div>
       <div class="card"><h3>New ${esc(s.entity.toLowerCase())}</h3>
