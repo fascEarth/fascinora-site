@@ -353,7 +353,7 @@ footer.site .wrap{padding-block:48px 28px}
     <p class="eyebrow">Products</p>
     <h1>Platforms you can brand and launch.</h1>
     <p class="lead">Production-grade products we build on, customise and deploy for clients. Book a guided demo and see them working end to end.</p>
-    <div class="ctas"><a class="pill lg solid" href="#request">Request a demo</a><a class="pill lg ghost" href="#security">How demos are secured</a></div>
+    <div class="ctas"><a class="pill lg solid" href="#nexus-core">Try the live demos</a><a class="pill lg ghost" href="#security">How demos are secured</a></div>
   </div>
 </section>
 
@@ -362,7 +362,7 @@ footer.site .wrap{padding-block:48px 28px}
 
     <article class="product" id="nexus-core">
       <div>
-        <div class="p-tags"><span class="badge req">Demo on request</span><span class="badge">Platform</span></div>
+        <div class="p-tags"><span class="badge">Live demo</span><span class="badge req">Platform</span></div>
         <h2>Nexus Core</h2>
         <p class="sub">A multi-tenant, event-driven application platform. Your next HRMS, WMS or CRM is configured on it, not coded from scratch.</p>
         <ul class="feat">
@@ -375,8 +375,8 @@ footer.site .wrap{padding-block:48px 28px}
         </ul>
         <div class="p-stack"><span>Angular</span><span>NestJS</span><span>PostgreSQL + RLS</span><span>Redis Streams</span><span>WebSockets</span><span>Claude Code agents</span></div>
         <div class="acts">
-          <a class="pill lg solid" href="#request" data-product="Nexus Core">Request a demo</a>
-          <a class="pill lg ghost" data-live="nexus-core" target="_blank" rel="noopener" hidden>Open live demo</a>
+          <a class="pill lg solid" data-live="nexus-core" target="_blank" rel="noopener" hidden>Open live demo</a>
+          <a class="pill lg ghost" href="#request" data-product="Nexus Core">Book a guided demo</a>
         </div>
       </div>
       <div class="p-panel">
@@ -385,14 +385,14 @@ footer.site .wrap{padding-block:48px 28px}
           <dt>Best for</dt><dd>Companies needing several internal apps on one secure base</dd>
           <dt>Includes</dt><dd>Source code, deployment, admin training</dd>
           <dt>Hosting</dt><dd>Your cloud (AWS, Azure, GCP) or managed by us</dd>
-          <dt>Demo</dt><dd>Guided 30-minute session, then a private sandbox for 7 days</dd>
+          <dt>Try it</dt><dd>Open the live demo: sign in as employee, manager or admin. Open two tabs to watch pages update each other.</dd>
         </dl>
       </div>
     </article>
 
     <article class="product" id="mediconsult">
       <div>
-        <div class="p-tags"><span class="badge req">Demo on request</span><span class="badge">Healthcare</span></div>
+        <div class="p-tags"><span class="badge">Live demo</span><span class="badge req">Healthcare</span></div>
         <h2>MediConsult</h2>
         <p class="sub">A secure online doctor consultation platform for clinics, hospitals and health startups.</p>
         <ul class="feat">
@@ -405,8 +405,8 @@ footer.site .wrap{padding-block:48px 28px}
         </ul>
         <div class="p-stack"><span>Angular</span><span>NestJS</span><span>PostgreSQL</span><span>Jitsi video</span><span>Razorpay</span><span>AES-256-GCM</span></div>
         <div class="acts">
-          <a class="pill lg solid" href="#request" data-product="MediConsult">Request a demo</a>
-          <a class="pill lg ghost" data-live="mediconsult" target="_blank" rel="noopener" hidden>Open live demo</a>
+          <a class="pill lg solid" data-live="mediconsult" target="_blank" rel="noopener" hidden>Open live demo</a>
+          <a class="pill lg ghost" href="#request" data-product="MediConsult">Book a guided demo</a>
         </div>
       </div>
       <div class="p-panel">
@@ -415,7 +415,7 @@ footer.site .wrap{padding-block:48px 28px}
           <dt>Best for</dt><dd>Clinics, hospital groups and telehealth startups</dd>
           <dt>Includes</dt><dd>Your branding, payment setup, domain, launch support</dd>
           <dt>Built with</dt><dd>India Telemedicine Guidelines 2020, DPDP Act 2023, GDPR and HIPAA-style safeguards in mind</dd>
-          <dt>Demo</dt><dd>Patient, doctor and admin views with sample data</dd>
+          <dt>Try it</dt><dd>Open the live demo as patient, doctor or admin. Book, pay (simulated), chat and issue a prescription.</dd>
         </dl>
       </div>
     </article>
@@ -424,11 +424,11 @@ footer.site .wrap{padding-block:48px 28px}
 </section>
 
 <section class="block band mist" id="security"><div class="wrap">
-  <div class="sh"><p class="eyebrow">Security</p><h2>Demos that are safe to explore.</h2><p class="lead">We never publish shared logins. Each demo is private to you.</p></div>
+  <div class="sh"><p class="eyebrow">Security</p><h2>Demos that are safe to explore.</h2><p class="lead">Public demos run entirely in your browser. Nothing you type leaves your device.</p></div>
   <div class="sec-grid">
-    <div><h3>Private accounts</h3><p>After a short check, you get your own demo login that expires after 7 days.</p></div>
-    <div><h3>Sample data only</h3><p>Demos run on fictional data that resets every night. No real payments, no real patient data.</p></div>
-    <div><h3>Hardened by default</h3><p>HTTPS only, rate limits, short-lived sessions, encryption at rest and full audit logs in every demo.</p></div>
+    <div><h3>Runs in your browser</h3><p>No server, no shared database. Your demo data stays on your device and you can reset it any time.</p></div>
+    <div><h3>Sample data only</h3><p>Fictional users, doctors and records. Payments and video are simulated; nothing is charged or recorded.</p></div>
+    <div><h3>Hardened by default</h3><p>HTTPS only with a strict Content Security Policy. Guided demos on a private server are available on request.</p></div>
   </div>
 </div></section>
 
@@ -496,8 +496,8 @@ footer.site .wrap{padding-block:48px 28px}
 <script>
 /* Live demo links stay hidden until a URL is set here. Use HTTPS URLs only. */
 const LIVE_DEMOS = {
-  'nexus-core': '',
-  'mediconsult': ''
+  'nexus-core': 'https://nexus.fascinora.com/login',
+  'mediconsult': 'https://mediconsult.fascinora.com/'
 };
 (function(){
   document.querySelectorAll('[data-live]').forEach(a=>{
