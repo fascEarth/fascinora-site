@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Fascinora products: Nexus Core, a multi-tenant event-driven app platform, and MediConsult, a secure online doctor consultation platform. Request a guided demo.">
+<meta name="description" content="Fascinora products: Nexus Core, a multi-tenant event-driven app platform, and MediConsult, a secure online doctor consultation platform, and Rideora, a white-label cab booking website and CMS. Request a guided demo.">
 <link rel="canonical" href="https://fascinora.com/products/">
 <meta property="og:site_name" content="Fascinora">
 <meta property="og:title" content="Products | Nexus Core &amp; MediConsult by Fascinora">
@@ -422,6 +422,37 @@ footer.site .wrap{padding-block:48px 28px}
       </div>
     </article>
 
+    <article class="product" id="rideora">
+      <div>
+        <div class="p-tags"><span class="badge">Live demo</span><span class="badge req">Mobility</span></div>
+        <h2>Rideora</h2>
+        <p class="sub">A white-label cab, van and chauffeur booking website with its own CMS portal. Each cab operator gets their own brand, prices, fleet and city.</p>
+        <ul class="feat">
+          <li>Online booking for one-way, round-trip, hourly chauffeur and airport transfers</li>
+          <li>Fixed fares from distance, vehicle category, airport fees, night surcharges, extras, promo codes and tax</li>
+          <li>Customers manage or cancel their trip with a booking reference</li>
+          <li>CMS dashboard with revenue, upcoming trips and the vehicle mix</li>
+          <li>Dispatch board: confirm, assign drivers and vehicles, start and complete trips</li>
+          <li>Manage vehicles, drivers, rates, promotions, places, FAQ and all website text</li>
+          <li>Branding and region presets: business name, colour, currency, tax and service area</li>
+        </ul>
+        <div class="p-stack"><span>Angular</span><span>Node.js</span><span>PostgreSQL</span><span>Maps API</span><span>Stripe / Razorpay</span><span>White-label</span></div>
+        <div class="acts">
+          <a class="pill lg solid" data-live="rideora" target="_blank" rel="noopener" hidden>Open live demo</a>
+          <a class="pill lg ghost" href="#request" data-product="Rideora">Book a guided demo</a>
+        </div>
+      </div>
+      <div class="p-panel">
+        <h3>At a glance</h3>
+        <dl>
+          <dt>Best for</dt><dd>Taxi and cab operators, chauffeur companies, airport transfer and van hire businesses</dd>
+          <dt>Includes</dt><dd>Your branding, domain, rates and service area, admin training</dd>
+          <dt>Hosting</dt><dd>Your cloud or managed by us</dd>
+          <dt>Try it</dt><dd>Book a ride on the website, then open the CMS portal (demo login on the sign-in page) and dispatch it.</dd>
+        </dl>
+      </div>
+    </article>
+
   </div>
 </section>
 
@@ -451,7 +482,7 @@ footer.site .wrap{padding-block:48px 28px}
       <div class="field"><label for="d-country">Country</label><input id="d-country" name="country" autocomplete="country-name" maxlength="60"></div>
     </div>
     <div class="field"><label for="d-product">Product</label>
-      <select id="d-product" name="product"><option>Nexus Core</option><option>MediConsult</option><option>Both</option></select></div>
+      <select id="d-product" name="product"><option>Nexus Core</option><option>MediConsult</option><option>Rideora</option><option>More than one</option></select></div>
     <div class="field"><label for="d-use">What would you use it for?</label><textarea id="d-use" name="use" maxlength="1500" placeholder="Example: A 5-branch clinic group that wants online consultations with our own doctors and branding."></textarea></div>
     <div class="hp" aria-hidden="true"><label for="d-website">Website</label><input id="d-website" name="website" tabindex="-1" autocomplete="off"></div>
     <p class="err" id="d-err" role="alert" hidden></p>
@@ -478,7 +509,7 @@ footer.site .wrap{padding-block:48px 28px}
   </div>
   <div class="f-cols">
     <div><h4>Services</h4><ul><li><a href="/custom-software-development/">Custom software</a></li><li><a href="/low-code-platform/">Low-code platforms</a></li><li><a href="/ai-agents/">AI agents &amp; chatbots</a></li><li><a href="/warehouse-management-software/">Warehouse software</a></li></ul></div>
-    <div><h4>Products &amp; demos</h4><ul><li><a href="/products/">All products</a></li><li><a href="/products/#nexus-core">Nexus Core</a></li><li><a href="/products/#mediconsult">MediConsult</a></li><li><a href="/studio/">AI Studio</a></li><li><a href="/stockflow/">StockFlow WMS</a></li></ul></div>
+    <div><h4>Products &amp; demos</h4><ul><li><a href="/products/">All products</a></li><li><a href="/products/#nexus-core">Nexus Core</a></li><li><a href="/products/#mediconsult">MediConsult</a></li><li><a href="/rideora/">Rideora cab booking</a></li><li><a href="/studio/">AI Studio</a></li><li><a href="/stockflow/">StockFlow WMS</a></li></ul></div>
     <div><h4>Company</h4><ul><li><a href="/#about">About</a></li><li><a href="/#process">Process</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/#faq">FAQ</a></li><li><a href="/blog/">Blog</a></li></ul></div>
     <div><h4>Contact</h4><ul><li>hello@fascinora.com</li><li><a href="/privacy/">Privacy policy</a></li></ul></div>
   </div>
@@ -499,7 +530,8 @@ footer.site .wrap{padding-block:48px 28px}
 /* Live demo links stay hidden until a URL is set here. Use HTTPS URLs only. */
 const LIVE_DEMOS = {
   'nexus-core': 'https://nexus.fascinora.com/login',
-  'mediconsult': 'https://mediconsult.fascinora.com/'
+  'mediconsult': 'https://mediconsult.fascinora.com/',
+  'rideora': 'https://fascinora.com/rideora/'
 };
 (function(){
   document.querySelectorAll('[data-live]').forEach(a=>{
@@ -529,6 +561,6 @@ const LIVE_DEMOS = {
   });
 })();
 </script>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Nexus Core","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Multi-tenant, event-driven application platform with workflows, permissions, automation rules and real-time sync. Live demo: a full food-delivery business with customer, restaurant, rider and admin apps.","publisher":{"@id":"https://fascinora.com/#org"},"url":"https://fascinora.com/products/#nexus-core"},{"@type":"SoftwareApplication","name":"MediConsult","applicationCategory":"HealthApplication","operatingSystem":"Web","description":"Secure online doctor consultation platform with video, e-prescriptions, payments and encrypted health records.","publisher":{"@id":"https://fascinora.com/#org"},"url":"https://fascinora.com/products/#mediconsult"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Nexus Core","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Multi-tenant, event-driven application platform with workflows, permissions, automation rules and real-time sync. Live demo: a full food-delivery business with customer, restaurant, rider and admin apps.","publisher":{"@id":"https://fascinora.com/#org"},"url":"https://fascinora.com/products/#nexus-core"},{"@type":"SoftwareApplication","name":"MediConsult","applicationCategory":"HealthApplication","operatingSystem":"Web","description":"Secure online doctor consultation platform with video, e-prescriptions, payments and encrypted health records.","publisher":{"@id":"https://fascinora.com/#org"},"url":"https://fascinora.com/products/#mediconsult"},{"@type":"SoftwareApplication","name":"Rideora","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"White-label cab, van and chauffeur booking website with a CMS for bookings, dispatch, fleet, drivers, pricing, promotions and branding.","publisher":{"@id":"https://fascinora.com/#org"},"url":"https://fascinora.com/rideora/"}]}</script>
 </body>
 </html>

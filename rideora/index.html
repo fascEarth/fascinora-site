@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Rideora is a white-label cab, van and chauffeur booking website with a full CMS portal: online booking, fixed fares, dispatch, fleet, drivers, pricing, promotions and branding. Built by Fascinora.">
+<link rel="canonical" href="https://fascinora.com/rideora/">
+<meta property="og:site_name" content="Fascinora">
+<meta property="og:title" content="Rideora | White-label cab booking website and CMS by Fascinora">
+<meta property="og:description" content="Online cab, van and chauffeur booking with fixed fares, plus a CMS for bookings, dispatch, fleet, pricing and branding. Try the live demo.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fascinora.com/rideora/">
+<meta property="og:image" content="https://fascinora.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FFC62B">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'none'; base-uri 'self'">
+<title>Rideora cab booking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/*
+VOICE: confident, international, calm. A premium chauffeur service, not a discount app.
+IDEA: the street at kerbside: a bright brand-coloured band, a road panorama, a booking card like a ticket.
+PICTURE: a wide road scene with the fleet driving across, the booking card sitting on top of it.
+COLOUR and TYPE: brand colour field (default cab yellow, set in the CMS), ink black, white. Plus Jakarta Sans.
+LAYOUT: site = header, hero band with booking card, sections; CMS = sidebar + work area, tables stack on phones.
+*/
+:root{--p:#FFC62B;--onp:#121417;--pd:color-mix(in srgb,var(--p) 78%,#000);--pl:color-mix(in srgb,var(--p) 16%,#fff);
+--ink:#121417;--body:#3A3F47;--muted:#6B717B;--line:#E2E4E8;--soft:#F5F6F7;--white:#fff;
+--ok:#16834F;--okb:#E3F4EA;--warn:#A86400;--warnb:#FFF1D6;--bad:#C23A32;--badb:#FCE6E4;--info:#2457D6;--infob:#E4ECFD;--vio:#6D3FC8;--viob:#EEE6FB;--trip:#0E7C86;--tripb:#DDF3F4;
+--f:"Plus Jakarta Sans","Segoe UI",system-ui,-apple-system,sans-serif;--r:14px;color-scheme:light}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--ink);font:16px/1.55 var(--f);overflow-x:clip;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;line-height:1.1;letter-spacing:-.025em;text-wrap:balance}
+p{margin:0}a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:8px}
+[hidden]{display:none!important}
+.wrap{max-width:1200px;margin:0 auto;padding:0 max(4vw,16px)}
+.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 20px;border-radius:999px;border:1px solid transparent;font-weight:700;font-size:15px;cursor:pointer;text-decoration:none;white-space:nowrap;transition:transform .15s,background .15s}
+.btn:active{transform:scale(.98)}
+.btn.p{background:var(--p);color:var(--onp)}.btn.p:hover{background:var(--pd);color:#fff}
+.btn.dark{background:var(--ink);color:#fff}.btn.dark:hover{background:#000}
+.btn.ghost{background:transparent;border-color:var(--line);color:var(--ink)}.btn.ghost:hover{border-color:var(--ink)}
+.btn.sm{min-height:38px;padding:0 14px;font-size:14px}
+.btn.danger{background:var(--badb);color:var(--bad)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.demo{background:var(--ink);color:#fff;font-size:13.5px;text-align:center;padding:7px 16px}
+.demo a{color:var(--p);font-weight:700}
+/* header */
+.top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(16px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px}
+.brand{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:21px;letter-spacing:-.03em;text-decoration:none}
+.mark{width:34px;height:34px;border-radius:10px;background:var(--p);display:grid;place-items:center;color:var(--onp);flex:none}
+.mark svg{width:22px;height:22px}
+.nav{display:flex;gap:26px;font-size:15px;font-weight:500;color:var(--body)}
+.nav a{text-decoration:none}.nav a:hover{color:var(--ink)}
+.menu{display:none;width:44px;height:44px;border:0;background:none;border-radius:10px;cursor:pointer}
+@media(max-width:900px){.nav{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;flex-direction:column;gap:0;border-bottom:1px solid var(--line);padding:8px max(4vw,16px) 16px}.nav.open{display:flex}.nav a{padding:12px 0;border-bottom:1px solid var(--soft)}.menu{display:inline-grid;place-items:center}.hide-sm{display:none}}
+/* hero */
+.hero{background:var(--p);color:var(--onp);position:relative;overflow:hidden}
+.hero .wrap{position:relative;z-index:2;padding-top:clamp(36px,6vw,72px)}
+.hero-copy{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px 48px;align-items:end;margin-bottom:28px}
+.hero h1{font-size:clamp(34px,5vw,52px);font-weight:800;line-height:1.05;max-width:16ch}
+.hero .lead{font-size:18px;line-height:1.5;max-width:46ch;opacity:.86}
+.ticks{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px;font-weight:600;font-size:14.5px}
+.ticks span{display:inline-flex;gap:6px;align-items:center}
+.ticks .ic{width:18px;height:18px;stroke-width:2.4}
+@media(max-width:760px){.hero-copy{grid-template-columns:1fr}}
+.bk{background:#fff;color:var(--ink);border-radius:20px;box-shadow:0 24px 60px -24px rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.06);padding:8px 8px 14px;position:relative}
+.tabs{display:flex;gap:4px;padding:6px;overflow-x:auto;scrollbar-width:none}
+.tabs button{flex:none;border:0;background:transparent;padding:10px 16px;border-radius:999px;font-weight:600;font-size:14.5px;cursor:pointer;color:var(--body);display:inline-flex;gap:7px;align-items:center;min-height:40px}
+.tabs button .ic{width:18px;height:18px}
+.tabs button[aria-pressed=true]{background:var(--ink);color:#fff}
+.bk-grid{display:grid;grid-template-columns:minmax(0,1.5fr) auto minmax(0,1.5fr) minmax(0,1fr) minmax(0,.8fr) minmax(0,.7fr) minmax(0,.7fr) auto;gap:8px;padding:6px 8px 0;align-items:end}
+.bk-grid.hourly .f-drop,.bk-grid.hourly .swap{display:none}
+.bk-grid:not(.hourly) .f-hours{display:none}
+.bk-ret{display:grid;grid-template-columns:repeat(2,minmax(0,200px));gap:8px;padding:8px 8px 0}
+.fld{display:flex;flex-direction:column;gap:4px;background:var(--soft);border-radius:12px;padding:8px 12px;border:1px solid transparent}
+.fld:focus-within{border-color:var(--ink);background:#fff}
+.fld span{font-size:13px;font-weight:600;color:var(--muted)}
+.fld input,.fld select{border:0;background:transparent;font-size:16px;font-weight:600;padding:2px 0;outline:none;width:100%}
+.swap{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;display:grid;place-items:center;margin-bottom:8px}
+.bk-go{height:58px;padding:0 26px;font-size:16px}
+.bk-err{color:var(--bad);font-weight:600;font-size:14px;padding:10px 14px 0}
+@media(max-width:1060px){.bk-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.bk-grid .bk-go{grid-column:1/-1}.bk-grid .f-pick,.bk-grid .f-drop{grid-column:1/-1}.swap{display:none}.bk-grid .f-pax,.bk-grid .f-bags{grid-column:auto}}
+.bk-grid.hourly .f-hours{grid-column:1/-1}
+@media(min-width:1061px){.bk-grid.hourly{grid-template-columns:minmax(0,1.6fr) minmax(0,1.2fr) minmax(0,1fr) minmax(0,.8fr) minmax(0,.7fr) minmax(0,.7fr) auto}.bk-grid.hourly .f-hours{grid-column:auto}}
+.scene{display:block;width:100%;height:clamp(150px,22vw,260px);margin-top:-40px;position:relative;z-index:1}
+.lane{stroke-dasharray:44 36;animation:drive 1.6s linear infinite}
+@keyframes drive{to{stroke-dashoffset:-80}}
+@media(prefers-reduced-motion:reduce){.lane{animation:none}}
+/* sections */
+.sec{padding:clamp(56px,8vw,96px) 0}
+.sec.soft{background:var(--soft)}
+.sh{max-width:640px;margin-bottom:36px}
+.sh h2{font-size:clamp(30px,3.6vw,42px);font-weight:800}
+.sh p{color:var(--muted);font-size:17px;margin-top:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+@media(max-width:960px){.grid3,.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.grid3,.grid4{grid-template-columns:1fr}}
+.feat{display:flex;gap:14px;align-items:flex-start}
+.feat .bubble,.svc .bubble{width:44px;height:44px;border-radius:12px;background:var(--pl);display:grid;place-items:center;flex:none;color:var(--ink)}
+.feat h3{font-size:17px}.feat p{color:var(--muted);font-size:15px;margin-top:4px}
+.svc{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:12px}
+.svc h3{font-size:19px}.svc p{color:var(--muted);font-size:15.5px}
+.fleet{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.car{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.car .pic{background:linear-gradient(#fff 0 62%,var(--pl) 62%);padding:18px 18px 6px}
+.car .pic svg{width:100%;height:auto;display:block}
+.car .bd{padding:16px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.car h3{font-size:18px}
+.car p{color:var(--muted);font-size:14.5px}
+.specs{display:flex;gap:14px;color:var(--body);font-size:14px;font-weight:600}
+.specs span{display:inline-flex;align-items:center;gap:5px}.specs .ic{width:17px;height:17px}
+.from{margin-top:auto;padding-top:8px;font-size:14px;color:var(--muted)}.from b{color:var(--ink);font-size:18px;white-space:nowrap}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.step{padding:28px;border-radius:var(--r);background:#fff;border:1px solid var(--line)}
+.step .bubble{width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--p);display:grid;place-items:center;margin-bottom:18px}
+.step h3{font-size:19px}.step p{color:var(--muted);margin-top:6px}
+@media(max-width:760px){.steps{grid-template-columns:1fr}}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:14.5px;font-weight:600}
+.chip .ic{width:16px;height:16px}
+.cov{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
+@media(max-width:860px){.cov{grid-template-columns:1fr}}
+.faq{max-width:820px}
+.faq details{border-bottom:1px solid var(--line);padding:4px 0}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding:16px 0;font-weight:700;font-size:17px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:24px;line-height:1;font-weight:400}
+.faq details[open] summary::after{content:"–"}
+.faq details p{color:var(--body);padding:0 0 18px;max-width:68ch}
+.cta{background:var(--ink);color:#fff;border-radius:24px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px}
+.cta h2{font-size:clamp(28px,3.4vw,40px);font-weight:800}
+.cta p{opacity:.75;margin-top:10px}
+.cta .lines{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+.cta .lines div{display:flex;gap:10px;align-items:center}
+.cta form{display:flex;flex-direction:column;gap:10px}
+.cta input,.cta textarea{width:100%;background:#22252b;border:1px solid #34383f;border-radius:12px;padding:12px 14px;color:#fff;font-size:16px}
+.cta input::placeholder,.cta textarea::placeholder{color:#9aa0a8}
+@media(max-width:860px){.cta{grid-template-columns:1fr}}
+footer.foot{border-top:1px solid var(--line);padding:36px 0;color:var(--muted);font-size:14.5px}
+footer.foot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{text-decoration:none}footer a:hover{color:var(--ink)}
+/* overlay sheet */
+.ov{position:fixed;inset:0;z-index:80;background:rgba(18,20,23,.5);display:flex;justify-content:flex-end}
+.sheet{background:#fff;width:min(920px,100%);height:100%;display:flex;flex-direction:column}.sheet.anim{animation:slide .25s ease}
+@keyframes slide{from{transform:translateX(40px);opacity:0}}
+@media(prefers-reduced-motion:reduce){.sheet.anim{animation:none}}
+.sheet-h{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line)}
+.sheet-h h2{font-size:20px}
+.sheet-h small{display:block;color:var(--muted);font-size:13.5px;font-weight:500;letter-spacing:0;margin-top:2px}
+.x{width:44px;height:44px;border-radius:50%;border:0;background:var(--soft);cursor:pointer;display:grid;place-items:center;flex:none}
+.sheet-b{flex:1;overflow-y:auto;padding:20px}
+.sheet-f{border-top:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sheet-f .tot{font-size:14px;color:var(--muted)}.sheet-f .tot b{display:block;font-size:22px;color:var(--ink)}
+.trip{display:flex;flex-wrap:wrap;gap:6px 14px;background:var(--soft);border-radius:12px;padding:12px 14px;font-size:14.5px;margin-bottom:18px}
+.trip b{font-weight:700}
+.vlist{display:flex;flex-direction:column;gap:10px}
+.vopt{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:16px;align-items:center;border:1.5px solid var(--line);border-radius:var(--r);padding:12px 16px;cursor:pointer;background:#fff;text-align:left;width:100%}
+.vopt:hover{border-color:var(--ink)}
+.vopt[aria-pressed=true]{border-color:var(--ink);box-shadow:0 0 0 2px var(--ink) inset}
+.vopt svg.carsvg{width:150px;height:auto}
+.vopt h3{font-size:17px}.vopt p{color:var(--muted);font-size:14px;margin:2px 0 6px}
+.vopt .pr{text-align:right;font-weight:800;font-size:20px;white-space:nowrap}
+.vopt .pr small{display:block;font-size:12.5px;color:var(--muted);font-weight:500}
+@media(max-width:600px){.vopt{grid-template-columns:96px minmax(0,1fr);}.vopt svg.carsvg{width:96px}.vopt .pr{grid-column:2;text-align:left}}
+.kmrow{display:flex;gap:12px;align-items:end;flex-wrap:wrap;background:var(--warnb);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:14.5px}
+.kmrow .fld{background:#fff;width:140px}
+.det{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;align-items:start}
+@media(max-width:760px){.det{grid-template-columns:1fr}}
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.form .wide{grid-column:1/-1}
+@media(max-width:520px){.form{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:5px;font-size:14px;font-weight:600;color:var(--body)}
+.fl input,.fl select,.fl textarea{border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-size:16px;font-weight:500;background:#fff;color:var(--ink);width:100%}
+.fl input:focus,.fl select:focus,.fl textarea:focus{outline:2px solid var(--ink);outline-offset:0;border-color:transparent}
+.fl input[type=color]{padding:4px;height:46px}
+.chk{display:flex;gap:10px;align-items:center;font-weight:600;font-size:15px;min-height:44px}
+.chk input{width:20px;height:20px;accent-color:var(--ink)}
+.h4{font-size:16px;font-weight:800;margin:22px 0 10px}
+.ex{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--soft)}
+.ex small{color:var(--muted);display:block}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:18px}
+.qty output{min-width:18px;text-align:center;font-weight:700}
+.pays{display:flex;flex-direction:column;gap:8px}
+.pay{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer}
+.pay:has(input:checked){border-color:var(--ink)}
+.pay input{margin-top:4px;accent-color:var(--ink);width:18px;height:18px}
+.pay small{display:block;color:var(--muted)}
+.sum{background:var(--soft);border-radius:var(--r);padding:18px;position:sticky;top:0}
+.sum h3{font-size:17px;margin-bottom:10px}
+.bl{display:flex;justify-content:space-between;gap:12px;padding:6px 0;font-size:14.5px}
+.bl span:last-child{white-space:nowrap;font-variant-numeric:tabular-nums}
+.bl.tot{border-top:1px solid var(--line);margin-top:8px;padding-top:12px;font-weight:800;font-size:18px}
+.promo{display:flex;gap:8px;margin-top:12px}.promo input{flex:1;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:16px;text-transform:uppercase}
+.note{font-size:13.5px;color:var(--muted);margin-top:8px}
+.okmsg{color:var(--ok);font-weight:600;font-size:14px;margin-top:6px}.errmsg{color:var(--bad);font-weight:600;font-size:14px;margin-top:6px}
+.done{text-align:center;max-width:560px;margin:20px auto}
+.done .big{width:72px;height:72px;border-radius:50%;background:var(--okb);color:var(--ok);display:grid;place-items:center;margin:0 auto 18px}
+.done .big .ic{width:36px;height:36px;stroke-width:2.4}
+.ref{font-size:30px;font-weight:800;letter-spacing:.04em;margin:8px 0}
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 18px;text-align:left;background:var(--soft);border-radius:var(--r);padding:16px 18px;margin:18px 0;font-size:14.5px}
+.kv dt{color:var(--muted)}.kv dd{margin:0;font-weight:600}
+.tl{display:flex;gap:0;margin:18px 0;flex-wrap:wrap}
+.tl div{flex:1;min-width:80px;text-align:center;font-size:13px;font-weight:600;color:var(--muted);position:relative;padding-top:24px}
+.tl div::before{content:"";position:absolute;top:6px;left:50%;width:12px;height:12px;border-radius:50%;background:var(--line);transform:translateX(-50%)}
+.tl div.on{color:var(--ink)}.tl div.on::before{background:var(--ink)}
+/* badges */
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:700;white-space:nowrap}
+.s-Pending{background:var(--warnb);color:var(--warn)}.s-Confirmed{background:var(--infob);color:var(--info)}.s-Assigned{background:var(--viob);color:var(--vio)}.s-On-trip{background:var(--tripb);color:var(--trip)}.s-Completed{background:var(--okb);color:var(--ok)}.s-Cancelled{background:var(--badb);color:var(--bad)}
+.s-Available{background:var(--okb);color:var(--ok)}.s-Maintenance,.s-Off-duty{background:var(--soft);color:var(--muted)}.s-New{background:var(--warnb);color:var(--warn)}.s-Handled{background:var(--soft);color:var(--muted)}.s-Active{background:var(--okb);color:var(--ok)}.s-Inactive{background:var(--soft);color:var(--muted)}
+/* modal & toast */
+.md{position:fixed;inset:0;z-index:90;background:rgba(18,20,23,.5);display:grid;place-items:center;padding:16px}
+.md-c{background:#fff;border-radius:18px;width:min(560px,100%);max-height:calc(100vh - 32px);overflow:auto;padding:22px}
+.md-c.wide{width:min(860px,100%)}
+.md-h{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.md-h h3{font-size:20px}
+.md-f{display:flex;justify-content:flex-end;gap:8px;margin-top:18px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;font-weight:600;z-index:100;font-size:15px;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:calc(100% - 32px)}
+/* admin */
+.adm{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh;background:var(--soft)}
+.side{background:var(--ink);color:#d9dce1;padding:18px 12px;display:flex;flex-direction:column;gap:14px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.side .brand{color:#fff;font-size:19px;padding:4px 8px}
+.side .brand small{font-size:12px;font-weight:700;background:#2a2e35;color:var(--p);padding:2px 8px;border-radius:999px;letter-spacing:0}
+.side nav{display:flex;flex-direction:column;gap:2px}
+.side nav button{display:flex;align-items:center;gap:10px;border:0;background:transparent;color:#c4c8cf;padding:10px 12px;border-radius:10px;font-weight:600;font-size:14.5px;cursor:pointer;text-align:left;min-height:42px}
+.side nav button:hover{background:#1f2227;color:#fff}
+.side nav button[aria-current=page]{background:var(--p);color:var(--onp)}
+.side nav .ic{width:19px;height:19px}
+.side nav .cnt{margin-left:auto;background:#2f333a;color:#fff;font-size:12px;border-radius:999px;padding:1px 8px}
+.side-f{margin-top:auto;display:flex;flex-direction:column;gap:6px;padding:8px}
+.side-f a,.side-f button{color:#c4c8cf;background:none;border:0;text-align:left;padding:8px 4px;cursor:pointer;font-weight:600;font-size:14px;text-decoration:none}
+.side-f a:hover,.side-f button:hover{color:#fff}
+.am{padding:24px clamp(16px,3vw,36px) 48px}
+.am-h{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.am-h h1{font-size:clamp(24px,3vw,30px);font-weight:800}
+.am-h p{color:var(--muted);font-size:14.5px;margin-top:4px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.card+.card{margin-top:16px}.two>.card{margin-top:0}
+.card h2{font-size:17px;font-weight:800;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:16px}
+@media(max-width:1100px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.kpi span{font-size:14px;color:var(--muted);font-weight:600}
+.kpi b{display:block;font-size:clamp(24px,3vw,32px);font-weight:800;letter-spacing:-.02em;margin:4px 0 2px;white-space:nowrap}
+.kpi small{font-size:13px;font-weight:600}.up{color:var(--ok)}.down{color:var(--bad)}.flat{color:var(--muted)}
+.two{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px;margin-bottom:16px}
+@media(max-width:1100px){.two{grid-template-columns:1fr}}
+.bars{display:flex;align-items:flex-end;gap:6px;height:220px;padding-top:24px}
+.bars div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px;font-size:13px;color:var(--muted)}
+.bars i{display:block;width:100%;max-width:34px;background:var(--p);border-radius:6px 6px 2px 2px;position:relative;min-height:3px}
+.bars i b{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);font-size:13px;color:var(--ink);padding-bottom:3px}
+.bars div.today i{background:var(--ink)}
+@media(max-width:520px){.bars{gap:3px}.bars i b{display:none}}
+.hb{display:flex;flex-direction:column;gap:12px}
+.hb div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;font-size:14px;font-weight:600}
+.hb div>i{grid-column:1/-1;height:8px;background:var(--soft);border-radius:99px;overflow:hidden;display:block}
+.hb div>i>i{display:block;height:100%;background:var(--ink);border-radius:99px}
+.tbl{width:100%;border-collapse:collapse;font-size:14.5px}
+.tbl th{text-align:left;font-size:13px;color:var(--muted);font-weight:700;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:12px;border-bottom:1px solid var(--soft);vertical-align:top}
+.tbl tr.click{cursor:pointer}.tbl tr.click:hover td{background:#fafafa}
+.tbl .num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tbl td small{display:block;color:var(--muted);font-size:13px}
+.tbl .acts{white-space:nowrap;text-align:right}
+.lnk{background:none;border:0;color:var(--info);font-weight:700;cursor:pointer;padding:6px;font-size:14px}
+.lnk.del{color:var(--bad)}
+.filt{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.filt input,.filt select{border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:16px;background:#fff;min-height:44px}
+.filt input{flex:1;min-width:180px}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+.kan{display:grid;grid-template-columns:repeat(4,minmax(240px,1fr));gap:14px;overflow-x:auto;padding-bottom:8px}
+.col{background:#eceef1;border-radius:var(--r);padding:12px;min-height:200px}
+.col h3{font-size:15px;display:flex;justify-content:space-between;margin:2px 4px 12px}
+.tk{background:#fff;border-radius:12px;padding:12px;margin-bottom:10px;border:1px solid var(--line);cursor:pointer;font-size:14px;display:flex;flex-direction:column;gap:4px}
+.tk:hover{border-color:var(--ink)}
+.tk .t{font-weight:800;font-size:15px}
+.tk small{color:var(--muted)}
+.tk .btn{margin-top:6px;align-self:flex-start}
+.login{min-height:100vh;display:grid;place-items:center;background:var(--p);padding:16px}
+.login .card{width:min(420px,100%);padding:28px}
+.login h1{font-size:26px;font-weight:800;margin:18px 0 6px}
+.login p{color:var(--muted);font-size:14.5px;margin-bottom:18px}
+.hint{background:var(--soft);border-radius:10px;padding:10px 12px;font-size:13.5px;margin-top:14px;color:var(--body)}
+.prev{border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.prev .ph{background:var(--p);color:var(--onp);padding:18px}
+.prev .ph b{font-size:20px}
+.prev .pb{padding:16px;display:flex;gap:8px;flex-wrap:wrap}
+.presets{display:flex;gap:8px;flex-wrap:wrap}
+textarea.code{width:100%;min-height:180px;font:13px/1.4 ui-monospace,Menlo,Consolas,monospace;border:1px solid var(--line);border-radius:10px;padding:10px}
+.sub{color:var(--muted);font-size:14px;margin:-6px 0 14px}
+@media(max-width:860px){.adm{grid-template-columns:1fr}.side{position:sticky;top:0;height:auto;z-index:30;flex-direction:row;align-items:center;padding:8px;gap:8px;overflow:visible}.side .brand{display:none}.side nav{flex-direction:row;overflow-x:auto;scrollbar-width:none;flex:1}.side nav button{flex:none}.side nav .cnt{display:none}.side-f{display:none}}
+@media(max-width:640px){.stack thead{display:none}.stack tr{display:grid;padding:10px 0;border-bottom:1px solid var(--line)}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:7.5em;text-align:start!important}.stack td::before{content:attr(data-l);float:inline-start;width:7em;margin-inline-start:-7.5em;color:var(--muted);font-size:13px;font-weight:600}.stack td:empty{display:none}.stack td.acts{padding-inline-start:0}.stack td.acts::before{display:none}}
+</style>
+</head>
+<body>
+<div id="app"><p style="padding:40px;text-align:center">Loading booking site…</p></div>
+<div id="layer"></div>
+<div class="toast" id="toast" hidden role="status"></div>
+<script>
+{
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const KEY='rideora.demo.v1';
+const pad=n=>String(n).padStart(2,'0');
+const ymd=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const addDays=n=>{const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+n);return d};
+const uid=p=>p+Math.random().toString(36).slice(2,8);
+const STAT=['Pending','Confirmed','Assigned','On trip','Completed','Cancelled'];
+const sc=s=>'s-'+String(s).replace(/\s+/g,'-');
+const badge=s=>`<span class="badge ${sc(s)}">${esc(s)}</span>`;
+
+/* ---------- icons ---------- */
+const IC={plane:'M2 13l8-2 4-7h2l-1.5 7H21l1 2-7.5 1L16 21h-2l-4-6-8-2z',city:'M3 21V9l6-3v15M9 21V3h8v18M17 21v-9h4v9M2 21h20M12 7h2M12 11h2M12 15h2',clock:'M12 7v5l3 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z',road:'M8 3 4 21M16 3l4 18M12 4v3M12 11v3M12 18v2',brief:'M3 8h18v12H3zM8 8V5h8v3M3 13h18',group:'M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20c0-3 3-5 6-5s6 2 6 5M16 5a3 3 0 0 1 0 6M18 15c2 .5 3 2 3 5',shield:'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM9 12l2 2 4-4',tag:'M3 12V3h9l9 9-9 9zM7.5 7.5h.01',headset:'M4 14v-2a8 8 0 0 1 16 0v2M4 14h3v5H4zM17 14h3v5h-3zM20 19c0 1.5-2 2-5 2',check:'M5 12l4 4 10-10',pin:'M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12zM12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z',user:'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c0-4 4-6 8-6s8 2 8 6',bag:'M6 8h12v13H6zM9 8V4h6v4M9 12v5M15 12v5',swap:'M7 4v16M7 4 3 8M7 4l4 4M17 20V4M17 20l-4-4M17 20l4-4',x:'M6 6l12 12M18 6 6 18',menu:'M4 7h16M4 12h16M4 17h16',phone:'M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z',mail:'M3 6h18v12H3zM3 7l9 6 9-6',chat:'M4 5h16v11H8l-4 4z',grid:'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z',list:'M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01',kan:'M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v13h-4z',car:'M3 16v-4l2-5h14l2 5v4zM3 16h18v2H3zM7 18v2M17 18v2M6.5 13h.01M17.5 13h.01',id:'M3 5h18v14H3zM8 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM5 16c0-2 1.5-3 3-3s3 1 3 3M14 9h4M14 13h4',money:'M3 6h18v12H3zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 9v.01M18 15v.01',ticket:'M3 7h18v3a2 2 0 0 0 0 4v3H3v-3a2 2 0 0 0 0-4zM14 7v10',doc:'M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7',brush:'M14 4l6 6-8 8H6v-6zM4 20h4',gear:'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19 12l2-1-1-3-2 .2-1.3-1.5.3-2-3-1-1 2h-2l-1-2-3 1 .3 2L6 7.2 4 7 3 10l2 1v2l-2 1 1 3 2-.2 1.3 1.5-.3 2 3 1 1-2h2l1 2 3-1-.3-2 1.3-1.5 2 .2 1-3-2-1z',inbox:'M3 13l3-8h12l3 8v6H3zM3 13h5l1 2h6l1-2h5',route:'M6 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM6 15V9a4 4 0 0 1 4-4h4M18 9v6a4 4 0 0 1-4 4h-4'};
+const ic=(n,c='')=>`<svg class="ic ${c}" viewBox="0 0 24 24" aria-hidden="true"><path d="${IC[n]||IC.check}"/></svg>`;
+const MARK=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="18" r="2.2"/><circle cx="18" cy="6" r="2.2"/><path d="M6 15.5V10a4 4 0 0 1 4-4h5.5"/></svg>`;
+
+/* ---------- vehicle drawings ---------- */
+const BODY={
+ sedan:{b:'M12 62Q12 51 26 49L60 46L80 31Q86 27 94 27L128 27Q138 27 146 35L160 47L182 51Q190 53 190 62L190 66Q190 70 186 70L16 70Q12 70 12 66Z',w:['M85 32Q89 30 95 30L110 30L110 46L68 46Z','M115 30L128 30Q136 30 142 37L150 46L115 46Z']},
+ ev:{b:'M12 62Q12 51 28 48L62 45L84 30Q90 26 98 26L126 26Q140 26 150 36L162 46L182 51Q190 54 190 62L190 66Q190 70 186 70L16 70Q12 70 12 66Z',w:['M89 31Q93 29 99 29L112 29L112 45L70 45Z','M117 29L126 29Q138 29 146 38L152 45L117 45Z']},
+ lux:{b:'M8 62Q8 52 22 50L66 47L88 31Q94 27 102 27L136 27Q146 27 154 35L166 47L186 51Q194 53 194 62L194 66Q194 70 190 70L12 70Q8 70 8 66Z',w:['M93 32Q97 30 103 30L118 30L118 46L74 46Z','M123 30L136 30Q144 30 150 37L157 46L123 46Z']},
+ suv:{b:'M12 64Q12 46 28 44L50 42L62 22Q65 18 72 18L150 18Q158 18 162 26L172 42L184 46Q190 48 190 58L190 66Q190 70 186 70L16 70Q12 70 12 66Z',w:['M68 24L104 24L104 41L58 41Z','M109 24L150 24Q155 24 158 30L163 41L109 41Z']},
+ van:{b:'M12 66L12 42Q12 36 18 34L40 23Q46 14 56 14L180 14Q190 14 190 24L190 66Q190 70 186 70L16 70Q12 70 12 66Z',w:['M44 32L58 20L80 20L80 38L36 38Z','M86 20L130 20L130 38L86 38Z','M136 20L182 20L182 38L136 38Z']},
+ bus:{b:'M10 66L10 26Q10 12 24 12L182 12Q192 12 192 22L192 66Q192 70 188 70L14 70Q10 70 10 66Z',w:['M16 20L44 20L44 40L14 40L14 26Q14 20 16 20Z','M50 20L84 20L84 40L50 40Z','M90 20L124 20L124 40L90 40Z','M130 20L164 20L164 40L130 40Z','M170 20L186 20L186 40L170 40Z']}
+};
+function carG(type,col){const t=BODY[type]||BODY.sedan;const wx=type==='bus'?[46,160]:[52,152];
+ return `<ellipse cx="101" cy="80" rx="94" ry="5" fill="#000" opacity=".16"/><path d="${t.b}" fill="${col}"/><path d="M18 56L186 58" stroke="#fff" stroke-opacity=".35" stroke-width="1.5"/>${t.w.map(w=>`<path d="${w}" fill="#cfe3f3" opacity=".92"/>`).join('')}<path d="M184 56h6v5h-6z" fill="#ffe9a8"/><path d="M12 56h5v5h-5z" fill="#e5484d"/>${wx.map(x=>`<circle cx="${x}" cy="70" r="13" fill="#1b1d21"/><circle cx="${x}" cy="70" r="5.5" fill="#b8bcc3"/>`).join('')}${type==='ev'?'<path d="M100 52l-5 8h5l-2 7 7-10h-5l2-5z" fill="#fff" opacity=".85"/>':''}`;}
+const carSVG=(type,col='#23262B')=>`<svg class="carsvg" viewBox="0 0 204 90" aria-hidden="true">${carG(type,col)}</svg>`;
+
+/* ---------- presets ---------- */
+const PRESETS={
+ dubai:{label:'Dubai, UAE',city:'Dubai',currency:'AED',locale:'en-AE',f:1,tax:5,taxLabel:'VAT',phone:'+971 4 555 0100',address:'Business Bay, Dubai, UAE',places:[['Dubai International Airport (DXB)','airport',25.2532,55.3657],['Al Maktoum Airport (DWC)','airport',24.896,55.1614],['Downtown Dubai','district',25.1972,55.2744],['Dubai Mall','landmark',25.1985,55.2796],['Dubai Marina','district',25.0805,55.1403],['JBR Beach','landmark',25.078,55.134],['Palm Jumeirah','district',25.1124,55.139],['Business Bay','district',25.186,55.265],['Deira City Centre','landmark',25.2522,55.3304],['Expo City Dubai','landmark',24.9631,55.1474],['Abu Dhabi Corniche','city',24.4764,54.3705],['Sharjah City','city',25.3463,55.4209]]},
+ london:{label:'London, UK',city:'London',currency:'GBP',locale:'en-GB',f:.5,tax:20,taxLabel:'VAT',phone:'+44 20 7946 0100',address:'Canary Wharf, London, UK',places:[['Heathrow Airport (LHR)','airport',51.47,-0.4543],['Gatwick Airport (LGW)','airport',51.1537,-0.1821],['London City Airport (LCY)','airport',51.5048,0.0495],['Westminster','district',51.4995,-0.1248],['Canary Wharf','district',51.5054,-0.0235],["King's Cross St Pancras",'station',51.5308,-0.1238],['Paddington Station','station',51.5154,-0.1755],['Wembley Stadium','landmark',51.556,-0.2795],['Oxford','city',51.752,-1.2577],['Cambridge','city',52.2053,0.1218]]},
+ chennai:{label:'Chennai, India',city:'Chennai',currency:'INR',locale:'en-IN',f:8,tax:5,taxLabel:'GST',phone:'+91 44 4000 0100',address:'Guindy, Chennai, India',places:[['Chennai Airport (MAA)','airport',12.9941,80.1709],['Chennai Central','station',13.0827,80.2757],['T. Nagar','district',13.0418,80.2341],['Anna Nagar','district',13.085,80.2101],['OMR Sholinganallur','district',12.901,80.2279],['Guindy','district',13.0067,80.2206],['Marina Beach','landmark',13.05,80.2824],['Mahabalipuram','city',12.6208,80.1945],['Puducherry','city',11.9416,79.8083],['Vellore','city',12.9165,79.1325]]}
+};
+const CATS=[
+ ['eco','Economy sedan','sedan',4,2,25,2.2,70,50,'Toyota Camry or similar. Comfortable everyday rides at fixed prices.'],
+ ['biz','Business sedan','lux',3,2,40,3.2,110,90,'Lexus ES or similar. Quiet cabin, bottled water, suited drivers.'],
+ ['suv','SUV','suv',6,4,45,3.5,120,100,'Toyota Land Cruiser or similar. Room for families and extra luggage.'],
+ ['van','Van / MPV','van',7,6,55,4,140,120,'Kia Carnival or similar. Sliding doors, space for groups and bags.'],
+ ['lux','First class','lux',3,2,90,6.5,250,220,'Mercedes S-Class or similar. Our most refined ride for VIPs.'],
+ ['bus','Minibus','bus',14,12,120,7,260,300,'Toyota Coaster or similar. Group transfers, events and tours.'],
+ ['ev','Electric','ev',4,2,28,2.4,80,55,'Tesla Model 3 or similar. Zero tailpipe emissions, same fixed fare.']];
+const nice=v=>v<20?Math.round(v*100)/100:Math.round(v);
+function applyPreset(s,key){const P=PRESETS[key],f=P.f;
+ Object.assign(s.brand,{city:P.city,currency:P.currency,locale:P.locale,phone:P.phone,address:P.address,whatsapp:P.phone});
+ Object.assign(s.pricing,{tax:P.tax,taxLabel:P.taxLabel,airportFee:nice(25*f)});
+ s.places=P.places.map(([name,type,lat,lng],i)=>({id:'pl'+i,name,type,lat,lng}));
+ const old=Object.fromEntries((s.categories||[]).map(c=>[c.id,c]));
+ s.categories=CATS.map(([id,name,type,seats,bags,base,perKm,perHour,minFare,desc])=>({id,name:old[id]?.name||name,type,seats,bags,base:nice(base*f),perKm:nice(perKm*f),perHour:nice(perHour*f),minFare:nice(minFare*f),desc:old[id]?.desc||desc,active:old[id]?old[id].active:true}));
+ s.pricing.extras=[{id:'seat',name:'Child seat',price:nice(20*f)},{id:'meet',name:'Meet & greet with name sign',price:nice(40*f)},{id:'stop',name:'Extra stop on the way',price:nice(25*f)}];
+ s.pricing.promos=[{id:'pr1',code:'WELCOME10',kind:'pct',value:10,active:true,note:'10% off a first ride'},{id:'pr2',code:'AIRPORT',kind:'flat',value:nice(15*f),active:true,note:'Flat discount on airport trips'},{id:'pr3',code:'SUMMER',kind:'pct',value:15,active:false,note:'Seasonal offer, paused'}];
+ s.preset=key;}
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function seed(key='dubai'){
+ const s={v:1,brand:{name:'Rideora',tagline:'Cabs, vans and chauffeurs, booked in a minute',primary:'#FFC62B',email:'bookings@rideora.example'},
+ content:{heroTitle:'Rides you can book, track and trust.',heroSub:'Fixed fares, professional drivers and a car for every trip, from a quick airport run to a full day with a chauffeur.',about:'We are a licensed private-hire company with a modern fleet and drivers who know the city. Every fare is agreed before you travel.',
+  features:[{id:'f1',icon:'tag',t:'Fixed fares',d:'The price you see is the price you pay. No surge.'},{id:'f2',icon:'plane',t:'Flight tracking',d:'Airport pickups follow your actual landing time.'},{id:'f3',icon:'shield',t:'Vetted drivers',d:'Licensed, background-checked and rated after every trip.'},{id:'f4',icon:'headset',t:'Support around the clock',d:'Call, chat or email us any time, day or night.'}],
+  services:[{id:'s1',icon:'plane',t:'Airport transfers',d:'Meet and greet at arrivals, help with bags and a driver who waits if your flight is late.'},{id:'s2',icon:'city',t:'City rides',d:'Point-to-point trips across the city at a fare fixed when you book.'},{id:'s3',icon:'clock',t:'Chauffeur by the hour',d:'Keep a car and driver for meetings, shopping or a day out. Minimum two hours.'},{id:'s4',icon:'road',t:'Intercity trips',d:'Comfortable long-distance rides between cities, with return options.'},{id:'s5',icon:'brief',t:'Corporate accounts',d:'Monthly invoicing, cost centres and priority booking for your team.'},{id:'s6',icon:'group',t:'Events and groups',d:'Vans and minibuses for weddings, conferences, tours and teams.'}],
+  faq:[{id:'q1',q:'How is my fare calculated?',a:'Fares are based on distance and vehicle type, or on hours for chauffeur bookings. Airport fees, night surcharges, extras and tax are shown line by line before you confirm.'},{id:'q2',q:'Can I cancel or change my booking?',a:'Yes. Use Manage booking with your reference and email to cancel. Contact us to change times or addresses and we will update the booking.'},{id:'q3',q:'What happens if my flight is delayed?',a:'Add your flight number when you book. Your driver tracks the flight and adjusts the pickup time.'},{id:'q4',q:'Do you provide child seats?',a:'Yes. Add child seats as an extra during booking and they will be fitted before pickup.'},{id:'q5',q:'How can I pay?',a:'Pay online by card when you book, pay the driver in cash or by card at the end of the trip, or use a corporate account.'},{id:'q6',q:'How much luggage can I bring?',a:'Each vehicle shows its seats and bag capacity. Choose a larger vehicle if you have more bags, or contact us for oversized items.'}]},
+ pricing:{nightPct:20,nightStart:22,nightEnd:6,roundDisc:10,minHours:2,kmPerHour:20},
+ categories:[],places:[],vehicles:[],drivers:[],bookings:[],enquiries:[],admin:{email:'admin@rideora.demo',pass:'demo1234'}};
+ applyPreset(s,key);
+ const VM=[['Toyota Camry','eco','White'],['Hyundai Sonata','eco','Silver'],['Lexus ES 300h','biz','Black'],['Lexus ES 300h','biz','Graphite'],['Toyota Land Cruiser','suv','White'],['GMC Yukon','suv','Black'],['Kia Carnival','van','Silver'],['Mercedes V-Class','van','Black'],['Mercedes S-Class','lux','Black'],['Toyota Coaster','bus','White'],['Tesla Model 3','ev','White'],['Tesla Model Y','ev','Blue']];
+ s.vehicles=VM.map(([model,cat,color],i)=>({id:'v'+i,plate:['A','B','C','D','K','L','M','N','P','R','S','T'][i]+' '+(20000+i*3571%79999),model,cat,color,year:2022+i%4,status:i===8?'Maintenance':'Available'}));
+ const DN=['Omar Haddad','Priya Nair','James Carter','Arjun Mehta','Fatima Zahra','Daniel Kim','Sofia Rossi','Kwame Mensah','Ravi Kumar','Elena Petrova'];
+ s.drivers=DN.map((name,i)=>({id:'d'+i,name,phone:'+00 5'+(i+1)+' 210 '+(3000+i*137),licence:'DL-'+(840000+i*7919),languages:['English, Arabic','English, Hindi, Tamil','English','English, Hindi','English, Arabic, French','English, Korean','English, Italian','English, French','English, Tamil','English, Russian'][i],rating:+(4.6+((i*7)%5)/10).toFixed(1),status:i===9?'Off duty':'Available'}));
+ const r=rng(42),pick=a=>a[Math.floor(r()*a.length)];
+ const CUS=[['Emma Wilson','emma.wilson'],['Rahul Sharma','rahul.s'],['Li Wei','liwei'],['Ahmed Al Mansoori','ahmed.m'],['Sarah Johnson','sarahj'],['Carlos Mendes','carlos.mendes'],['Aisha Khan','aisha.k'],['Tom Becker','tbecker'],['Meera Iyer','meera.iyer'],['Yuki Tanaka','yuki.t'],['Olivia Brown','olivia.b'],['Hassan Ali','hassan.ali']];
+ for(let d=-20;d<=6;d++){const n=1+Math.floor(r()*(d>0?3:4));
+  for(let k=0;k<n;k++){const type=pick(['oneway','oneway','airport','airport','round','hourly']);
+   const air=s.places.filter(p=>p.type==='airport'),oth=s.places.filter(p=>p.type!=='airport');
+   let a=pick(oth),b=pick(oth.filter(p=>p!==a));if(type==='airport'){if(r()<.5)a=pick(air);else b=pick(air)}
+   const pax=1+Math.floor(r()*4),cat=pick(s.categories.filter(c=>c.seats>=pax&&c.id!=='bus'));
+   const time=pad(5+Math.floor(r()*18))+':'+pick(['00','15','30','45']);
+   const q={type,pickup:a.name,drop:type==='hourly'?'':b.name,km:type==='hourly'?0:dist(a,b),hours:type==='hourly'?2+Math.floor(r()*5):0,time,extras:r()<.25?{seat:1}:{},promo:r()<.1?'WELCOME10':''};
+   const qt=quote(s,q,cat),c=pick(CUS);
+   let st=d<0?(r()<.88?'Completed':'Cancelled'):d===0?pick(['Completed','On trip','Assigned','Confirmed']):pick(['Pending','Confirmed','Confirmed','Assigned']);
+   const dr=['Assigned','On trip','Completed'].includes(st)?pick(s.drivers.slice(0,9)):null,vh=dr?s.vehicles.find(v=>v.cat===cat.id)||null:null;
+   const created=addDays(d-1-Math.floor(r()*4));
+   s.bookings.push({ref:mkRef(r),created:created.toISOString(),date:ymd(addDays(d)),time,rdate:type==='round'?ymd(addDays(d)):'',rtime:type==='round'?pad(Math.min(23,+time.slice(0,2)+4))+':00':'',...q,pax,bags:Math.min(cat.bags,Math.floor(r()*3)),cat:cat.id,lines:qt.lines,total:qt.total,name:c[0],email:c[1]+'@example.com',phone:'+00 50 '+(1000000+Math.floor(r()*8999999)),flight:type==='airport'?pick(['EK 203','BA 107','QR 1018','AI 937','LH 630']):'',notes:'',pay:pick(['card','cash','account']),status:st,driver:dr?.id||'',vehicle:vh?.id||'',log:[{t:created.toISOString(),m:'Booked online'}]});}}
+ s.enquiries=[{id:'e1',t:addDays(-1).toISOString(),name:'Grace Lee',email:'grace.lee@example.com',msg:'Can you quote a 12-seat minibus for a conference shuttle next month, three days, hotel to venue?',status:'New'},{id:'e2',t:addDays(-4).toISOString(),name:'Mohammed Saleh',email:'m.saleh@example.com',msg:'We would like a corporate account for about 40 rides a month. Who should I speak to?',status:'Handled'}];
+ return s;}
+function mkRef(r=Math.random){const A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let o='RD-';for(let i=0;i<6;i++)o+=A[Math.floor(r()*A.length)];return o}
+function dist(a,b){if(!a||!b)return 0;const R=6371,t=x=>x*Math.PI/180,dl=t(b.lat-a.lat),dn=t(b.lng-a.lng);const h=Math.sin(dl/2)**2+Math.cos(t(a.lat))*Math.cos(t(b.lat))*Math.sin(dn/2)**2;return Math.max(2,Math.round(2*R*Math.asin(Math.sqrt(h))*1.3))}
+const findPlace=n=>S.places.find(p=>p.name.toLowerCase()===String(n||'').trim().toLowerCase());
+const isAir=(s,n)=>{const p=s.places.find(p=>p.name.toLowerCase()===String(n||'').trim().toLowerCase());return !!p&&p.type==='airport'};
+
+/* ---------- state ---------- */
+let S;
+try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){S=null}
+if(!S||S.v!==1)S=seed();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+save();
+function money(n){const b=S.brand;try{return new Intl.NumberFormat(b.locale||'en-US',{style:'currency',currency:b.currency||'USD',minimumFractionDigits:Number.isInteger(Math.round(n*100)/100)?0:2,maximumFractionDigits:Number.isInteger(Math.round(n*100)/100)?0:2}).format(n)}catch(e){return (b.currency||'')+' '+(+n).toFixed(2)}}
+function quote(s,q,cat){const P=s.pricing,L=[];let fare;const m=x=>Math.round(x*100)/100;
+ if(q.type==='hourly'){const h=Math.max(P.minHours,+q.hours||P.minHours);fare=h*cat.perHour;L.push([`${h} hours, up to ${h*P.kmPerHour} km`,fare])}
+ else{const km=Math.max(1,+q.km||0),one=Math.max(cat.minFare,cat.base+cat.perKm*km);L.push([`${km} km trip`,m(one)]);fare=one;
+  if(q.type==='round'){L.push(['Return trip',m(one)]);fare=one*2;if(P.roundDisc>0){const d=-fare*P.roundDisc/100;L.push([`Round-trip saving ${P.roundDisc}%`,m(d)]);fare+=d}}
+  if((q.type==='airport'||isAir(s,q.pickup)||isAir(s,q.drop))&&P.airportFee>0){L.push(['Airport fee',P.airportFee]);fare+=P.airportFee}}
+ const hr=+String(q.time||'12:00').split(':')[0],ns=+P.nightStart,ne=+P.nightEnd;
+ if(P.nightPct>0&&(ns>ne?(hr>=ns||hr<ne):(hr>=ns&&hr<ne))){const n=fare*P.nightPct/100;L.push([`Night surcharge ${P.nightPct}%`,m(n)]);fare+=n}
+ for(const [id,qty] of Object.entries(q.extras||{})){const x=P.extras.find(e=>e.id===id);if(x&&qty>0){L.push([x.name+(qty>1?' × '+qty:''),m(x.price*qty)]);fare+=x.price*qty}}
+ let promoOk=null;if(q.promo){const p=P.promos.find(p=>p.active&&p.code.toUpperCase()===String(q.promo).trim().toUpperCase());if(p){const d=p.kind==='pct'?fare*p.value/100:Math.min(fare,p.value);L.push([`Promo ${p.code}`,m(-d)]);fare-=d;promoOk=p.code}else promoOk=false}
+ if(P.tax>0){const t=fare*P.tax/100;L.push([`${P.taxLabel} ${P.tax}%`,m(t)]);fare+=t}
+ return{lines:L,total:Math.round(fare*100)/100,promoOk}}
+function lum(hex){const h=hex.replace('#','');if(h.length<6)return 1;const c=[0,2,4].map(i=>{let v=parseInt(h.substr(i,2),16)/255;return v<=.03928?v/12.92:((v+.055)/1.055)**2.4});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function applyBrand(){const p=/^#[0-9a-f]{6}$/i.test(S.brand.primary)?S.brand.primary:'#FFC62B';const r=document.documentElement.style;r.setProperty('--p',p);r.setProperty('--onp',lum(p)>.42?'#121417':'#FFFFFF');document.title=(S.brand.name||'Rideora')+' | Book a ride';$('meta[name=theme-color]').setAttribute('content',p)}
+let toastT;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,2600)}
+const catOf=id=>S.categories.find(c=>c.id===id);
+const drvOf=id=>S.drivers.find(d=>d.id===id);
+const vehOf=id=>S.vehicles.find(v=>v.id===id);
+const typeName={oneway:'One way',round:'Round trip',hourly:'By the hour',airport:'Airport transfer'};
+const payName={card:'Card (paid online)',cash:'Pay the driver',account:'Corporate account'};
+const fmtDate=(d,t)=>{try{return new Date(d+'T'+(t||'12:00')).toLocaleDateString(S.brand.locale||'en',{weekday:'short',day:'numeric',month:'short'})+(t?' · '+t:'')}catch(e){return d+' '+t}};
+
+/* ---------- website ---------- */
+let mode='',BK=null;
+const today=()=>ymd(new Date());
+function hero(){const c=S.content,places=S.places.map(p=>`<option value="${esc(p.name)}">`).join(''),t=new Date();t.setHours(t.getHours()+2);
+ const tm=pad(t.getHours())+':'+(t.getMinutes()<30?'30':'00');
+ const opt=(a,b,sel)=>Array.from({length:b-a+1},(_,i)=>`<option${i+a===sel?' selected':''}>${i+a}</option>`).join('');
+ return `<section class="hero" id="top"><div class="wrap">
+ <div class="hero-copy"><h1>${esc(c.heroTitle)}</h1><div><p class="lead">${esc(c.heroSub)}</p><div class="ticks">${c.features.slice(0,3).map(f=>`<span>${ic('check')}${esc(f.t)}</span>`).join('')}</div></div></div>
+ <form class="bk" id="book" novalidate data-form="book">
+  <div class="tabs" role="group" aria-label="Trip type">${[['oneway','One way','route'],['round','Round trip','swap'],['hourly','By the hour','clock'],['airport','Airport','plane']].map(([k,l,i],n)=>`<button type="button" data-act="ttype" data-v="${k}" aria-pressed="${n===0}">${ic(i)}${l}</button>`).join('')}</div>
+  <input type="hidden" name="type" value="oneway">
+  <div class="bk-grid" id="bkg">
+   <label class="fld f-pick"><span>Pickup</span><input name="pickup" list="plc" placeholder="Airport, hotel or address" autocomplete="off" required></label>
+   <button type="button" class="swap" data-act="swap" aria-label="Swap pickup and drop-off">${ic('swap')}</button>
+   <label class="fld f-drop"><span>Drop-off</span><input name="drop" list="plc" placeholder="Where to?" autocomplete="off"></label>
+   <label class="fld f-hours"><span>Hours</span><select name="hours">${opt(S.pricing.minHours,12,3)}</select></label>
+   <label class="fld f-date"><span>Date</span><input type="date" name="date" min="${today()}" value="${ymd(t)}" required></label>
+   <label class="fld f-time"><span>Time</span><input type="time" name="time" value="${tm}" required></label>
+   <label class="fld f-pax"><span>Guests</span><select name="pax">${opt(1,14,1)}</select></label>
+   <label class="fld f-bags"><span>Bags</span><select name="bags">${opt(0,12,1)}</select></label>
+   <button class="btn dark bk-go" type="submit">See prices</button>
+  </div>
+  <div class="bk-ret" id="bkr" hidden><label class="fld"><span>Return date</span><input type="date" name="rdate" min="${today()}" value="${ymd(t)}"></label><label class="fld"><span>Return time</span><input type="time" name="rtime" value="18:00"></label></div>
+  <p class="bk-err" id="bke" hidden role="alert"></p>
+  <datalist id="plc">${places}</datalist>
+ </form></div>
+ ${scene()}</section>`}
+function scene(){let bl='';for(let i=0;i<34;i++){const x=i*38-10,w=26+(i*37%22),h=50+(i*53%120);bl+=`<rect x="${x}" y="${190-h}" width="${w}" height="${h}" rx="3"/>`}
+ let bf='';for(let i=0;i<24;i++){const x=i*54+8,w=34+(i*29%26),h=30+(i*41%80);bf+=`<rect x="${x}" y="${190-h}" width="${w}" height="${h}" rx="3"/>`}
+ return `<svg class="scene" viewBox="0 0 1260 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+ <g fill="#000" opacity=".07">${bl}</g><g fill="#000" opacity=".09">${bf}</g>
+ <rect y="188" width="1260" height="6" fill="#fff" opacity=".55"/><rect y="194" width="1260" height="66" fill="#1E2025"/>
+ <line class="lane" x1="0" y1="227" x2="1260" y2="227" stroke="#fff" stroke-opacity=".55" stroke-width="4"/>
+ <g transform="translate(150 150) scale(.62)">${carG('van','#F4F5F7')}</g>
+ <g transform="translate(700 104) scale(1.12)">${carG('lux','#16181C')}</g>
+ <g transform="translate(1030 146) scale(.66)">${carG('suv','#FFFFFF')}</g></svg>`}
+function renderSite(){applyBrand();const b=S.brand,c=S.content,act=S.categories.filter(c=>c.active);
+ const minFrom=cat=>Math.min(cat.minFare,cat.base+cat.perKm*5);
+ $('#app').innerHTML=`<div class="demo">Live demo of <b>Rideora</b> by Fascinora. Bookings stay in this browser. <a href="#admin">Open the CMS portal →</a></div>
+ <header class="top"><div class="wrap"><a class="brand" href="#top"><span class="mark">${MARK}</span>${esc(b.name)}</a>
+ <nav class="nav" id="nav"><a href="#services">Services</a><a href="#fleet">Fleet</a><a href="#how">How it works</a><a href="#cover">Coverage</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav>
+ <div class="row"><button class="btn ghost sm hide-sm" data-act="manage">Manage booking</button><a class="btn dark sm" href="#book">Book a ride</a><button class="menu" data-act="menu" aria-label="Open menu" aria-expanded="false">${ic('menu')}</button></div></div></header>
+ <main>${hero()}
+ <section class="sec"><div class="wrap grid4">${c.features.map(f=>`<div class="feat"><span class="bubble">${ic(f.icon)}</span><div><h3>${esc(f.t)}</h3><p>${esc(f.d)}</p></div></div>`).join('')}</div></section>
+ <section class="sec soft" id="services"><div class="wrap"><div class="sh"><h2>One booking site for every kind of trip.</h2><p>${esc(c.about)}</p></div>
+ <div class="grid3">${c.services.map(s=>`<article class="svc"><span class="bubble">${ic(s.icon)}</span><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p></article>`).join('')}</div></div></section>
+ <section class="sec" id="fleet"><div class="wrap"><div class="sh"><h2>Pick the car that fits the trip.</h2><p>Every category has a fixed fare formula. You see the full price before you book.</p></div>
+ <div class="fleet">${act.map(k=>`<article class="car"><div class="pic">${carSVG(k.type)}</div><div class="bd"><h3>${esc(k.name)}</h3><div class="specs"><span>${ic('user')}${k.seats} guests</span><span>${ic('bag')}${k.bags} bags</span></div><p>${esc(k.desc)}</p><p class="from">From <b>${money(minFrom(k))}</b> · ${money(k.perKm)}/km · ${money(k.perHour)}/hour</p></div></article>`).join('')}</div></div></section>
+ <section class="sec soft" id="how"><div class="wrap"><div class="sh"><h2>Booked in under a minute.</h2></div><div class="steps">
+ <div class="step"><span class="bubble">${ic('pin')}</span><h3>Tell us the trip</h3><p>Pickup, drop-off, date and guests. Choose one way, round trip, hourly or airport.</p></div>
+ <div class="step"><span class="bubble">${ic('car')}</span><h3>Choose your car</h3><p>Compare categories with the full fixed fare, including tax and extras.</p></div>
+ <div class="step"><span class="bubble">${ic('ticket')}</span><h3>Ride and relax</h3><p>Get a booking reference instantly. Your driver details follow before pickup.</p></div></div></div></section>
+ <section class="sec" id="cover"><div class="wrap cov"><div class="sh" style="margin:0"><h2>Serving ${esc(b.city||'the city')} and beyond.</h2><p>Popular pickups and destinations. Any other address works too, and our team confirms the fare.</p></div>
+ <div class="chips">${S.places.map(p=>`<span class="chip">${ic(p.type==='airport'?'plane':p.type==='city'?'road':'pin')}${esc(p.name)}</span>`).join('')}</div></div></section>
+ <section class="sec soft" id="faq"><div class="wrap"><div class="sh"><h2>Questions, answered.</h2></div><div class="faq">${c.faq.map(f=>`<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('')}</div></div></section>
+ <section class="sec" id="contact"><div class="wrap"><div class="cta"><div><h2>Planning something bigger?</h2><p>Corporate accounts, event transport and long-term hire. Tell us what you need and we reply within one business day.</p>
+ <div class="lines">${b.phone?`<div>${ic('phone')}<span>${esc(b.phone)}</span></div>`:''}${b.email?`<div>${ic('mail')}<span>${esc(b.email)}</span></div>`:''}${b.whatsapp?`<div>${ic('chat')}<span>WhatsApp ${esc(b.whatsapp)}</span></div>`:''}${b.address?`<div>${ic('pin')}<span>${esc(b.address)}</span></div>`:''}</div></div>
+ <form data-form="enq" novalidate><input name="name" placeholder="Your name" required autocomplete="name"><input name="email" type="email" placeholder="Email" required autocomplete="email"><textarea name="msg" rows="4" placeholder="Dates, number of guests, pickup and destination"></textarea><button class="btn p" type="submit">Send enquiry</button><p id="enqm" class="note" style="color:#c9ccd2" hidden></p></form></div></div></section></main>
+ <footer class="foot"><div class="wrap"><span>© ${new Date().getFullYear()} ${esc(b.name)}. ${esc(b.tagline||'')}</span><span class="row"><button class="lnk" data-act="manage" style="color:inherit;padding:0">Manage booking</button><a href="#admin">CMS login</a><a href="https://fascinora.com/products/">Powered by Fascinora</a></span></div></footer>`;}
+
+/* booking flow */
+function readBook(f){const v=n=>f.elements[n]?.value.trim()||'';return{type:v('type'),pickup:v('pickup'),drop:v('drop'),date:v('date'),time:v('time'),rdate:v('rdate'),rtime:v('rtime'),hours:+v('hours'),pax:+v('pax'),bags:+v('bags')}}
+function startBooking(f){const q=readBook(f),e=$('#bke');let err='';
+ if(!q.pickup)err='Please enter a pickup location.';else if(q.type!=='hourly'&&!q.drop)err='Please enter a drop-off location.';else if(q.type!=='hourly'&&q.pickup.toLowerCase()===q.drop.toLowerCase())err='Pickup and drop-off are the same.';
+ else if(!q.date||q.date<today())err='Please choose today or a later date.';else if(!q.time)err='Please choose a pickup time.';
+ else if(q.date===today()&&q.time<pad(new Date().getHours())+':'+pad(new Date().getMinutes()))err='That time has already passed today.';
+ else if(q.type==='round'&&(q.rdate+q.rtime)<=(q.date+q.time))err='The return must be after the outward trip.';
+ else if(q.type==='airport'&&!isAir(S,q.pickup)&&!isAir(S,q.drop))err='For an airport transfer, choose an airport as pickup or drop-off.';
+ if(err){e.textContent=err;e.hidden=false;return}e.hidden=true;
+ const a=findPlace(q.pickup),b=findPlace(q.drop);q.kmKnown=q.type==='hourly'||(!!a&&!!b);q.km=q.type==='hourly'?0:(q.kmKnown?dist(a,b):15);q.extras={};q.promo='';
+ BK={q,step:'veh',cat:null,c:{name:'',email:'',phone:'',flight:'',notes:'',pay:'card'}};renderSheet()}
+function tripLine(q){return `<div class="trip"><span><b>${typeName[q.type]}</b></span><span>${esc(q.pickup)}${q.type!=='hourly'?' → '+esc(q.drop):''}</span><span>${fmtDate(q.date,q.time)}</span>${q.type==='round'?`<span>Return ${fmtDate(q.rdate,q.rtime)}</span>`:''}${q.type==='hourly'?`<span>${q.hours} hours</span>`:`<span>${q.km} km${q.kmKnown?'':' (estimate)'}</span>`}<span>${q.pax} guest${q.pax>1?'s':''} · ${q.bags} bag${q.bags===1?'':'s'}</span></div>`}
+function renderSheet(){if(!BK){$('#layer').innerHTML='';document.body.style.overflow='';return}
+ const q=BK.q,cat=catOf(BK.cat),qt=cat?quote(S,q,cat):null;let h='',title='',sub='',foot='';
+ if(BK.step==='veh'){title='Choose your vehicle';sub='Step 1 of 2';
+  const fit=S.categories.filter(c=>c.active&&c.seats>=q.pax&&c.bags>=q.bags);
+  h=tripLine(q)+(q.kmKnown?'':`<div class="kmrow"><div style="flex:1;min-width:200px">One of these addresses isn't on our map yet, so we've estimated the distance. Adjust it if you know it; our team confirms the final fare.</div><label class="fld"><span>Distance, km</span><input type="number" min="1" max="2000" value="${q.km}" data-act-input="km"></label></div>`)+
+  (fit.length?`<div class="vlist">${fit.map(c=>{const t=quote(S,q,c);return `<button type="button" class="vopt" data-act="pickcat" data-id="${c.id}" aria-pressed="${BK.cat===c.id}">${carSVG(c.type)}<div><h3>${esc(c.name)}</h3><p>${esc(c.desc)}</p><div class="specs"><span>${ic('user')}${c.seats}</span><span>${ic('bag')}${c.bags}</span></div></div><div class="pr">${money(t.total)}<small>total, incl. ${esc(S.pricing.taxLabel)}</small></div></button>`}).join('')}</div>`:`<div class="empty">No vehicle fits ${q.pax} guests and ${q.bags} bags. Reduce bags or guests, or contact us for a group quote.</div>`);
+  foot=`<span class="tot">${cat?'Selected: '+esc(cat.name)+`<b>${money(qt.total)}</b>`:'Select a vehicle to continue'}</span><button class="btn dark" data-act="tostep" data-v="det"${cat?'':' disabled'}>Continue</button>`}
+ else if(BK.step==='det'){title='Your details';sub='Step 2 of 2 · '+esc(cat.name);const c=BK.c,air=q.type==='airport'||isAir(S,q.pickup)||isAir(S,q.drop);
+  h=tripLine(q)+`<div class="det"><form id="cf" class="form" data-form="cust" novalidate>
+  <label class="fl"><span>Full name</span><input name="name" value="${esc(c.name)}" autocomplete="name" required></label>
+  <label class="fl"><span>Mobile number</span><input name="phone" type="tel" value="${esc(c.phone)}" autocomplete="tel" placeholder="+ country code" required></label>
+  <label class="fl wide"><span>Email for confirmation</span><input name="email" type="email" value="${esc(c.email)}" autocomplete="email" required></label>
+  ${air?`<label class="fl"><span>Flight number</span><input name="flight" value="${esc(c.flight)}" placeholder="e.g. EK 203"></label>`:''}
+  <label class="fl ${air?'':'wide'}"><span>Note for the driver</span><input name="notes" value="${esc(c.notes)}" placeholder="Gate, building, landmark"></label>
+  <div class="wide"><p class="h4">Extras</p>${S.pricing.extras.map(x=>`<div class="ex"><div><b>${esc(x.name)}</b><small>${money(x.price)} each</small></div><div class="qty"><button type="button" data-act="exq" data-id="${x.id}" data-d="-1" aria-label="Fewer">−</button><output>${q.extras[x.id]||0}</output><button type="button" data-act="exq" data-id="${x.id}" data-d="1" aria-label="More">+</button></div></div>`).join('')}
+  <p class="h4">Payment</p><div class="pays">${Object.entries(payName).map(([k,l])=>`<label class="pay"><input type="radio" name="pay" value="${k}"${c.pay===k?' checked':''}><span><b>${l}</b><small>${k==='card'?'Simulated in this demo. No card details are collected.':k==='cash'?'Cash or card to the driver at the end of the trip.':'Billed monthly to your company. Approved accounts only.'}</small></span></label>`).join('')}</div></div>
+  <p class="errmsg wide" id="cfe" hidden role="alert"></p></form>
+  <aside class="sum"><h3>Fare breakdown</h3>${qt.lines.map(([l,v])=>`<div class="bl"><span>${esc(l)}</span><span>${money(v)}</span></div>`).join('')}<div class="bl tot"><span>Total</span><span>${money(qt.total)}</span></div>
+  <div class="promo"><input id="promo" placeholder="Promo code" value="${esc(q.promo)}" aria-label="Promo code"><button class="btn ghost sm" type="button" data-act="promo">Apply</button></div>
+  ${qt.promoOk?`<p class="okmsg">Code ${esc(qt.promoOk)} applied.</p>`:qt.promoOk===false?'<p class="errmsg">That code is not valid.</p>':''}<p class="note">Fixed fare. Waiting time beyond the free allowance may be charged.</p></aside></div>`;
+  foot=`<button class="btn ghost" data-act="tostep" data-v="veh">Back</button><span class="tot" style="text-align:right">Total<b>${money(qt.total)}</b></span><button class="btn p" data-act="confirm">Confirm booking</button>`}
+ else if(BK.step==='done'){const b=S.bookings.find(x=>x.ref===BK.ref);title='Booking received';sub=b.status==='Confirmed'?'Paid and confirmed':'We will confirm shortly';
+  h=`<div class="done"><div class="big">${ic('check')}</div><h2>Thank you, ${esc(b.name.split(' ')[0])}.</h2><p class="note">Your booking reference</p><p class="ref">${b.ref}</p><p class="note">A confirmation would be sent to ${esc(b.email)} in the live product. Keep this reference to manage your booking.</p>${bookingKV(b)}</div>`;
+  foot=`<button class="btn ghost" data-act="close">Close</button><button class="btn dark" data-act="manage" data-ref="${b.ref}" data-email="${esc(b.email)}">Manage booking</button>`}
+ const fresh=!$('#layer .sheet');$('#layer').innerHTML=`<div class="ov" data-act="ovclose"><div class="sheet${fresh?' anim':''}" role="dialog" aria-modal="true" aria-label="${title}"><div class="sheet-h"><div><h2>${title}</h2><small>${sub}</small></div><button class="x" data-act="close" aria-label="Close">${ic('x')}</button></div><div class="sheet-b">${h}</div><div class="sheet-f">${foot}</div></div></div>`;
+ document.body.style.overflow='hidden'}
+function bookingKV(b){const c=catOf(b.cat),d=drvOf(b.driver),v=vehOf(b.vehicle);
+ return `<dl class="kv"><dt>Trip</dt><dd>${typeName[b.type]}</dd><dt>From</dt><dd>${esc(b.pickup)}</dd>${b.drop?`<dt>To</dt><dd>${esc(b.drop)}</dd>`:''}<dt>When</dt><dd>${fmtDate(b.date,b.time)}${b.type==='round'?' · return '+fmtDate(b.rdate,b.rtime):''}${b.type==='hourly'?' · '+b.hours+' hours':''}</dd><dt>Vehicle</dt><dd>${esc(c?.name||b.cat)}${v?' · '+esc(v.model)+' '+esc(v.plate):''}</dd>${d?`<dt>Driver</dt><dd>${esc(d.name)} · ${esc(d.phone)}</dd>`:''}<dt>Guests</dt><dd>${b.pax} · ${b.bags} bags</dd><dt>Payment</dt><dd>${payName[b.pay]}</dd><dt>Total</dt><dd>${money(b.total)}</dd><dt>Status</dt><dd>${badge(b.status)}</dd></dl>`}
+function saveCust(){const f=$('#cf');if(!f)return;['name','email','phone','flight','notes'].forEach(k=>{if(f.elements[k])BK.c[k]=f.elements[k].value.trim()});const p=f.querySelector('input[name=pay]:checked');if(p)BK.c.pay=p.value}
+function confirmBooking(){saveCust();const c=BK.c,e=$('#cfe');let err='';
+ if(c.name.length<2)err='Please enter your full name.';else if(!/^\+?[\d\s()-]{7,}$/.test(c.phone))err='Please enter a valid mobile number with country code.';else if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(c.email))err='Please enter a valid email address.';
+ if(err){e.textContent=err;e.hidden=false;e.scrollIntoView({block:'nearest'});return}
+ const q=BK.q,cat=catOf(BK.cat),qt=quote(S,q,cat);let ref;do{ref=mkRef()}while(S.bookings.some(b=>b.ref===ref));
+ const now=new Date().toISOString(),st=c.pay==='card'?'Confirmed':'Pending';
+ S.bookings.push({ref,created:now,type:q.type,pickup:q.pickup,drop:q.type==='hourly'?'':q.drop,date:q.date,time:q.time,rdate:q.type==='round'?q.rdate:'',rtime:q.type==='round'?q.rtime:'',hours:q.type==='hourly'?q.hours:0,km:q.km,pax:q.pax,bags:q.bags,cat:cat.id,extras:{...q.extras},promo:qt.promoOk||'',lines:qt.lines,total:qt.total,name:c.name,email:c.email,phone:c.phone,flight:c.flight||'',notes:c.notes||'',pay:c.pay,status:st,driver:'',vehicle:'',log:[{t:now,m:'Booked online'+(c.pay==='card'?' and paid by card':'')}]});
+ save();BK.step='done';BK.ref=ref;renderSheet()}
+function manageSheet(ref='',email=''){BK=null;const b=ref?S.bookings.find(x=>x.ref===ref.toUpperCase().trim()&&x.email.toLowerCase()===email.toLowerCase().trim()):null;let res='';
+ if(ref&&!b)res='<p class="errmsg">We could not find a booking with that reference and email.</p>';
+ if(b){const i=STAT.indexOf(b.status);res=b.status==='Cancelled'?`<div style="margin-top:18px">${badge('Cancelled')} <span class="note">This booking was cancelled.</span></div>${bookingKV(b)}`:`<div class="tl">${STAT.slice(0,5).map((s,k)=>`<div class="${k<=i?'on':''}">${s}</div>`).join('')}</div>${bookingKV(b)}${['Pending','Confirmed','Assigned'].includes(b.status)?`<button class="btn danger" data-act="ccancel" data-ref="${b.ref}" data-email="${esc(b.email)}">Cancel this booking</button>`:''}`}
+ $('#layer').innerHTML=`<div class="ov" data-act="ovclose"><div class="sheet" style="width:min(620px,100%)" role="dialog" aria-modal="true" aria-label="Manage booking"><div class="sheet-h"><div><h2>Manage booking</h2><small>Find your trip with its reference and email</small></div><button class="x" data-act="close" aria-label="Close">${ic('x')}</button></div><div class="sheet-b">
+ <form class="form" data-form="find" novalidate><label class="fl"><span>Booking reference</span><input name="ref" value="${esc(ref)}" placeholder="RD-XXXXXX" style="text-transform:uppercase" required></label><label class="fl"><span>Email</span><input name="email" type="email" value="${esc(email)}" required></label><button class="btn dark wide" type="submit">Find booking</button></form>${res}
+ ${!ref?`<p class="note" style="margin-top:16px">Try a sample: ${S.bookings.filter(b=>b.date>=today()&&b.status!=='Cancelled').slice(0,1).map(b=>`<b>${b.ref}</b> with <b>${esc(b.email)}</b>`).join('')}</p>`:''}</div></div></div>`;
+ document.body.style.overflow='hidden'}
+
+/* ---------- admin ---------- */
+let AV='dash',authed=false;try{authed=sessionStorage.getItem('rideora.auth')==='1'}catch(e){}
+const NAV=[['dash','Dashboard','grid'],['bookings','Bookings','list'],['dispatch','Dispatch','kan'],['enquiries','Enquiries','inbox'],['vehicles','Vehicles','car'],['drivers','Drivers','id'],['pricing','Fleet & pricing','money'],['promos','Promotions','tag'],['places','Places','pin'],['content','Website content','doc'],['brand','Branding','brush'],['settings','Settings','gear']];
+const CRUD={
+ vehicles:{path:'vehicles',name:'vehicle',cols:[['plate','Plate'],['model','Model',v=>v.model+`<small>${esc(v.color||'')} · ${v.year||''}</small>`],['cat','Category',v=>esc(catOf(v.cat)?.name||v.cat)],['status','Status',v=>badge(v.status)]],fields:[['plate','Plate number','text'],['model','Make and model','text'],['cat','Category','select',()=>S.categories.map(c=>[c.id,c.name])],['color','Colour','text'],['year','Year','number'],['status','Status','select',[['Available','Available'],['On trip','On trip'],['Maintenance','Maintenance']]]]},
+ drivers:{path:'drivers',name:'driver',cols:[['name','Name',d=>esc(d.name)+`<small>${esc(d.languages||'')}</small>`],['phone','Phone'],['licence','Licence'],['rating','Rating',d=>'★ '+d.rating],['status','Status',d=>badge(d.status)]],fields:[['name','Full name','text'],['phone','Phone','text'],['licence','Licence number','text'],['languages','Languages','text'],['rating','Rating','number'],['status','Status','select',[['Available','Available'],['On trip','On trip'],['Off duty','Off duty']]]]},
+ categories:{path:'categories',name:'vehicle category',cols:[['name','Category',c=>esc(c.name)+`<small>${c.seats} guests · ${c.bags} bags</small>`],['base','Base',c=>money(c.base),'num'],['perKm','Per km',c=>money(c.perKm),'num'],['perHour','Per hour',c=>money(c.perHour),'num'],['minFare','Minimum',c=>money(c.minFare),'num'],['active','Status',c=>badge(c.active?'Active':'Inactive')]],fields:[['name','Name','text'],['type','Illustration','select',[['sedan','Sedan'],['lux','Executive sedan'],['suv','SUV'],['van','Van / MPV'],['bus','Minibus'],['ev','Electric']]],['seats','Guests','number'],['bags','Bags','number'],['base','Base fare','number'],['perKm','Per km','number'],['perHour','Per hour','number'],['minFare','Minimum fare','number'],['desc','Description','textarea'],['active','Show on website','check']]},
+ extras:{path:'pricing.extras',name:'extra',cols:[['name','Extra'],['price','Price',x=>money(x.price),'num']],fields:[['name','Name','text'],['price','Price','number']]},
+ promos:{path:'pricing.promos',name:'promo code',cols:[['code','Code',p=>`<b>${esc(p.code)}</b><small>${esc(p.note||'')}</small>`],['value','Discount',p=>p.kind==='pct'?p.value+'%':money(p.value),'num'],['used','Used',p=>S.bookings.filter(b=>b.promo===p.code).length,'num'],['active','Status',p=>badge(p.active?'Active':'Inactive')]],fields:[['code','Code','text'],['kind','Type','select',[['pct','Percentage'],['flat','Fixed amount']]],['value','Value','number'],['note','Internal note','text'],['active','Active','check']]},
+ places:{path:'places',name:'place',cols:[['name','Place'],['type','Type',p=>esc(p.type)],['lat','Coordinates',p=>(+p.lat).toFixed(4)+', '+(+p.lng).toFixed(4),'num']],fields:[['name','Name','text'],['type','Type','select',[['airport','Airport'],['station','Station'],['district','District'],['landmark','Landmark'],['hotel','Hotel'],['city','City']]],['lat','Latitude','number'],['lng','Longitude','number']]},
+ features:{path:'content.features',name:'highlight',cols:[['t','Highlight',f=>`<b>${esc(f.t)}</b><small>${esc(f.d)}</small>`]],fields:[['icon','Icon','select',()=>ICONSEL],['t','Title','text'],['d','Text','textarea']]},
+ services:{path:'content.services',name:'service',cols:[['t','Service',f=>`<b>${esc(f.t)}</b><small>${esc(f.d)}</small>`]],fields:[['icon','Icon','select',()=>ICONSEL],['t','Title','text'],['d','Description','textarea']]},
+ faq:{path:'content.faq',name:'question',cols:[['q','Question',f=>`<b>${esc(f.q)}</b><small>${esc(f.a)}</small>`]],fields:[['q','Question','text'],['a','Answer','textarea']]}};
+const ICONSEL=[['plane','Plane'],['city','City'],['clock','Clock'],['road','Road'],['brief','Briefcase'],['group','Group'],['shield','Shield'],['tag','Price tag'],['headset','Support'],['car','Car'],['pin','Pin'],['check','Tick']];
+const getP=p=>p.split('.').reduce((o,k)=>o[k],S);
+function field([k,label,type,opts],val){
+ if(type==='select'){const o=typeof opts==='function'?opts():opts;return `<label class="fl"><span>${label}</span><select name="${k}">${o.map(([v,t])=>`<option value="${esc(v)}"${String(v)===String(val)?' selected':''}>${esc(t)}</option>`).join('')}</select></label>`}
+ if(type==='textarea')return `<label class="fl wide"><span>${label}</span><textarea name="${k}" rows="3">${esc(val)}</textarea></label>`;
+ if(type==='check')return `<label class="chk wide"><input type="checkbox" name="${k}"${val?' checked':''}><span>${label}</span></label>`;
+ if(type==='color')return `<label class="fl"><span>${label}</span><input type="color" name="${k}" value="${esc(val)}"></label>`;
+ return `<label class="fl"><span>${label}</span><input name="${k}" type="${type==='number'?'number':type==='email'?'email':'text'}"${type==='number'?' step="any"':''} value="${esc(val)}"></label>`}
+function readF(f,fields){const o={};for(const [k,,t] of fields){const el=f.elements[k];if(!el)continue;o[k]=t==='check'?el.checked:t==='number'?(el.value===''?0:+el.value):el.value.trim()}return o}
+function crudTable(key,{title,sub,limit}={}){const C=CRUD[key],rows=getP(C.path);
+ return `<div class="card"><h2><span>${title||''}</span><button class="btn dark sm" data-act="cadd" data-k="${key}">Add ${C.name}</button></h2>${sub?`<p class="sub">${sub}</p>`:''}
+ ${rows.length?`<div style="overflow-x:auto"><table class="tbl stack"><thead><tr>${C.cols.map(c=>`<th class="${c[3]||''}">${c[1]}</th>`).join('')}<th></th></tr></thead><tbody>${rows.map((r,i)=>`<tr>${C.cols.map(c=>`<td class="${c[3]||''}">${c[2]?c[2](r):esc(r[c[0]])}</td>`).join('')}<td class="acts"><button class="lnk" data-act="cedit" data-k="${key}" data-i="${i}">Edit</button><button class="lnk del" data-act="cdel" data-k="${key}" data-i="${i}">Delete</button></td></tr>`).join('')}</tbody></table></div>`:`<div class="empty">Nothing here yet.</div>`}</div>`}
+function crudModal(key,i){const C=CRUD[key],row=i>=0?getP(C.path)[i]:{active:true,status:C.fields.find(f=>f[0]==='status')?.[3]?.[0]?.[0]};
+ modal(`<div class="md-h"><h3>${i>=0?'Edit':'Add'} ${C.name}</h3><button class="x" data-act="mclose" aria-label="Close">${ic('x')}</button></div><form class="form" data-form="crud" data-k="${key}" data-i="${i}" novalidate>${C.fields.map(f=>field(f,row[f[0]]??(f[2]==='select'?'':''))).join('')}<p class="errmsg wide" id="mfe" hidden></p><div class="md-f wide"><button type="button" class="btn ghost" data-act="mclose">Cancel</button><button class="btn dark" type="submit">Save</button></div></form>`)}
+function modal(h,wide){$('#layer').innerHTML=`<div class="md" data-act="mback"><div class="md-c ${wide?'wide':''}" role="dialog" aria-modal="true">${h}</div></div>`;document.body.style.overflow='hidden';setTimeout(()=>$('#layer input,#layer select,#layer textarea')?.focus(),30)}
+function closeLayer(){$('#layer').innerHTML='';document.body.style.overflow='';BK=null}
+let pendingYes=null;function ask(msg,yes,fn){pendingYes=fn;modal(`<div class="md-h"><h3>Are you sure?</h3></div><p>${msg}</p><div class="md-f"><button class="btn ghost" data-act="mclose">Cancel</button><button class="btn danger" data-act="yes">${yes}</button></div>`)}
+
+function renderAdmin(){applyBrand();document.title=(S.brand.name||'Rideora')+' CMS';
+ if(!authed){$('#app').innerHTML=`<div class="login"><form class="card" data-form="login" novalidate><a class="brand" href="#top"><span class="mark">${MARK}</span>${esc(S.brand.name)}</a><h1>Sign in to the CMS</h1><p>Manage bookings, dispatch, fleet, pricing and your website.</p><div class="form" style="grid-template-columns:1fr"><label class="fl"><span>Email</span><input name="email" type="email" value="${esc(S.admin.email)}" autocomplete="username"></label><label class="fl"><span>Password</span><input name="pass" type="password" value="" autocomplete="current-password"></label><p class="errmsg" id="lge" hidden>Email or password is incorrect.</p><button class="btn dark" type="submit">Sign in</button></div><p class="hint">Demo login: <b>${esc(S.admin.email)}</b> / <b>${esc(S.admin.pass)}</b></p><p class="note" style="margin-top:12px"><a href="#top">← Back to website</a></p></form></div>`;return}
+ const nNew=S.bookings.filter(b=>b.status==='Pending').length,nEnq=S.enquiries.filter(e=>e.status==='New').length;
+ const [title,body,actions,sub]=VIEWS[AV]();
+ $('#app').innerHTML=`<div class="adm"><aside class="side"><div class="brand"><span class="mark">${MARK}</span>${esc(S.brand.name)} <small>CMS</small></div><nav aria-label="CMS">${NAV.map(([k,l,i])=>`<button data-act="av" data-v="${k}"${AV===k?' aria-current="page"':''}>${ic(i)}${l}${k==='bookings'&&nNew?`<span class="cnt">${nNew}</span>`:''}${k==='enquiries'&&nEnq?`<span class="cnt">${nEnq}</span>`:''}</button>`).join('')}</nav><div class="side-f"><a href="#top">View website ↗</a><button data-act="logout">Sign out</button></div></aside>
+ <main class="am"><div class="am-h"><div><h1>${title}</h1>${sub?`<p>${sub}</p>`:''}</div><div class="row">${actions||''}</div></div>${body}</main></div>`}
+function kpi(label,val,cur,prev,fmt){const ch=prev?((cur-prev)/prev*100):0;return `<div class="kpi"><span>${label}</span><b>${val}</b>${fmt===false?`<small class="flat">${prev}</small>`:`<small class="${ch>0.5?'up':ch<-0.5?'down':'flat'}">${ch>0.5?'▲':ch<-0.5?'▼':'■'} ${Math.abs(ch).toFixed(0)}% vs previous 7 days</small>`}</div>`}
+function bookingRowsC(list){return list.length?`<table class="tbl stack"><thead><tr><th>When</th><th>Trip</th><th>Customer</th><th>Status</th></tr></thead><tbody>${list.map(b=>`<tr class="click" data-act="bopen" data-ref="${b.ref}"><td style="white-space:nowrap">${fmtDate(b.date,b.time)}<small>${b.ref}</small></td><td>${esc(b.pickup)}${b.drop?`<small>→ ${esc(b.drop)}</small>`:`<small>${b.hours} hours</small>`}</td><td>${esc(b.name)}<small>${esc(catOf(b.cat)?.name||'')} · ${esc(drvOf(b.driver)?.name||'No driver')}</small></td><td>${badge(b.status)}</td></tr>`).join('')}</tbody></table>`:'<div class="empty">No upcoming trips.</div>'}
+function bookingRows(list){return list.length?`<div style="overflow-x:auto"><table class="tbl stack"><thead><tr><th>Reference</th><th>Trip</th><th>When</th><th>Customer</th><th>Vehicle</th><th class="num">Total</th><th>Status</th></tr></thead><tbody>${list.map(b=>`<tr class="click" data-act="bopen" data-ref="${b.ref}"><td><b>${b.ref}</b><small>${typeName[b.type]}</small></td><td>${esc(b.pickup)}${b.drop?`<small>→ ${esc(b.drop)}</small>`:`<small>${b.hours} hours</small>`}</td><td>${fmtDate(b.date,b.time)}</td><td>${esc(b.name)}<small>${esc(b.phone)}</small></td><td>${esc(catOf(b.cat)?.name||b.cat)}<small>${esc(drvOf(b.driver)?.name||'Unassigned')}</small></td><td class="num">${money(b.total)}</td><td>${badge(b.status)}</td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">No bookings match.</div>'}
+let BF={q:'',st:'',when:'upcoming'};
+const sortB=(a,b)=>(a.date+a.time).localeCompare(b.date+b.time);
+function filteredBookings(){const t=today(),q=BF.q.toLowerCase();return S.bookings.filter(b=>(!BF.st||b.status===BF.st)&&(BF.when==='all'||(BF.when==='today'&&b.date===t)||(BF.when==='upcoming'&&b.date>=t)||(BF.when==='past'&&b.date<t))&&(!q||[b.ref,b.name,b.email,b.phone,b.pickup,b.drop].join(' ').toLowerCase().includes(q))).sort(BF.when==='past'?(a,b)=>sortB(b,a):sortB)}
+const VIEWS={
+ dash(){const t=today(),d7=ymd(addDays(-6)),p0=ymd(addDays(-13)),p1=ymd(addDays(-7)),ok=b=>b.status!=='Cancelled';
+  const inR=(b,a,z)=>b.date>=a&&b.date<=z,cur=S.bookings.filter(b=>inR(b,d7,t)),prev=S.bookings.filter(b=>inR(b,p0,p1));
+  const rev=a=>a.filter(ok).reduce((s,b)=>s+b.total,0),up=S.bookings.filter(b=>b.date>=t&&!['Completed','Cancelled'].includes(b.status));
+  const d30=S.bookings.filter(b=>inR(b,ymd(addDays(-29)),t)),cr=d30.length?d30.filter(b=>b.status==='Cancelled').length/d30.length*100:0;
+  const days=Array.from({length:14},(_,i)=>{const d=ymd(addDays(i-13)),l=S.bookings.filter(b=>b.date===d&&ok(b));return{d,n:l.length,r:rev(l)}}),mx=Math.max(1,...days.map(x=>x.r));
+  const mix=S.categories.map(c=>({c,n:d30.filter(b=>b.cat===c.id&&ok(b)).length})).filter(x=>x.n).sort((a,b)=>b.n-a.n),mn=Math.max(1,...mix.map(x=>x.n));
+  const unas=up.filter(b=>!b.driver);
+  return ['Dashboard',`<div class="kpis">${kpi('Bookings, last 7 days',cur.length,cur.length,prev.length)}${kpi('Revenue, last 7 days',money(rev(cur)),rev(cur),rev(prev))}${kpi('Upcoming trips',up.length,0,`${unas.length} still need a driver`,false)}${kpi('Cancellation rate, 30 days',cr.toFixed(1)+'%',0,`${d30.filter(b=>b.status==='Cancelled').length} of ${d30.length} bookings`,false)}</div>
+  <div class="two"><div class="card"><h2>Revenue by trip day, last 14 days</h2><div class="bars">${days.map(x=>`<div class="${x.d===t?'today':''}" title="${x.d}: ${x.n} trips, ${money(x.r)}"><i style="height:${Math.max(2,x.r/mx*100)}%"><b>${x.n}</b></i><span>${+x.d.slice(8)}</span></div>`).join('')}</div><p class="note">Bar height is revenue; the number on each bar is trips. Today is dark.</p></div>
+  <div class="card"><h2>Vehicle mix, 30 days</h2><div class="hb">${mix.map(x=>`<div><span>${esc(x.c.name)}</span><span>${x.n}</span><i><i style="width:${x.n/mn*100}%"></i></i></div>`).join('')||'<div class="empty">No trips yet.</div>'}</div></div></div>
+  <div class="two"><div class="card"><h2><span>Next trips</span><button class="lnk" data-act="av" data-v="bookings">All bookings</button></h2>${bookingRowsC(up.sort(sortB).slice(0,6))}</div>
+  <div class="card"><h2>Fleet today</h2><div class="hb">${[['Drivers available',S.drivers.filter(d=>d.status==='Available').length,S.drivers.length],['Vehicles available',S.vehicles.filter(v=>v.status==='Available').length,S.vehicles.length],['Trips needing a driver',unas.length,Math.max(1,up.length)]].map(([l,n,m])=>`<div><span>${l}</span><span>${n} of ${m}</span><i><i style="width:${n/m*100}%"></i></i></div>`).join('')}</div><p class="note" style="margin-top:16px">${S.enquiries.filter(e=>e.status==='New').length} new enquiries waiting. <button class="lnk" data-act="av" data-v="enquiries">Open</button></p></div></div>`,
+  `<a class="btn ghost sm" href="#top">View website</a><button class="btn dark sm" data-act="newbk">New booking</button>`,`${new Date().toLocaleDateString(S.brand.locale||'en',{weekday:'long',day:'numeric',month:'long'})} · ${esc(S.brand.city||'')}`]},
+ bookings(){return ['Bookings',`<div class="card"><div class="filt"><input id="bq" type="search" placeholder="Search reference, customer, phone or place" value="${esc(BF.q)}" aria-label="Search bookings"><select id="bw" aria-label="When">${[['upcoming','Upcoming'],['today','Today'],['past','Past'],['all','All dates']].map(([v,l])=>`<option value="${v}"${BF.when===v?' selected':''}>${l}</option>`).join('')}</select><select id="bs" aria-label="Status"><option value="">All statuses</option>${STAT.map(s=>`<option${BF.st===s?' selected':''}>${s}</option>`).join('')}</select></div><div id="btab">${bookingRows(filteredBookings())}</div></div>`,`<button class="btn dark sm" data-act="newbk">New booking</button>`,`${S.bookings.length} bookings in total`]},
+ dispatch(){const cols=['Pending','Confirmed','Assigned','On trip'],nx={Pending:'Confirm',Confirmed:'Assign driver',Assigned:'Start trip','On trip':'Complete'};
+  return ['Dispatch',`<div class="kan">${cols.map(c=>{const l=S.bookings.filter(b=>b.status===c).sort(sortB);return `<div class="col"><h3><span>${c}</span><span>${l.length}</span></h3>${l.map(b=>`<div class="tk" data-act="bopen" data-ref="${b.ref}"><span class="t">${fmtDate(b.date,b.time)}</span><span>${esc(b.pickup)}${b.drop?' → '+esc(b.drop):' · '+b.hours+' h'}</span><small>${esc(catOf(b.cat)?.name||'')} · ${esc(b.name)} · ${b.ref}</small>${b.driver?`<small>${ic('id')} ${esc(drvOf(b.driver)?.name||'')}</small>`:''}<button class="btn ${c==='Confirmed'?'p':'ghost'} sm" data-act="adv" data-ref="${b.ref}">${nx[c]}</button></div>`).join('')||'<div class="empty">Clear</div>'}</div>`}).join('')}</div>`,'','Move trips through the day. Click a card for full details.']},
+ enquiries(){return ['Enquiries',`<div class="card">${S.enquiries.length?`<table class="tbl stack"><thead><tr><th>Received</th><th>From</th><th>Message</th><th>Status</th><th></th></tr></thead><tbody>${[...S.enquiries].sort((a,b)=>b.t.localeCompare(a.t)).map(e=>`<tr><td>${new Date(e.t).toLocaleDateString(S.brand.locale||'en',{day:'numeric',month:'short'})}</td><td>${esc(e.name)}<small>${esc(e.email)}</small></td><td style="max-width:420px">${esc(e.msg)}</td><td>${badge(e.status)}</td><td class="acts"><button class="lnk" data-act="enqt" data-id="${e.id}">${e.status==='New'?'Mark handled':'Reopen'}</button><button class="lnk del" data-act="enqd" data-id="${e.id}">Delete</button></td></tr>`).join('')}</tbody></table>`:'<div class="empty">No enquiries yet. Messages from the website contact form land here.</div>'}</div>`,'','From the contact form on your website']},
+ vehicles(){return ['Vehicles',crudTable('vehicles'),'',`${S.vehicles.length} vehicles in the fleet`]},
+ drivers(){return ['Drivers',crudTable('drivers'),'',`${S.drivers.length} drivers`]},
+ pricing(){const P=S.pricing,F=[['taxLabel','Tax name','text'],['tax','Tax %','number'],['airportFee','Airport fee','number'],['nightPct','Night surcharge %','number'],['nightStart','Night starts (hour, 0–23)','number'],['nightEnd','Night ends (hour, 0–23)','number'],['roundDisc','Round-trip discount %','number'],['minHours','Minimum hours for hourly','number'],['kmPerHour','Km included per hour','number']];
+  return ['Fleet & pricing',`<div class="card"><h2>Fare rules</h2><p class="sub">Applied to every quote on the website. Amounts are in ${esc(S.brand.currency)}.</p><form class="form" data-form="pricing" novalidate>${F.map(f=>field(f,P[f[0]])).join('')}<div class="wide row"><button class="btn dark" type="submit">Save fare rules</button></div></form></div>
+  ${crudTable('categories',{title:'Vehicle categories and rates',sub:'Fare = base + per km × distance, never below the minimum. Hourly trips use the hourly rate.'})}${crudTable('extras',{title:'Extras'})}
+  <div class="card"><h2>Fare check</h2><p class="sub">Quote any trip with the current rules.</p><form class="form" data-form="fcheck" novalidate><label class="fl"><span>Category</span><select name="cat">${S.categories.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select></label><label class="fl"><span>Distance, km</span><input name="km" type="number" value="25"></label><label class="fl"><span>Pickup time</span><input name="time" type="time" value="14:00"></label><label class="fl"><span>Trip type</span><select name="type">${Object.entries(typeName).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></label><div class="wide"><button class="btn ghost" type="submit">Calculate</button></div></form><div id="fco"></div></div>`,'','Rates, surcharges and extras']},
+ promos(){return ['Promotions',crudTable('promos',{sub:'Customers enter codes at checkout. Inactive codes are rejected.'}),'','']},
+ places(){return ['Places',crudTable('places',{sub:'Places appear as suggestions in the booking form and on the coverage section. Distances between saved places are calculated automatically; other addresses get an estimate your team confirms.'}),'',`${S.places.length} saved places`]},
+ content(){const c=S.content;return ['Website content',`<div class="card"><h2>Hero and about</h2><form class="form" data-form="content" novalidate>${field(['heroTitle','Headline','text'],c.heroTitle).replace('class="fl"','class="fl wide"')}${field(['heroSub','Sub-headline','textarea'],c.heroSub)}${field(['about','About text (services section)','textarea'],c.about)}<div class="wide"><button class="btn dark" type="submit">Save content</button></div></form></div>${crudTable('features',{title:'Highlights'})}${crudTable('services',{title:'Services'})}${crudTable('faq',{title:'FAQ'})}`,'<a class="btn ghost sm" href="#top">Preview website</a>','Everything a visitor reads']},
+ brand(){const b=S.brand,F=[['name','Business name','text'],['tagline','Tagline','text'],['city','Main city','text'],['phone','Phone','text'],['whatsapp','WhatsApp','text'],['email','Email','email'],['address','Address','text']];
+  const CUR=['USD','EUR','GBP','AED','SAR','QAR','KWD','OMR','BHD','INR','SGD','MYR','THB','AUD','NZD','CAD','ZAR','NGN','KES','EGP','TRY','JPY','CHF'];
+  return ['Branding',`<div class="two"><div class="card"><h2>Business identity</h2><form class="form" data-form="brand" novalidate>${F.map(f=>field(f,b[f[0]])).join('')}<label class="fl"><span>Brand colour</span><input type="color" name="primary" value="${esc(b.primary)}"></label><label class="fl"><span>Currency</span><select name="currency">${CUR.map(c=>`<option${c===b.currency?' selected':''}>${c}</option>`).join('')}</select></label><label class="fl"><span>Number format (locale)</span><select name="locale">${['en-US','en-GB','en-AE','en-IN','en-SG','en-AU','en-CA','ar-AE','fr-FR','de-DE','es-ES','ja-JP'].map(l=>`<option${l===b.locale?' selected':''}>${l}</option>`).join('')}</select></label><div class="wide"><button class="btn dark" type="submit">Save branding</button></div></form></div>
+  <div><div class="card"><h2>Preview</h2><div class="prev"><div class="ph"><span class="brand" style="font-size:18px"><span class="mark" style="background:var(--onp);color:var(--p)">${MARK}</span>${esc(b.name)}</span><p style="margin-top:10px;font-weight:700">${esc(S.content.heroTitle)}</p></div><div class="pb"><span class="btn p sm">Primary</span><span class="btn dark sm">Book a ride</span><span class="badge s-Confirmed">Confirmed</span><b>${money(1234.5)}</b></div></div></div>
+  <div class="card"><h2>Region preset</h2><p class="sub">Load ready-made places, rates, currency and tax for a market. Bookings, drivers and website content are kept as they are.</p><div class="presets">${Object.entries(PRESETS).map(([k,p])=>`<button class="btn ${S.preset===k?'dark':'ghost'} sm" data-act="preset" data-v="${k}">${p.label}</button>`).join('')}</div></div></div></div>`,'','Make the site your own: name, colours, contacts and currency']},
+ settings(){return ['Settings',`<div class="card"><h2>Admin login</h2><form class="form" data-form="acct" novalidate>${field(['email','Admin email','email'],S.admin.email)}${field(['pass','New password','text'],'')}<p class="note wide">Demo only: in the live product, logins are handled by the server with hashed passwords and roles for dispatchers and drivers.</p><div class="wide"><button class="btn dark" type="submit">Update login</button></div></form></div>
+  <div class="card"><h2>Backup and move data</h2><p class="sub">Copy all site data as JSON, or paste a backup to restore it.</p><textarea class="code" id="exp" readonly>${esc(JSON.stringify(S))}</textarea><div class="row" style="margin-top:10px"><button class="btn ghost sm" data-act="copyexp">Copy data</button></div><textarea class="code" id="imp" placeholder="Paste backup JSON here" style="margin-top:16px;min-height:100px"></textarea><div class="row" style="margin-top:10px"><button class="btn ghost sm" data-act="import">Restore from backup</button></div></div>
+  <div class="card"><h2>Demo data</h2><p class="sub">Reset everything to the original sample data.</p><button class="btn danger" data-act="reset">Reset demo</button></div>`,'','']}};
+function openBooking(ref){const b=S.bookings.find(x=>x.ref===ref);if(!b)return;const fitV=S.vehicles.filter(v=>v.cat===b.cat||v.id===b.vehicle),i=STAT.indexOf(b.status);
+ modal(`<div class="md-h"><div><h3>${b.ref}</h3><p class="note" style="margin:2px 0 0">Booked ${new Date(b.created).toLocaleString(S.brand.locale||'en',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</p></div><button class="x" data-act="mclose" aria-label="Close">${ic('x')}</button></div>
+ <div class="det"><div>${bookingKV(b)}<dl class="kv"><dt>Customer</dt><dd>${esc(b.name)}</dd><dt>Phone</dt><dd>${esc(b.phone)}</dd><dt>Email</dt><dd>${esc(b.email)}</dd>${b.flight?`<dt>Flight</dt><dd>${esc(b.flight)}</dd>`:''}${b.notes?`<dt>Note</dt><dd>${esc(b.notes)}</dd>`:''}</dl>
+ <p class="h4">History</p>${b.log.map(l=>`<div class="bl"><span>${esc(l.m)}</span><span class="note" style="margin:0">${new Date(l.t).toLocaleString(S.brand.locale||'en',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</span></div>`).join('')}</div>
+ <div><form class="form" style="grid-template-columns:1fr" data-form="bedit" data-ref="${b.ref}" novalidate>
+ <label class="fl"><span>Status</span><select name="status">${STAT.map(s=>`<option${s===b.status?' selected':''}>${s}</option>`).join('')}</select></label>
+ <label class="fl"><span>Driver</span><select name="driver"><option value="">Unassigned</option>${S.drivers.map(d=>`<option value="${d.id}"${d.id===b.driver?' selected':''}>${esc(d.name)} · ${d.status}</option>`).join('')}</select></label>
+ <label class="fl"><span>Vehicle</span><select name="vehicle"><option value="">Unassigned</option>${fitV.map(v=>`<option value="${v.id}"${v.id===b.vehicle?' selected':''}>${esc(v.model)} · ${esc(v.plate)} · ${v.status}</option>`).join('')}</select></label>
+ <label class="fl"><span>Add to history</span><input name="note" placeholder="Internal note, e.g. called customer"></label>
+ <button class="btn dark" type="submit">Save changes</button></form>
+ <div class="sum" style="margin-top:16px;position:static"><h3>Fare</h3>${b.lines.map(([l,v])=>`<div class="bl"><span>${esc(l)}</span><span>${money(v)}</span></div>`).join('')}<div class="bl tot"><span>Total</span><span>${money(b.total)}</span></div><p class="note">${payName[b.pay]}</p></div></div></div>`,true)}
+function advance(ref){const b=S.bookings.find(x=>x.ref===ref);if(!b)return;
+ if(b.status==='Confirmed'&&!b.driver){openBooking(ref);toast('Choose a driver, then set status to Assigned');return}
+ const n={Pending:'Confirmed',Confirmed:'Assigned',Assigned:'On trip','On trip':'Completed'}[b.status];if(!n)return;setStatus(b,n);save();renderAdmin();toast(`${b.ref} is now ${n}`)}
+function setStatus(b,st){if(b.status===st)return;b.status=st;b.log.push({t:new Date().toISOString(),m:'Status changed to '+st});
+ const d=drvOf(b.driver),v=vehOf(b.vehicle);if(st==='On trip'){if(d)d.status='On trip';if(v)v.status='On trip'}if(['Completed','Cancelled'].includes(st)){if(d&&d.status==='On trip')d.status='Available';if(v&&v.status==='On trip')v.status='Available'}}
+
+/* ---------- events ---------- */
+document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(!t)return;const a=t.dataset.act;
+ if((a==='ovclose'||a==='mback')&&e.target!==t)return;
+ switch(a){
+ case 'ttype':{const f=$('#book');$$('.tabs button',f).forEach(b=>b.setAttribute('aria-pressed',b===t));f.elements.type.value=t.dataset.v;$('#bkg').classList.toggle('hourly',t.dataset.v==='hourly');$('#bkr').hidden=t.dataset.v!=='round';if(t.dataset.v==='airport'&&!f.elements.pickup.value){const ap=S.places.find(p=>p.type==='airport');if(ap)f.elements.pickup.value=ap.name}break}
+ case 'swap':{const f=$('#book'),x=f.elements.pickup.value;f.elements.pickup.value=f.elements.drop.value;f.elements.drop.value=x;break}
+ case 'menu':{const n=$('#nav'),o=!n.classList.contains('open');n.classList.toggle('open',o);t.setAttribute('aria-expanded',o);break}
+ case 'pickcat':BK.cat=t.dataset.id;renderSheet();break;
+ case 'tostep':if(BK.step==='det')saveCust();BK.step=t.dataset.v;renderSheet();$('.sheet-b').scrollTop=0;break;
+ case 'exq':{saveCust();const id=t.dataset.id,v=Math.max(0,Math.min(5,(BK.q.extras[id]||0)+ +t.dataset.d));BK.q.extras[id]=v;renderSheet();break}
+ case 'promo':saveCust();BK.q.promo=$('#promo').value.trim().toUpperCase();renderSheet();break;
+ case 'confirm':confirmBooking();break;
+ case 'close':case 'ovclose':case 'mclose':case 'mback':closeLayer();break;
+ case 'manage':manageSheet(t.dataset.ref||'',t.dataset.email||'');break;
+ case 'ccancel':ask('The booking will be cancelled. Any online payment would be refunded under the cancellation policy.','Cancel booking',()=>{const b=S.bookings.find(x=>x.ref===t.dataset.ref);setStatus(b,'Cancelled');b.log[b.log.length-1].m='Cancelled by customer';save();manageSheet(b.ref,b.email);toast('Booking cancelled')});break;
+ case 'yes':{const f=pendingYes;pendingYes=null;closeLayer();f&&f();break}
+ case 'av':AV=t.dataset.v;renderAdmin();window.scrollTo(0,0);break;
+ case 'logout':authed=false;try{sessionStorage.removeItem('rideora.auth')}catch(_){}renderAdmin();break;
+ case 'bopen':if(e.target.closest('[data-act=adv]'))return;openBooking(t.dataset.ref);break;
+ case 'adv':e.stopPropagation();advance(t.dataset.ref);break;
+ case 'cadd':crudModal(t.dataset.k,-1);break;
+ case 'cedit':crudModal(t.dataset.k,+t.dataset.i);break;
+ case 'cdel':{const C=CRUD[t.dataset.k],arr=getP(C.path),i=+t.dataset.i;if(C.path==='categories'&&S.categories.length<=1){toast('Keep at least one category');break}ask(`Delete this ${C.name}? This can't be undone.`,'Delete',()=>{arr.splice(i,1);save();renderAdmin();toast('Deleted')});break}
+ case 'enqt':{const q=S.enquiries.find(x=>x.id===t.dataset.id);q.status=q.status==='New'?'Handled':'New';save();renderAdmin();break}
+ case 'enqd':ask('Delete this enquiry?','Delete',()=>{S.enquiries=S.enquiries.filter(x=>x.id!==t.dataset.id);save();renderAdmin()});break;
+ case 'preset':{const k=t.dataset.v;ask(`Load the ${PRESETS[k].label} preset? Places, rates, extras, promo codes, currency and tax will be replaced.`,'Load preset',()=>{applyPreset(S,k);save();renderAdmin();toast('Preset loaded')});break}
+ case 'copyexp':{const x=$('#exp');try{navigator.clipboard.writeText(x.value).then(()=>toast('Copied'),()=>{x.select();toast('Selected, press Ctrl+C')})}catch(_){x.select();toast('Selected, press Ctrl+C')}break}
+ case 'import':{try{const d=JSON.parse($('#imp').value);if(d.v!==1||!Array.isArray(d.bookings))throw 0;ask('Replace all current data with this backup?','Restore',()=>{S=d;save();renderAdmin();toast('Backup restored')})}catch(_){toast('That is not a valid backup')}break}
+ case 'reset':ask('Reset all data to the original demo? Your changes and test bookings will be lost.','Reset',()=>{S=seed();save();renderAdmin();toast('Demo reset')});break;
+ case 'newbk':location.hash='book';break;
+ }});
+document.addEventListener('input',e=>{const t=e.target;
+ if(t.dataset.actInput==='km'&&BK){BK.q.km=Math.max(1,Math.min(2000,Math.round(+t.value||1)));clearTimeout(t._t);t._t=setTimeout(()=>{const pos=t.selectionStart;renderSheet();const n=$('[data-act-input=km]');if(n){n.focus();try{n.setSelectionRange(pos,pos)}catch(_){}}},500)}
+ if(t.id==='bq'){BF.q=t.value;$('#btab').innerHTML=bookingRows(filteredBookings())}});
+document.addEventListener('change',e=>{const t=e.target;if(t.id==='bw'||t.id==='bs'){BF[t.id==='bw'?'when':'st']=t.value;$('#btab').innerHTML=bookingRows(filteredBookings())}});
+document.addEventListener('submit',e=>{const f=e.target,k=f.dataset.form;if(!k)return;e.preventDefault();
+ if(k==='book')return startBooking(f);
+ if(k==='cust')return confirmBooking();
+ if(k==='find')return manageSheet(f.elements.ref.value,f.elements.email.value);
+ if(k==='enq'){const n=f.elements.name.value.trim(),em=f.elements.email.value.trim(),m=$('#enqm');if(!n||!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){m.textContent='Please add your name and a valid email.';m.hidden=false;return}S.enquiries.push({id:'e'+Date.now(),t:new Date().toISOString(),name:n,email:em,msg:f.elements.msg.value.trim()||'(no message)',status:'New'});save();f.reset();m.textContent='Thanks, we have your enquiry and will reply within one business day.';m.hidden=false;return}
+ if(k==='login'){if(f.elements.email.value.trim().toLowerCase()===S.admin.email.toLowerCase()&&f.elements.pass.value===S.admin.pass){authed=true;try{sessionStorage.setItem('rideora.auth','1')}catch(_){}AV='dash';renderAdmin()}else $('#lge').hidden=false;return}
+ if(k==='crud'){const C=CRUD[f.dataset.k],i=+f.dataset.i,o=readF(f,C.fields),arr=getP(C.path),fe=$('#mfe');const first=C.fields[0][0];
+  if(C.fields.find(x=>x[0]==='icon')?!o.t:!String(o[first]).trim()){fe.textContent='Please fill in the first field.';fe.hidden=false;return}
+  if(C.path==='pricing.promos'){o.code=o.code.toUpperCase().replace(/\s+/g,'');if(arr.some((p,j)=>j!==i&&p.code===o.code)){fe.textContent='That code already exists.';fe.hidden=false;return}}
+  if(i>=0)Object.assign(arr[i],o);else arr.push({id:uid(f.dataset.k.slice(0,2)),...o});save();closeLayer();renderAdmin();toast('Saved');return}
+ if(k==='pricing'){const F=['taxLabel','tax','airportFee','nightPct','nightStart','nightEnd','roundDisc','minHours','kmPerHour'];F.forEach(n=>{const v=f.elements[n].value;S.pricing[n]=n==='taxLabel'?v.trim()||'Tax':Math.max(0,+v||0)});S.pricing.nightStart%=24;S.pricing.nightEnd%=24;S.pricing.minHours=Math.max(1,S.pricing.minHours);save();toast('Fare rules saved');return}
+ if(k==='fcheck'){const c=catOf(f.elements.cat.value),q={type:f.elements.type.value,km:+f.elements.km.value||1,hours:Math.max(S.pricing.minHours,Math.ceil((+f.elements.km.value||1)/S.pricing.kmPerHour)),time:f.elements.time.value,pickup:f.elements.type.value==='airport'?(S.places.find(p=>p.type==='airport')?.name||''):'',extras:{}};const r=quote(S,q,c);$('#fco').innerHTML=`<div class="sum" style="position:static;margin-top:14px">${r.lines.map(([l,v])=>`<div class="bl"><span>${esc(l)}</span><span>${money(v)}</span></div>`).join('')}<div class="bl tot"><span>Total</span><span>${money(r.total)}</span></div></div>`;return}
+ if(k==='content'){['heroTitle','heroSub','about'].forEach(n=>S.content[n]=f.elements[n].value.trim()||S.content[n]);save();toast('Content saved');return}
+ if(k==='brand'){['name','tagline','city','phone','whatsapp','email','address','primary','currency','locale'].forEach(n=>S.brand[n]=f.elements[n].value.trim());S.brand.name=S.brand.name||'Rideora';save();renderAdmin();toast('Branding saved');return}
+ if(k==='acct'){const em=f.elements.email.value.trim(),p=f.elements.pass.value;if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){toast('Enter a valid email');return}if(p&&p.length<6){toast('Use at least 6 characters');return}S.admin.email=em;if(p)S.admin.pass=p;save();toast('Login updated');return}
+ if(k==='bedit'){const b=S.bookings.find(x=>x.ref===f.dataset.ref),d=f.elements.driver.value,v=f.elements.vehicle.value,st=f.elements.status.value,n=f.elements.note.value.trim();
+  if(['Assigned','On trip'].includes(st)&&!d){toast('Choose a driver first');return}
+  if(d!==b.driver){b.driver=d;b.log.push({t:new Date().toISOString(),m:d?'Driver '+drvOf(d).name+' assigned':'Driver removed'})}
+  if(v!==b.vehicle){b.vehicle=v;if(v)b.log.push({t:new Date().toISOString(),m:'Vehicle '+vehOf(v).plate+' assigned'})}
+  setStatus(b,st);if(n)b.log.push({t:new Date().toISOString(),m:n});save();closeLayer();renderAdmin();toast('Booking updated');return}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#layer').innerHTML)closeLayer()});
+function route(){const h=location.hash.slice(1);
+ if(h==='admin'){closeLayer();mode='admin';renderAdmin();window.scrollTo(0,0);return}
+ if(mode!=='site'){mode='site';closeLayer();renderSite()}
+ const el=h&&document.getElementById(h);if(el){el.scrollIntoView();if(h==='book')setTimeout(()=>$('#book input[name=pickup]')?.focus({preventScroll:true}),50)}
+ $('#nav')?.classList.remove('open')}
+new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document.body,{childList:true,subtree:true});
+addEventListener('hashchange',route);
+addEventListener('storage',e=>{if(e.key===KEY){try{S=JSON.parse(e.newValue)}catch(_){}if(mode==='admin'&&!$('#layer').innerHTML)renderAdmin()}});
+route();
+}
+</script>
+</body>
+</html>
